@@ -1,0 +1,6 @@
+*.py
+*.ps1
+*.bat
+venv
+.idea
+requirements.txt
