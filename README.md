@@ -13,12 +13,35 @@ This project is also developing a user interface inspired by World of Warcraft. 
 
 ## Features
 
+- Search for Eberron places (continents, nations, major cities) and your own markers
 - Interactive marker creation (cities, monsters, dungeons, villages, etc.), with editable name, type and description and drag-to-move
-- Custom tooltips and marker types
-- Ruler tool for measuring distances
+- Toggleable layers: the places overlay and each marker type
+- Measuring tool with multi-leg routes and travel-time estimates (on foot, ship, airship, lightning rail)
+- Shareable links: the URL always reflects the current view (`#zoom/lat/lng`)
+- Export and import markers as JSON, to back them up or share them with your players
 - Responsive UI (mobile and desktop)
-- Local marker persistence (at the moment only localStorage)
-- Modern UI with Tailwind CSS and Leaflet
+- Markers are stored locally in the browser (`localStorage`)
+- Built with Tailwind CSS and Leaflet, with no runtime dependency on external CDNs apart from the title font
+
+### Places data
+
+Places live in [`data/places.json`](data/places.json). Each entry looks like this:
+
+```json
+{
+  "name": "Sharn",
+  "kind": "city",
+  "parent": "Breland",
+  "lat": 7.3407,
+  "lng": -40.7593,
+  "zoom": 6,
+  "description": "La Città delle Torri, la più grande del Khorvaire."
+}
+```
+
+`kind` is one of `continent`, `nation`, `region`, `capital`, `city` or `site`; `zoom` is the zoom level used when the place is selected from the search. To find the coordinates of a new place, navigate to it and read them from the address bar. The list currently covers the continents, the nations of Khorvaire and about 45 major settlements: additions are very welcome.
+
+Travel speeds for the measuring tool are defined in `TRAVEL_MODES` at the top of `assets/map.js`.
 
 ## Running locally
 
@@ -28,7 +51,7 @@ The site is fully static: serve the repository root with any web server.
 python3 -m http.server 8000
 ```
 
-Then open <http://localhost:8000>.
+Then open <http://localhost:8000>. A web server is required: the places list is loaded with `fetch`, which browsers block when the page is opened directly from disk.
 
 ### Editing styles
 

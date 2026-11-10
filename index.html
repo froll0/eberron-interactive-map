@@ -12,9 +12,6 @@
   <link rel="stylesheet" href="assets/leaflet.css" />
   <script src="assets/leaflet.js"></script>
 
-  <!-- Leaflet Ruler Plugin -->
-  <script src="assets/leaflet-plugins/leaflet-ruler.min.js"></script>
-
   <!-- Map Script -->
   <script src="assets/map.js" defer></script>
   <link rel="stylesheet" href="assets/map.css" />
@@ -44,12 +41,49 @@
             <button type="button" class="w-full text-left px-4 py-2 hover:bg-zinc-800 transition text-sm marker-type-btn" data-marker-type="other">📍 Altro</button>
           </div>
         </div>
-        <button id="resetView" type="button" class="px-3 py-1.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 transition text-sm whitespace-nowrap cursor-pointer" style="position: relative; z-index: 100;">
-          Centra mappa
-        </button>
-        <button id="toggleGrid" type="button" aria-pressed="false" class="hidden md:block px-3 py-1.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 transition text-sm cursor-pointer" style="position: relative; z-index: 100;">
-          Griglia
-        </button>
+        <div class="relative" style="z-index: 100;">
+          <button id="toggleMainMenu" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="mainMenu" class="px-3 py-1.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 transition text-sm whitespace-nowrap cursor-pointer flex items-center gap-1">
+            <span>Menu</span>
+            <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div id="mainMenu" class="hidden absolute right-0 mt-2 w-60 max-h-[75dvh] overflow-y-auto rounded-xl border border-white/15 bg-zinc-900/95 shadow-lg py-1" style="font-family: ui-sans-serif, system-ui, sans-serif;">
+            <p class="px-4 pt-2 pb-1 text-xs uppercase tracking-wide text-zinc-400">Livelli</p>
+            <label class="flex items-center gap-2 px-4 py-1.5 hover:bg-zinc-800 transition text-sm cursor-pointer">
+              <input type="checkbox" class="layer-toggle accent-emerald-500" data-layer="places" checked />
+              <span>📌 Luoghi di Eberron</span>
+            </label>
+            <label class="flex items-center gap-2 px-4 py-1.5 hover:bg-zinc-800 transition text-sm cursor-pointer">
+              <input type="checkbox" class="layer-toggle accent-emerald-500" data-layer="marker:city" checked />
+              <span>🏙️ Marker: città</span>
+            </label>
+            <label class="flex items-center gap-2 px-4 py-1.5 hover:bg-zinc-800 transition text-sm cursor-pointer">
+              <input type="checkbox" class="layer-toggle accent-emerald-500" data-layer="marker:monster" checked />
+              <span>👾 Marker: mostri</span>
+            </label>
+            <label class="flex items-center gap-2 px-4 py-1.5 hover:bg-zinc-800 transition text-sm cursor-pointer">
+              <input type="checkbox" class="layer-toggle accent-emerald-500" data-layer="marker:dungeon" checked />
+              <span>🏰 Marker: dungeon</span>
+            </label>
+            <label class="flex items-center gap-2 px-4 py-1.5 hover:bg-zinc-800 transition text-sm cursor-pointer">
+              <input type="checkbox" class="layer-toggle accent-emerald-500" data-layer="marker:village" checked />
+              <span>🏡 Marker: villaggi</span>
+            </label>
+            <label class="flex items-center gap-2 px-4 py-1.5 hover:bg-zinc-800 transition text-sm cursor-pointer">
+              <input type="checkbox" class="layer-toggle accent-emerald-500" data-layer="marker:other" checked />
+              <span>📍 Marker: altro</span>
+            </label>
+            <div class="my-1 border-t border-white/10"></div>
+            <p class="px-4 pt-2 pb-1 text-xs uppercase tracking-wide text-zinc-400">Condivisione</p>
+            <button id="copyLink" type="button" class="w-full text-left px-4 py-2 hover:bg-zinc-800 transition text-sm cursor-pointer">Copia link a questa vista</button>
+            <button id="exportMarkers" type="button" class="w-full text-left px-4 py-2 hover:bg-zinc-800 transition text-sm cursor-pointer">Esporta marker (JSON)</button>
+            <button id="importMarkers" type="button" class="w-full text-left px-4 py-2 hover:bg-zinc-800 transition text-sm cursor-pointer">Importa marker…</button>
+            <input id="importFile" type="file" accept="application/json,.json" class="hidden" />
+            <div class="my-1 border-t border-white/10"></div>
+            <p class="px-4 pt-2 pb-1 text-xs uppercase tracking-wide text-zinc-400">Mappa</p>
+            <button id="resetView" type="button" class="w-full text-left px-4 py-2 hover:bg-zinc-800 transition text-sm cursor-pointer">Centra mappa</button>
+            <button id="toggleGrid" type="button" aria-pressed="false" class="w-full text-left px-4 py-2 hover:bg-zinc-800 transition text-sm cursor-pointer">Griglia delle tile</button>
+          </div>
+        </div>
       </div>
     </div>
   </header>
@@ -58,8 +92,15 @@
   <main class="fixed inset-x-0 top-[58px] bottom-0 md:bottom-[37px]">
     <div id="map" class="absolute inset-0"></div>
 
-    <!-- HUD bottom-left -->
-    <div class="pointer-events-none absolute left-3 bottom-3 hidden md:block" style="z-index: 1000;">
+    <!-- Ricerca -->
+    <div id="searchBox" class="search-box">
+      <label for="searchInput" class="sr-only">Cerca un luogo o un marker</label>
+      <input id="searchInput" type="search" role="combobox" aria-expanded="false" aria-controls="searchResults" aria-autocomplete="list" autocomplete="off" spellcheck="false" placeholder="Cerca un luogo o un marker…" class="search-box__input" />
+      <ul id="searchResults" role="listbox" aria-label="Risultati della ricerca" class="search-box__results" hidden></ul>
+    </div>
+
+    <!-- HUD di debug (visibile con la griglia) -->
+    <div id="hud" class="hidden pointer-events-none absolute left-3 bottom-3" style="z-index: 1000;">
       <div class="inline-flex items-center gap-3 rounded-xl border border-white/10 bg-zinc-900/70 backdrop-blur px-3 py-2 text-xs md:text-sm">
         <div id="hudZoom" class="font-medium tabular-nums">z —</div>
         <div class="h-3 w-px bg-white/15"></div>
@@ -67,17 +108,23 @@
       </div>
     </div>
 
+    <!-- Pannello del misuratore -->
+    <section id="measurePanel" class="measure-panel" aria-label="Misura distanze e tempi di viaggio" hidden></section>
+
     <!-- Help card -->
-    <div class="absolute right-3 bottom-3 max-w-[380px] pointer-events-auto hidden md:block" style="z-index: 1000;">
+    <div id="helpCard" class="absolute right-3 bottom-3 max-w-[380px] pointer-events-auto hidden md:block" style="z-index: 1000;">
       <div class="rounded-xl border border-white/10 bg-zinc-900/70 backdrop-blur px-4 py-3 text-xs md:text-sm leading-relaxed">
         <p class="opacity-90">
-          <strong>Modalità marker:</strong> Clicca su "Aggiungi marker" e poi sulla mappa per creare un marker. Puoi modificarlo dal suo popup e trascinarlo per spostarlo.
+          <strong>Marker:</strong> scegli un tipo da "Aggiungi marker" e clicca sulla mappa. Si modificano dal popup e si spostano trascinandoli.
         </p>
-        <p class="mt-2 opacity-80">
-          Sorgente tile: <code class="px-1 py-0.5 rounded bg-white/10">eberron/{z}/{x}/{y}.jpg</code>
+        <p class="mt-2 opacity-90">
+          <strong>Distanze:</strong> la bussola in alto a destra misura un percorso e stima i tempi di viaggio.
         </p>
       </div>
     </div>
+
+    <!-- Notifiche -->
+    <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
   </main>
 
   <!-- Footer -->

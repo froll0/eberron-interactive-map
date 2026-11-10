@@ -1,0 +1,643 @@
+[
+  {
+    "name": "Adar",
+    "kind": "region",
+    "parent": "Sarlona",
+    "lat": -24.8466,
+    "lng": 85.4297,
+    "zoom": 5,
+    "description": "Rifugio montano dei kalashtar, in Sarlona."
+  },
+  {
+    "name": "Aerenal",
+    "kind": "continent",
+    "lat": -6.3153,
+    "lng": -14.7656,
+    "zoom": 4,
+    "description": "Le isole degli elfi, governate dalla Corte Immortale."
+  },
+  {
+    "name": "Argonnessen",
+    "kind": "continent",
+    "lat": -36.8796,
+    "lng": 34.4531,
+    "zoom": 3,
+    "description": "La patria dei draghi, quasi inaccessibile agli stranieri."
+  },
+  {
+    "name": "Aruldusk",
+    "kind": "city",
+    "parent": "Thrane",
+    "lat": 23.9863,
+    "lng": -19.2261,
+    "zoom": 6,
+    "description": "Città del Thrane orientale."
+  },
+  {
+    "name": "Ashtakala",
+    "kind": "site",
+    "parent": "Demon Wastes",
+    "lat": 38.9936,
+    "lng": -34.3433,
+    "zoom": 6,
+    "description": "La città dei demoni, nel cuore delle Demon Wastes."
+  },
+  {
+    "name": "Atur",
+    "kind": "city",
+    "parent": "Karrnath",
+    "lat": 30.9776,
+    "lng": -12.1069,
+    "zoom": 6,
+    "description": "La Città della Notte."
+  },
+  {
+    "name": "Aundair",
+    "kind": "nation",
+    "parent": "Khorvaire",
+    "lat": 29.3439,
+    "lng": -27.4219,
+    "zoom": 5,
+    "description": "Una delle Cinque Nazioni, patria della magia arcana."
+  },
+  {
+    "name": "Breland",
+    "kind": "nation",
+    "parent": "Khorvaire",
+    "lat": 17.1828,
+    "lng": -31.333,
+    "zoom": 5,
+    "description": "La più popolosa delle Cinque Nazioni."
+  },
+  {
+    "name": "Darguun",
+    "kind": "nation",
+    "parent": "Khorvaire",
+    "lat": 5.9658,
+    "lng": -19.8193,
+    "zoom": 5,
+    "description": "Il regno dei goblinoidi."
+  },
+  {
+    "name": "Demon Wastes",
+    "kind": "nation",
+    "parent": "Khorvaire",
+    "lat": 37.9962,
+    "lng": -38.2764,
+    "zoom": 5,
+    "description": "Terra desolata infestata da demoni e barbari."
+  },
+  {
+    "name": "Droaam",
+    "kind": "nation",
+    "parent": "Khorvaire",
+    "lat": 20.5505,
+    "lng": -46.3184,
+    "zoom": 5,
+    "description": "La nazione dei mostri, governata dalle Figlie di Sora Kell."
+  },
+  {
+    "name": "Eldeen Reaches",
+    "kind": "nation",
+    "parent": "Khorvaire",
+    "lat": 30.8645,
+    "lng": -39.5947,
+    "zoom": 5,
+    "description": "Foreste custodite dai druidi e dai mutaforma."
+  },
+  {
+    "name": "Everice",
+    "kind": "continent",
+    "lat": -63.86,
+    "lng": -71.0156,
+    "zoom": 4,
+    "description": "I ghiacci perenni all'estremo sud."
+  },
+  {
+    "name": "Fairhaven",
+    "kind": "capital",
+    "parent": "Aundair",
+    "lat": 30.6568,
+    "lng": -25.686,
+    "zoom": 6,
+    "description": "Capitale dell'Aundair."
+  },
+  {
+    "name": "Flamekeep",
+    "kind": "capital",
+    "parent": "Thrane",
+    "lat": 28.7484,
+    "lng": -19.6436,
+    "zoom": 6,
+    "description": "Capitale del Thrane e sede della Chiesa della Fiamma Argentea."
+  },
+  {
+    "name": "Frostfell",
+    "kind": "continent",
+    "lat": 64.4728,
+    "lng": -4.2188,
+    "zoom": 3,
+    "description": "La distesa ghiacciata a nord del mondo."
+  },
+  {
+    "name": "Galethspyre",
+    "kind": "city",
+    "parent": "Breland",
+    "lat": 13.6887,
+    "lng": -38.3423,
+    "zoom": 6,
+    "description": "Città sul fiume Dagger."
+  },
+  {
+    "name": "Gatherhold",
+    "kind": "capital",
+    "parent": "Talenta Plains",
+    "lat": 20.1178,
+    "lng": -8.4155,
+    "zoom": 6,
+    "description": "L'unico insediamento stabile delle pianure, sede del Casato Ghallanda."
+  },
+  {
+    "name": "Graywall",
+    "kind": "city",
+    "parent": "Droaam",
+    "lat": 19.5391,
+    "lng": -42.2095,
+    "zoom": 6,
+    "description": "Città di frontiera del Droaam."
+  },
+  {
+    "name": "Great Crag",
+    "kind": "capital",
+    "parent": "Droaam",
+    "lat": 21.6574,
+    "lng": -45.7031,
+    "zoom": 6,
+    "description": "Capitale del Droaam."
+  },
+  {
+    "name": "Greenheart",
+    "kind": "capital",
+    "parent": "Eldeen Reaches",
+    "lat": 28.5749,
+    "lng": -40.9351,
+    "zoom": 6,
+    "description": "Il cuore druidico delle Eldeen Reaches."
+  },
+  {
+    "name": "Irontown",
+    "kind": "city",
+    "parent": "Karrnath",
+    "lat": 30.6568,
+    "lng": -0.9229,
+    "zoom": 6,
+    "description": "Città mineraria ai piedi dei monti Ironroot."
+  },
+  {
+    "name": "Karrlakton",
+    "kind": "city",
+    "parent": "Karrnath",
+    "lat": 27.2546,
+    "lng": -12.5684,
+    "zoom": 6,
+    "description": "Città al confine con il Mournland, sede del Casato Deneith."
+  },
+  {
+    "name": "Karrnath",
+    "kind": "nation",
+    "parent": "Khorvaire",
+    "lat": 31.3912,
+    "lng": -8.3057,
+    "zoom": 5,
+    "description": "Una delle Cinque Nazioni, dalla forte tradizione militare."
+  },
+  {
+    "name": "Khorvaire",
+    "kind": "continent",
+    "lat": 29.2289,
+    "lng": -28.8281,
+    "zoom": 4,
+    "description": "Il continente delle Cinque Nazioni, cuore dell'antico regno di Galifar."
+  },
+  {
+    "name": "Korranberg",
+    "kind": "city",
+    "parent": "Zilargo",
+    "lat": 4.193,
+    "lng": -24.5435,
+    "zoom": 6,
+    "description": "Sede della grande Biblioteca di Korranberg."
+  },
+  {
+    "name": "Korth",
+    "kind": "capital",
+    "parent": "Karrnath",
+    "lat": 30.2021,
+    "lng": -15.1831,
+    "zoom": 6,
+    "description": "Capitale del Karrnath."
+  },
+  {
+    "name": "Korunda Gate",
+    "kind": "city",
+    "parent": "Mror Holds",
+    "lat": 34.976,
+    "lng": -0.3735,
+    "zoom": 6,
+    "description": "Roccaforte del Casato Kundarak."
+  },
+  {
+    "name": "Krona Peak",
+    "kind": "capital",
+    "parent": "Mror Holds",
+    "lat": 32.0453,
+    "lng": 1.0547,
+    "zoom": 6,
+    "description": "Capitale dei Mror Holds."
+  },
+  {
+    "name": "Lathleer",
+    "kind": "city",
+    "parent": "Aundair",
+    "lat": 28.7484,
+    "lng": -25.2026,
+    "zoom": 6,
+    "description": "Città dell'Aundair meridionale."
+  },
+  {
+    "name": "Lhazaar Principalities",
+    "kind": "nation",
+    "parent": "Khorvaire",
+    "lat": 29.1522,
+    "lng": 15.9082,
+    "zoom": 5,
+    "description": "Isole e coste dei principi-pirati."
+  },
+  {
+    "name": "Making",
+    "kind": "site",
+    "parent": "Mournland",
+    "lat": 15.5384,
+    "lng": -13.7109,
+    "zoom": 6,
+    "description": "Rovine dell'antica città del Casato Cannith."
+  },
+  {
+    "name": "Menechtarun",
+    "kind": "region",
+    "parent": "Xen'drik",
+    "lat": -44.8403,
+    "lng": -99.1406,
+    "zoom": 5,
+    "description": "Il grande deserto di Xen'drik."
+  },
+  {
+    "name": "Metrol",
+    "kind": "site",
+    "parent": "Mournland",
+    "lat": 21.3712,
+    "lng": -10.5688,
+    "zoom": 6,
+    "description": "L'antica capitale del Cyre, oggi in rovina."
+  },
+  {
+    "name": "Mournland",
+    "kind": "nation",
+    "parent": "Khorvaire",
+    "lat": 22.0653,
+    "lng": -13.667,
+    "zoom": 5,
+    "description": "Ciò che resta del Cyre dopo il Giorno del Lutto."
+  },
+  {
+    "name": "Mror Holds",
+    "kind": "nation",
+    "parent": "Khorvaire",
+    "lat": 32.8057,
+    "lng": 4.1748,
+    "zoom": 5,
+    "description": "I clan dei nani, tra i monti Ironroot e Hoarfrost."
+  },
+  {
+    "name": "New Cyre",
+    "kind": "city",
+    "parent": "Breland",
+    "lat": 15.496,
+    "lng": -21.7969,
+    "zoom": 6,
+    "description": "Insediamento dei profughi del Cyre."
+  },
+  {
+    "name": "Newthrone",
+    "kind": "capital",
+    "parent": "Q'barra",
+    "lat": 16.7414,
+    "lng": 3.1641,
+    "zoom": 6,
+    "description": "Capitale dei coloni di Q'barra."
+  },
+  {
+    "name": "Passage",
+    "kind": "city",
+    "parent": "Aundair",
+    "lat": 27.2156,
+    "lng": -30.0146,
+    "zoom": 6,
+    "description": "Città sul Lake Galifar, sede del Casato Orien."
+  },
+  {
+    "name": "Port Verge",
+    "kind": "city",
+    "parent": "Lhazaar Principalities",
+    "lat": 40.2628,
+    "lng": 12.6343,
+    "zoom": 6,
+    "description": "Porto dei principati settentrionali."
+  },
+  {
+    "name": "Pylas Maradal",
+    "kind": "city",
+    "parent": "Valenar",
+    "lat": 7.3625,
+    "lng": -7.0093,
+    "zoom": 6,
+    "description": "Il principale porto del Valenar."
+  },
+  {
+    "name": "Q'barra",
+    "kind": "nation",
+    "parent": "Khorvaire",
+    "lat": 17.7278,
+    "lng": 4.4385,
+    "zoom": 5,
+    "description": "Giungla di frontiera, tra coloni e lucertoloidi."
+  },
+  {
+    "name": "Regalport",
+    "kind": "capital",
+    "parent": "Lhazaar Principalities",
+    "lat": 36.8093,
+    "lng": 19.0723,
+    "zoom": 6,
+    "description": "Il porto più importante dei principati."
+  },
+  {
+    "name": "Rekkenmark",
+    "kind": "city",
+    "parent": "Karrnath",
+    "lat": 31.3912,
+    "lng": -17.6001,
+    "zoom": 6,
+    "description": "Sede della celebre accademia militare."
+  },
+  {
+    "name": "Rhukaan Draal",
+    "kind": "capital",
+    "parent": "Darguun",
+    "lat": 10.5526,
+    "lng": -21.3574,
+    "zoom": 6,
+    "description": "Capitale del Darguun."
+  },
+  {
+    "name": "Riedra",
+    "kind": "region",
+    "parent": "Sarlona",
+    "lat": 1.5818,
+    "lng": 74.0039,
+    "zoom": 4,
+    "description": "L'impero degli Ispirati, in Sarlona."
+  },
+  {
+    "name": "Sarlona",
+    "kind": "continent",
+    "lat": 4.2149,
+    "lng": 78.3984,
+    "zoom": 3,
+    "description": "Il continente d'origine degli umani, dominato dagli Ispirati di Riedra."
+  },
+  {
+    "name": "Shadow Marches",
+    "kind": "nation",
+    "parent": "Khorvaire",
+    "lat": 26.3131,
+    "lng": -54.624,
+    "zoom": 5,
+    "description": "Paludi abitate da orchi e umani, ricche di frammenti del drago."
+  },
+  {
+    "name": "Sharn",
+    "kind": "city",
+    "parent": "Breland",
+    "lat": 7.3407,
+    "lng": -40.7593,
+    "zoom": 6,
+    "description": "La Città delle Torri, la più grande del Khorvaire."
+  },
+  {
+    "name": "Sigilstar",
+    "kind": "city",
+    "parent": "Thrane",
+    "lat": 24.7269,
+    "lng": -21.731,
+    "zoom": 6,
+    "description": "Città del Thrane."
+  },
+  {
+    "name": "Starilaskur",
+    "kind": "city",
+    "parent": "Breland",
+    "lat": 18.1876,
+    "lng": -22.2144,
+    "zoom": 6,
+    "description": "Città commerciale del Breland orientale."
+  },
+  {
+    "name": "Sterngate",
+    "kind": "city",
+    "parent": "Breland",
+    "lat": 12.8761,
+    "lng": -24.7192,
+    "zoom": 6,
+    "description": "Fortezza che sorveglia il passo verso il Darguun."
+  },
+  {
+    "name": "Stormhome",
+    "kind": "city",
+    "parent": "Aundair",
+    "lat": 37.3352,
+    "lng": -19.2041,
+    "zoom": 6,
+    "description": "Isola enclave del Casato Lyrandar."
+  },
+  {
+    "name": "Stormreach",
+    "kind": "city",
+    "parent": "Xen'drik",
+    "lat": -14.9448,
+    "lng": -65.083,
+    "zoom": 6,
+    "description": "La porta d'accesso a Xen'drik."
+  },
+  {
+    "name": "Syrkarn",
+    "kind": "region",
+    "parent": "Sarlona",
+    "lat": -14.094,
+    "lng": 73.125,
+    "zoom": 5,
+    "description": "Regione meridionale di Sarlona."
+  },
+  {
+    "name": "Taer Valaestas",
+    "kind": "capital",
+    "parent": "Valenar",
+    "lat": 10.639,
+    "lng": -4.5923,
+    "zoom": 6,
+    "description": "Capitale del Valenar."
+  },
+  {
+    "name": "Talenta Plains",
+    "kind": "nation",
+    "parent": "Khorvaire",
+    "lat": 23.3221,
+    "lng": -2.3291,
+    "zoom": 5,
+    "description": "Le pianure degli halfling nomadi e dei loro dinosauri."
+  },
+  {
+    "name": "Tashana Tundra",
+    "kind": "region",
+    "parent": "Sarlona",
+    "lat": 24.5271,
+    "lng": 52.0313,
+    "zoom": 5,
+    "description": "La tundra settentrionale di Sarlona."
+  },
+  {
+    "name": "Thaliost",
+    "kind": "city",
+    "parent": "Thrane",
+    "lat": 31.3912,
+    "lng": -18.5669,
+    "zoom": 6,
+    "description": "Città aundairiana occupata dal Thrane."
+  },
+  {
+    "name": "Thrane",
+    "kind": "nation",
+    "parent": "Khorvaire",
+    "lat": 23.2413,
+    "lng": -22.1484,
+    "zoom": 5,
+    "description": "Una delle Cinque Nazioni, teocrazia della Fiamma Argentea."
+  },
+  {
+    "name": "Thronehold",
+    "kind": "site",
+    "parent": "Khorvaire",
+    "lat": 29.4587,
+    "lng": -18.2813,
+    "zoom": 6,
+    "description": "L'isola dell'antica capitale di Galifar, dove fu firmato il trattato che chiuse l'Ultima Guerra."
+  },
+  {
+    "name": "Trolanport",
+    "kind": "capital",
+    "parent": "Zilargo",
+    "lat": 5.8783,
+    "lng": -31.9043,
+    "zoom": 6,
+    "description": "Capitale dello Zilargo."
+  },
+  {
+    "name": "Valenar",
+    "kind": "nation",
+    "parent": "Khorvaire",
+    "lat": 12.8546,
+    "lng": -5.5371,
+    "zoom": 5,
+    "description": "Il regno degli elfi guerrieri."
+  },
+  {
+    "name": "Varna",
+    "kind": "city",
+    "parent": "Eldeen Reaches",
+    "lat": 29.133,
+    "lng": -31.355,
+    "zoom": 6,
+    "description": "La città più grande delle Eldeen Reaches."
+  },
+  {
+    "name": "Vedykar",
+    "kind": "city",
+    "parent": "Karrnath",
+    "lat": 28.5749,
+    "lng": -9.7119,
+    "zoom": 6,
+    "description": "Città del Karrnath centrale."
+  },
+  {
+    "name": "Vulyar",
+    "kind": "city",
+    "parent": "Karrnath",
+    "lat": 26.3131,
+    "lng": -6.9214,
+    "zoom": 6,
+    "description": "Città di confine verso le Talenta Plains."
+  },
+  {
+    "name": "Wroat",
+    "kind": "capital",
+    "parent": "Breland",
+    "lat": 12.6618,
+    "lng": -36.189,
+    "zoom": 6,
+    "description": "Capitale del Breland."
+  },
+  {
+    "name": "Xandrar",
+    "kind": "city",
+    "parent": "Breland",
+    "lat": 23.7451,
+    "lng": -36.145,
+    "zoom": 6,
+    "description": "Città del Breland settentrionale, sul Silver Lake."
+  },
+  {
+    "name": "Xen'drik",
+    "kind": "continent",
+    "lat": -40.9799,
+    "lng": -71.0156,
+    "zoom": 3,
+    "description": "Il continente perduto dei giganti, terra di rovine e spedizioni."
+  },
+  {
+    "name": "Zarash'ak",
+    "kind": "city",
+    "parent": "Shadow Marches",
+    "lat": 22.0245,
+    "lng": -54.4043,
+    "zoom": 6,
+    "description": "La Città delle Palafitte, sede del Casato Tharashk."
+  },
+  {
+    "name": "Zilargo",
+    "kind": "nation",
+    "parent": "Khorvaire",
+    "lat": 9.6657,
+    "lng": -28.6963,
+    "zoom": 5,
+    "description": "La patria degli gnomi."
+  },
+  {
+    "name": "Zolanberg",
+    "kind": "city",
+    "parent": "Zilargo",
+    "lat": 8.4724,
+    "lng": -24.7192,
+    "zoom": 6,
+    "description": "Città mineraria dello Zilargo."
+  }
+]

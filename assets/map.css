@@ -13,8 +13,16 @@ html {
     font-family: inherit
 }
 
-#map.is-placing-marker {
+#map.is-placing-marker,
+#map.is-measuring,
+#map.is-measuring .leaflet-interactive {
     cursor: crosshair
+}
+
+/* Mentre si misura, i clic su marker e luoghi devono arrivare alla mappa:
+   così si può misurare da una città all'altra cliccandoci sopra. */
+#map.is-measuring .leaflet-marker-icon {
+    pointer-events: none
 }
 
 /* --- Controlli Leaflet --------------------------------------------------- */
@@ -47,6 +55,9 @@ html {
 /* --- Righello (leaflet-ruler) ------------------------------------------- */
 
 .leaflet-ruler {
+    display: block;
+    padding: 0;
+    box-sizing: content-box;
     height: 44px;
     width: 44px;
     background-color: rgba(0, 0, 0, .7);
@@ -66,26 +77,6 @@ html {
     background-position: center;
     background-image: url(../images/ruler/compass-icon-colored.png);
     border-color: #de0000!important
-}
-
-.result-tooltip {
-    background-color: rgba(0, 0, 0, .7);
-    border: 1px solid #de0000;
-    font-size: medium;
-    color: #fff
-}
-
-.moving-tooltip {
-    background-color: rgba(0, 0, 0, .7);
-    background-clip: padding-box;
-    opacity: .5;
-    border: 1px dotted #de0000;
-    font-size: medium;
-    color: #fff
-}
-
-.plus-length {
-    padding-left: 30px
 }
 
 /* --- Marker -------------------------------------------------------------- */
@@ -274,4 +265,214 @@ html {
     .marker-field__input {
         font-size: 16px
     }
+}
+
+/* --- Luoghi di Eberron --------------------------------------------------- */
+
+.place-dot {
+    border-radius: 50%;
+    border: 2px solid #fbbf24;
+    background: rgba(251, 191, 36, .25);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .7), 0 0 6px rgba(0, 0, 0, .6);
+    box-sizing: border-box;
+    cursor: pointer
+}
+
+.place-dot:hover,
+.place-dot:focus-visible {
+    background: rgba(251, 191, 36, .7);
+    outline: none
+}
+
+.place-dot--capital {
+    border-color: #fff;
+    background: rgba(251, 191, 36, .75)
+}
+
+.place-dot--site {
+    border-color: #f87171;
+    background: rgba(248, 113, 113, .25)
+}
+
+/* --- Ricerca ------------------------------------------------------------- */
+
+.search-box {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: min(20rem, calc(100% - 80px));
+    z-index: 1000;
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 14px
+}
+
+.search-box__input {
+    width: 100%;
+    box-sizing: border-box;
+    height: 44px;
+    padding: 0 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, .2);
+    background: rgba(9, 9, 11, .88);
+    color: #fafafa;
+    font: inherit;
+    font-size: 16px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .5)
+}
+
+.search-box__input::placeholder {
+    color: #a1a1aa
+}
+
+.search-box__input:focus-visible {
+    outline: 2px solid #34d399;
+    outline-offset: 1px
+}
+
+.search-box__results {
+    list-style: none;
+    margin: 6px 0 0;
+    padding: 4px;
+    max-height: min(60vh, 420px);
+    overflow-y: auto;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, .15);
+    background: rgba(24, 24, 27, .97);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, .6)
+}
+
+.search-box__result {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    cursor: pointer
+}
+
+.search-box__result:hover,
+.search-box__result[aria-selected="true"] {
+    background: rgba(52, 211, 153, .18)
+}
+
+.search-box__name {
+    font-weight: 600;
+    overflow-wrap: anywhere
+}
+
+.search-box__subtitle {
+    font-size: 12px;
+    color: #a1a1aa
+}
+
+.search-box__empty {
+    padding: 8px 10px;
+    color: #a1a1aa
+}
+
+/* --- Misuratore ---------------------------------------------------------- */
+
+.measure-panel {
+    position: absolute;
+    left: 50%;
+    bottom: 12px;
+    translate: -50% 0;
+    width: min(24rem, calc(100% - 24px));
+    box-sizing: border-box;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, .15);
+    background: rgba(24, 24, 27, .95);
+    color: #fafafa;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, .6);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    line-height: 1.4
+}
+
+.measure-panel[hidden],
+.toast[hidden],
+.is-hidden {
+    display: none !important
+}
+
+.measure-panel__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px
+}
+
+.measure-panel__total {
+    font-size: 17px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums
+}
+
+.measure-panel__legs,
+.measure-panel__hint {
+    margin: 0;
+    color: #a1a1aa;
+    font-size: 12px
+}
+
+.measure-panel__details summary {
+    cursor: pointer;
+    padding: 2px 0;
+    color: #d4d4d8
+}
+
+.measure-panel__details .measure-panel__hint {
+    margin-top: 6px
+}
+
+.measure-panel__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-variant-numeric: tabular-nums
+}
+
+.measure-panel__table th,
+.measure-panel__table td {
+    padding: 3px 0;
+    border-top: 1px solid rgba(255, 255, 255, .08);
+    font-weight: 400;
+    text-align: left
+}
+
+.measure-panel__table td {
+    text-align: right;
+    font-weight: 600;
+    white-space: nowrap
+}
+
+.marker-btn:disabled {
+    opacity: .4;
+    cursor: default
+}
+
+/* --- Notifiche ----------------------------------------------------------- */
+
+.toast {
+    position: absolute;
+    left: 50%;
+    top: 68px;
+    translate: -50% 0;
+    max-width: calc(100% - 24px);
+    box-sizing: border-box;
+    z-index: 1100;
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, .15);
+    background: rgba(9, 9, 11, .92);
+    color: #fafafa;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, .6);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    text-align: center;
+    pointer-events: none
 }
