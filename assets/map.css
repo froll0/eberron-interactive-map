@@ -1,478 +1,1069 @@
-body,
-html {
+/* ---------------------------------------------------------------------------
+   Font (inclusi nel repo, licenza OFL: vedi assets/fonts)
+   --------------------------------------------------------------------------- */
+@font-face {
+    font-family: "Marcellus";
+    src: url(fonts/marcellus-latin-400-normal.woff2) format("woff2");
+    font-weight: 400;
+    font-display: swap
+}
+
+@font-face {
+    font-family: "Alegreya Sans";
+    src: url(fonts/alegreya-sans-latin-400-normal.woff2) format("woff2");
+    font-weight: 400;
+    font-display: swap
+}
+
+@font-face {
+    font-family: "Alegreya Sans";
+    src: url(fonts/alegreya-sans-latin-400-italic.woff2) format("woff2");
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap
+}
+
+@font-face {
+    font-family: "Alegreya Sans";
+    src: url(fonts/alegreya-sans-latin-500-normal.woff2) format("woff2");
+    font-weight: 500;
+    font-display: swap
+}
+
+@font-face {
+    font-family: "Alegreya Sans";
+    src: url(fonts/alegreya-sans-latin-700-normal.woff2) format("woff2");
+    font-weight: 700;
+    font-display: swap
+}
+
+/* ---------------------------------------------------------------------------
+   Token
+   Due famiglie di superfici: gli strumenti (blu abisso, come il mare della
+   mappa) e le note (pergamena, come le sue terre).
+   --------------------------------------------------------------------------- */
+:root {
+    --abyss: #0c2233;
+    --abyss-raised: #16384f;
+    --abyss-line: rgba(217, 164, 65, .32);
+    --vellum: #f1e6c8;
+    --vellum-dim: #e4d5ad;
+    --ink: #2a2118;
+    --ink-soft: #6b5a41;
+    --gold: #d9a441;
+    --crimson: #b3262b;
+    --mist: #9db3c0;
+
+    --font-ui: "Alegreya Sans", "Segoe UI", system-ui, sans-serif;
+    --font-display: "Marcellus", "Palatino Linotype", Palatino, Georgia, serif;
+
+    --radius-tool: 14px;
+    --radius-note: 5px;
+    --shadow-tool: 0 6px 22px rgba(3, 12, 20, .55);
+    --gap: 12px;
+    --dock-height: 64px;
+    --safe-bottom: env(safe-area-inset-bottom, 0px)
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+   --------------------------------------------------------------------------- */
+html,
+body {
     height: 100%;
     margin: 0;
-    padding: 0;
-    background-color: #000
+    background: var(--abyss);
+    color: var(--vellum);
+    font-family: var(--font-ui);
+    font-size: 16px;
+    line-height: 1.4;
+    -webkit-text-size-adjust: 100%
+}
+
+.app {
+    position: fixed;
+    inset: 0;
+    overflow: hidden
 }
 
 #map {
-    width: 100%;
-    height: 100%;
-    background-color: #010101;
-    font-family: inherit
+    position: absolute;
+    inset: 0;
+    background: #0a1c2a;
+    font-family: var(--font-ui)
 }
 
-#map.is-placing-marker,
+#map.is-placing,
 #map.is-measuring,
 #map.is-measuring .leaflet-interactive {
     cursor: crosshair
 }
 
-/* Mentre si misura, i clic su marker e luoghi devono arrivare alla mappa:
-   così si può misurare da una città all'altra cliccandoci sopra. */
+/* Mentre si misura, i tocchi su marker e luoghi devono arrivare alla mappa:
+   così si può misurare da una città all'altra toccandole. */
 #map.is-measuring .leaflet-marker-icon {
     pointer-events: none
 }
 
-/* --- Controlli Leaflet --------------------------------------------------- */
+[hidden] {
+    display: none !important
+}
 
-.leaflet-control {
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+    color: inherit
+}
+
+button {
     cursor: pointer
 }
 
-.leaflet-bar a:last-child {
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-bottom: none!important
+button:disabled {
+    cursor: default;
+    opacity: .4
 }
 
-.leaflet-bar a,
-.leaflet-bar a:hover {
-    background-color: rgba(0, 0, 0, .8);
-    color: #fff;
-    font-size: 18px;
-    border-bottom: 1px solid #ccc
+:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px
 }
 
-.leaflet-control-zoom-in,
-.leaflet-control-zoom-out {
-    width: 44px!important;
-    height: 44px!important;
-    line-height: 44px!important
+svg {
+    display: block
 }
 
-/* --- Righello (leaflet-ruler) ------------------------------------------- */
-
-.leaflet-ruler {
-    display: block;
-    padding: 0;
-    box-sizing: content-box;
-    height: 44px;
-    width: 44px;
-    background-color: rgba(0, 0, 0, .7);
-    background-image: url(../images/ruler/compass-icon-colored.png);
-    background-repeat: no-repeat;
-    background-position: center
+/* ---------------------------------------------------------------------------
+   Pulsanti
+   --------------------------------------------------------------------------- */
+.btn {
+    min-height: 40px;
+    padding: 0 14px;
+    border: 1px solid rgba(241, 230, 200, .28);
+    border-radius: 9px;
+    background: transparent;
+    color: var(--vellum);
+    font-weight: 500;
+    line-height: 1.15
 }
 
-.leaflet-ruler:hover {
-    border-color: #de0000!important
+.btn:hover:not(:disabled) {
+    background: rgba(241, 230, 200, .1)
 }
 
-.leaflet-ruler-clicked {
-    height: 44px;
-    width: 44px;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-image: url(../images/ruler/compass-icon-colored.png);
-    border-color: #de0000!important
+.btn--quiet {
+    min-height: 32px;
+    border-color: transparent;
+    color: var(--gold);
+    padding: 0 8px
 }
 
-/* --- Marker -------------------------------------------------------------- */
+/* Sulle note di pergamena */
+.btn--ink {
+    border-color: rgba(42, 33, 24, .35);
+    color: var(--ink)
+}
 
-/* La forma del pin sta su ::before: ruotare direttamente .map-pin
-   ruoterebbe anche la traslazione con cui Leaflet posiziona l'icona. */
-.map-pin {
+.btn--ink:hover:not(:disabled) {
+    background: rgba(42, 33, 24, .08)
+}
+
+.btn--primary {
+    border-color: var(--abyss);
+    background: var(--abyss);
+    color: var(--vellum)
+}
+
+.btn--primary:hover:not(:disabled) {
+    background: var(--abyss-raised)
+}
+
+.btn--danger {
+    border-color: transparent;
+    color: var(--crimson)
+}
+
+.btn--danger:hover:not(:disabled) {
+    background: rgba(179, 38, 43, .1)
+}
+
+.icon-btn {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: 9px;
+    background: transparent;
+    color: var(--mist)
+}
+
+.icon-btn:hover {
+    background: rgba(241, 230, 200, .1);
+    color: var(--vellum)
+}
+
+.icon-btn svg,
+.zoom__btn svg,
+.dock__btn svg,
+.search__icon {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round
+}
+
+/* ---------------------------------------------------------------------------
+   Ricerca
+   --------------------------------------------------------------------------- */
+.search {
+    position: absolute;
+    top: var(--gap);
+    left: var(--gap);
+    width: min(25rem, calc(100% - var(--gap) * 3 - 44px));
+    z-index: 1100
+}
+
+.search__bar {
     display: flex;
     align-items: center;
-    justify-content: center
+    height: 48px;
+    border: 1px solid var(--abyss-line);
+    border-radius: var(--radius-tool);
+    background: var(--abyss);
+    box-shadow: var(--shadow-tool)
 }
 
-.map-pin::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 50% 50% 50% 0;
-    background: #18181b;
-    border: 2px solid var(--pin-color, #fff);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, .6);
-    rotate: -45deg
+.search__bar:focus-within {
+    border-color: var(--gold)
 }
 
-.map-pin__glyph {
-    position: relative;
-    font-size: 17px;
-    line-height: 1;
-    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif
-}
-
-.map-pin--city { --pin-color: #38bdf8 }
-.map-pin--monster { --pin-color: #c084fc }
-.map-pin--dungeon { --pin-color: #f87171 }
-.map-pin--village { --pin-color: #4ade80 }
-.map-pin--other { --pin-color: #facc15 }
-
-.map-pin:focus-visible {
-    outline: 3px solid #fff;
-    outline-offset: 6px;
-    border-radius: 50%
-}
-
-/* --- Popup dei marker ---------------------------------------------------- */
-
-.leaflet-popup-content-wrapper,
-.leaflet-popup-tip {
-    background: #18181b;
-    color: #fafafa;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, .7)
-}
-
-.leaflet-popup-content-wrapper {
-    border: 1px solid rgba(255, 255, 255, .15);
-    border-radius: 12px
-}
-
-.leaflet-popup-content {
-    margin: 14px 16px;
-    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-size: 13px;
-    line-height: 1.45
-}
-
-.leaflet-container a.leaflet-popup-close-button {
-    color: #a1a1aa
-}
-
-.leaflet-container a.leaflet-popup-close-button:hover {
-    color: #fff
-}
-
-.marker-popup {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    text-align: left
-}
-
-.marker-popup__title {
-    font-size: 15px;
-    font-weight: 600;
-    overflow-wrap: anywhere;
-    padding-right: 12px
-}
-
-.marker-popup__meta {
-    color: #d4d4d8
-}
-
-.marker-popup__description {
+.search__brand {
     margin: 0;
-    white-space: pre-wrap;
-    overflow-wrap: anywhere;
-    max-height: 140px;
-    overflow-y: auto
+    padding: 0 14px 0 16px;
+    border-right: 1px solid var(--abyss-line);
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 400;
+    letter-spacing: .04em;
+    line-height: 46px;
+    color: var(--gold)
 }
 
-.marker-popup__coords {
-    color: #a1a1aa;
-    font-size: 11px;
-    font-variant-numeric: tabular-nums
+.search__icon {
+    flex: none;
+    margin-left: 12px;
+    color: var(--mist)
 }
 
-.marker-popup__error {
-    color: #fca5a5;
-    font-size: 12px
-}
-
-.marker-popup__error:empty {
-    display: none
-}
-
-.marker-popup__actions {
-    display: flex;
-    gap: 8px;
-    margin-top: 2px
-}
-
-.marker-field {
-    display: flex;
-    flex-direction: column;
-    gap: 3px
-}
-
-.marker-field__label {
-    font-size: 11px;
-    color: #a1a1aa;
-    text-transform: uppercase;
-    letter-spacing: .04em
-}
-
-.marker-field__input {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 6px 8px;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, .2);
-    background: #09090b;
-    color: #fafafa;
-    font: inherit;
-    resize: vertical
-}
-
-.marker-field__input:focus-visible,
-.marker-btn:focus-visible {
-    outline: 2px solid #34d399;
-    outline-offset: 1px
-}
-
-.marker-btn {
+.search__input {
     flex: 1;
-    padding: 6px 10px;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, .2);
-    background: rgba(255, 255, 255, .06);
-    color: #fafafa;
-    font: inherit;
-    font-weight: 500;
+    min-width: 0;
+    height: 100%;
+    padding: 0 12px 0 8px;
+    border: 0;
+    background: transparent;
+    color: var(--vellum);
+    font-size: 1.0625rem;
+    outline: none
+}
+
+.search__input::placeholder {
+    color: var(--mist);
+    opacity: 1
+}
+
+.search__input::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    cursor: pointer;
+    background: var(--mist);
+    clip-path: polygon(15% 0, 50% 35%, 85% 0, 100% 15%, 65% 50%, 100% 85%, 85% 100%, 50% 65%, 15% 100%, 0 85%, 35% 50%, 0 15%)
+}
+
+.search__results {
+    list-style: none;
+    margin: 6px 0 0;
+    padding: 6px;
+    max-height: min(60vh, 26rem);
+    overflow-y: auto;
+    border: 1px solid var(--abyss-line);
+    border-radius: var(--radius-tool);
+    background: var(--abyss);
+    box-shadow: var(--shadow-tool)
+}
+
+.search__result {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 10px;
+    border-radius: 9px;
     cursor: pointer
 }
 
-.marker-btn:hover {
-    background: rgba(255, 255, 255, .14)
+.search__result:hover,
+.search__result[aria-selected="true"] {
+    background: var(--abyss-raised)
 }
 
-.marker-btn--primary {
-    background: #059669;
-    border-color: #10b981
+.search__text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0
 }
 
-.marker-btn--primary:hover {
-    background: #047857
+.search__name {
+    font-family: var(--font-display);
+    font-size: 1.0625rem;
+    line-height: 1.2;
+    overflow-wrap: anywhere
 }
 
-.marker-btn--danger {
-    background: #b91c1c;
-    border-color: #dc2626
+.search__subtitle {
+    font-size: .875rem;
+    color: var(--mist)
 }
 
-.marker-btn--danger:hover {
-    background: #991b1b
-}
-
-/* Sotto i 16px iOS ingrandisce la pagina quando un campo riceve il focus. */
-@media (pointer: coarse) {
-    .marker-field__input {
-        font-size: 16px
-    }
-}
-
-/* --- Luoghi di Eberron --------------------------------------------------- */
-
-.place-dot {
+.search__dot {
+    flex: none;
+    width: 10px;
+    height: 10px;
+    margin: 0 5px;
+    border: 2px solid var(--gold);
     border-radius: 50%;
-    border: 2px solid #fbbf24;
-    background: rgba(251, 191, 36, .25);
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, .7), 0 0 6px rgba(0, 0, 0, .6);
+    box-sizing: border-box
+}
+
+.search__empty {
+    padding: 10px;
+    color: var(--mist)
+}
+
+/* ---------------------------------------------------------------------------
+   Segnaposto dei marker
+   --------------------------------------------------------------------------- */
+.pin {
+    width: 32px;
+    height: 42px;
+    overflow: visible;
+    filter: drop-shadow(0 2px 2px rgba(3, 12, 20, .55))
+}
+
+.pin__body {
+    fill: var(--pin, #4a5560);
+    stroke: var(--vellum);
+    stroke-width: 2
+}
+
+.pin__glyph {
+    fill: var(--pin-glyph, var(--vellum))
+}
+
+.pin--party { --pin: #d9a441; --pin-glyph: #2a2118 }
+.pin--city { --pin: #1f5f8b }
+.pin--village { --pin: #3f7a3a }
+.pin--dungeon { --pin: #5b3a8c }
+.pin--monster { --pin: #b3262b }
+.pin--other { --pin: #46525c }
+
+.map-pin {
+    background: none;
+    border: 0
+}
+
+.map-pin:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+    border-radius: 6px
+}
+
+/* Versione piccola per elenchi e pulsanti */
+.pin-wrap {
+    flex: none;
+    display: block;
+    width: 20px
+}
+
+.pin-wrap .pin {
+    width: 20px;
+    height: 26px
+}
+
+/* ---------------------------------------------------------------------------
+   Punti dei luoghi di Eberron
+   --------------------------------------------------------------------------- */
+.place-dot {
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    background: rgba(217, 164, 65, .18);
+    box-shadow: 0 0 0 1px rgba(12, 34, 51, .8);
     box-sizing: border-box;
     cursor: pointer
 }
 
 .place-dot:hover,
 .place-dot:focus-visible {
-    background: rgba(251, 191, 36, .7);
+    background: rgba(217, 164, 65, .65);
     outline: none
 }
 
 .place-dot--capital {
-    border-color: #fff;
-    background: rgba(251, 191, 36, .75)
+    border-color: var(--vellum);
+    background: rgba(217, 164, 65, .7)
 }
 
 .place-dot--site {
-    border-color: #f87171;
-    background: rgba(248, 113, 113, .25)
+    border-color: var(--crimson);
+    background: rgba(179, 38, 43, .2)
 }
 
-/* --- Ricerca ------------------------------------------------------------- */
-
-.search-box {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    width: min(20rem, calc(100% - 80px));
-    z-index: 1000;
-    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-size: 14px
+/* ---------------------------------------------------------------------------
+   Note di pergamena (schede di luoghi e marker)
+   --------------------------------------------------------------------------- */
+.leaflet-popup-content-wrapper {
+    border: 1px solid #8a6d3b;
+    border-radius: var(--radius-note);
+    background: var(--vellum);
+    color: var(--ink);
+    box-shadow: 0 8px 24px rgba(3, 12, 20, .6)
 }
 
-.search-box__input {
-    width: 100%;
-    box-sizing: border-box;
-    height: 44px;
-    padding: 0 14px;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, .2);
-    background: rgba(9, 9, 11, .88);
-    color: #fafafa;
-    font: inherit;
-    font-size: 16px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, .5)
+.leaflet-popup-tip {
+    background: var(--vellum);
+    box-shadow: none
 }
 
-.search-box__input::placeholder {
-    color: #a1a1aa
-}
-
-.search-box__input:focus-visible {
-    outline: 2px solid #34d399;
-    outline-offset: 1px
-}
-
-.search-box__results {
-    list-style: none;
-    margin: 6px 0 0;
-    padding: 4px;
-    max-height: min(60vh, 420px);
-    overflow-y: auto;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, .15);
-    background: rgba(24, 24, 27, .97);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, .6)
-}
-
-.search-box__result {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-    padding: 8px 10px;
-    border-radius: 8px;
-    cursor: pointer
-}
-
-.search-box__result:hover,
-.search-box__result[aria-selected="true"] {
-    background: rgba(52, 211, 153, .18)
-}
-
-.search-box__name {
-    font-weight: 600;
-    overflow-wrap: anywhere
-}
-
-.search-box__subtitle {
-    font-size: 12px;
-    color: #a1a1aa
-}
-
-.search-box__empty {
-    padding: 8px 10px;
-    color: #a1a1aa
-}
-
-/* --- Misuratore ---------------------------------------------------------- */
-
-.measure-panel {
-    position: absolute;
-    left: 50%;
-    bottom: 12px;
-    translate: -50% 0;
-    width: min(24rem, calc(100% - 24px));
-    box-sizing: border-box;
-    z-index: 1000;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 12px 14px;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, .15);
-    background: rgba(24, 24, 27, .95);
-    color: #fafafa;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, .6);
-    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-size: 13px;
+.leaflet-popup-content {
+    margin: 16px 18px 14px;
+    font-family: var(--font-ui);
+    font-size: 1rem;
     line-height: 1.4
 }
 
-.measure-panel[hidden],
-.toast[hidden],
-.is-hidden {
-    display: none !important
+.leaflet-container a.leaflet-popup-close-button {
+    top: 4px;
+    right: 4px;
+    width: 28px;
+    height: 28px;
+    font: 22px/28px var(--font-ui);
+    color: var(--ink-soft)
 }
 
-.measure-panel__header {
+.leaflet-container a.leaflet-popup-close-button:hover {
+    color: var(--ink)
+}
+
+/* Leaflet dà ai paragrafi delle schede un margine di 18px. */
+.leaflet-popup-content .note p {
+    margin: 0
+}
+
+.note {
     display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 8px
+    flex-direction: column;
+    gap: 6px
 }
 
-.measure-panel__total {
-    font-size: 17px;
-    font-weight: 600;
-    font-variant-numeric: tabular-nums
-}
-
-.measure-panel__legs,
-.measure-panel__hint {
+.note__kind {
     margin: 0;
-    color: #a1a1aa;
-    font-size: 12px
+    padding-right: 20px;
+    font-size: .875rem;
+    font-style: italic;
+    color: var(--ink-soft)
 }
 
-.measure-panel__details summary {
-    cursor: pointer;
-    padding: 2px 0;
-    color: #d4d4d8
+.note__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.4375rem;
+    font-weight: 400;
+    line-height: 1.15;
+    overflow-wrap: anywhere
 }
 
-.measure-panel__details .measure-panel__hint {
-    margin-top: 6px
+.leaflet-popup-content .note .note__text {
+    margin-top: 4px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    max-height: 9rem;
+    overflow-y: auto
 }
 
-.measure-panel__table {
+.note__actions {
+    display: flex;
+    gap: 6px;
+    margin-top: 10px
+}
+
+.note__actions .btn {
+    min-height: 36px;
+    padding: 0 10px;
+    white-space: nowrap
+}
+
+.note__actions .btn--danger {
+    margin-left: auto
+}
+
+.note__error {
+    margin: 0;
+    color: var(--crimson);
+    font-weight: 500
+}
+
+.note__error:empty {
+    display: none
+}
+
+.note--form {
+    gap: 10px
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 3px
+}
+
+.field__label {
+    font-size: .875rem;
+    font-weight: 500;
+    color: var(--ink-soft)
+}
+
+.field__input {
     width: 100%;
-    border-collapse: collapse;
-    font-variant-numeric: tabular-nums
+    box-sizing: border-box;
+    min-height: 40px;
+    padding: 7px 10px;
+    border: 1px solid rgba(42, 33, 24, .35);
+    border-radius: 6px;
+    background: #fbf5e3;
+    color: var(--ink);
+    font-size: 1rem;
+    resize: vertical
 }
 
-.measure-panel__table th,
-.measure-panel__table td {
-    padding: 3px 0;
-    border-top: 1px solid rgba(255, 255, 255, .08);
+.field__input::placeholder {
+    color: #8c7b61;
+    opacity: 1
+}
+
+.field__input:focus-visible {
+    outline: 2px solid var(--abyss);
+    outline-offset: 0
+}
+
+.note .btn:focus-visible {
+    outline-color: var(--abyss)
+}
+
+/* Etichette al passaggio del mouse */
+.leaflet-tooltip {
+    padding: 3px 9px;
+    border: 1px solid var(--abyss-line);
+    border-radius: 7px;
+    background: var(--abyss);
+    color: var(--vellum);
+    font-family: var(--font-display);
+    font-size: .9375rem;
+    box-shadow: 0 2px 8px rgba(3, 12, 20, .5)
+}
+
+.leaflet-tooltip-top::before {
+    border-top-color: var(--abyss)
+}
+
+/* ---------------------------------------------------------------------------
+   Zoom
+   --------------------------------------------------------------------------- */
+.leaflet-top.leaflet-right .zoom {
+    margin: var(--gap) var(--gap) 0 0
+}
+
+.zoom {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--abyss-line);
+    border-radius: var(--radius-tool);
+    background: var(--abyss);
+    box-shadow: var(--shadow-tool);
+    overflow: hidden
+}
+
+.zoom__btn {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 0;
+    background: transparent;
+    color: var(--vellum)
+}
+
+.zoom__btn + .zoom__btn {
+    border-top: 1px solid var(--abyss-line)
+}
+
+.zoom__btn:hover:not(:disabled) {
+    background: var(--abyss-raised)
+}
+
+.zoom__btn:focus-visible {
+    outline-offset: -3px
+}
+
+/* ---------------------------------------------------------------------------
+   Barra degli strumenti
+   --------------------------------------------------------------------------- */
+.dock {
+    position: absolute;
+    left: 50%;
+    bottom: calc(var(--gap) + var(--safe-bottom));
+    translate: -50% 0;
+    z-index: 1050;
+    display: flex;
+    gap: 2px;
+    padding: 5px;
+    border: 1px solid var(--abyss-line);
+    border-radius: 18px;
+    background: var(--abyss);
+    box-shadow: var(--shadow-tool)
+}
+
+.dock__btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 44px;
+    padding: 0 16px;
+    border: 0;
+    border-radius: 13px;
+    background: transparent;
+    color: var(--vellum);
+    font-weight: 500;
+    white-space: nowrap
+}
+
+.dock__btn:hover {
+    background: var(--abyss-raised)
+}
+
+.dock__btn[aria-pressed="true"] {
+    background: var(--gold);
+    color: var(--ink)
+}
+
+/* ---------------------------------------------------------------------------
+   Pannello unico
+   --------------------------------------------------------------------------- */
+.sheet {
+    position: absolute;
+    top: calc(var(--gap) * 2 + 48px);
+    left: var(--gap);
+    width: min(22rem, calc(100% - var(--gap) * 2));
+    max-height: calc(100% - var(--gap) * 4 - 48px - var(--dock-height) - var(--safe-bottom));
+    z-index: 1040;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--abyss-line);
+    border-radius: var(--radius-tool);
+    background: var(--abyss);
+    box-shadow: var(--shadow-tool);
+    animation: sheet-in .16s ease-out
+}
+
+@keyframes sheet-in {
+    from { opacity: 0; translate: 0 6px }
+}
+
+.sheet__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 8px 8px 16px;
+    border-bottom: 1px solid var(--abyss-line)
+}
+
+.sheet__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 400
+}
+
+.sheet__body {
+    padding: 14px 16px 16px;
+    overflow-y: auto;
+    overscroll-behavior: contain
+}
+
+.sheet__heading {
+    margin: 18px 0 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--gold)
+}
+
+.sheet__heading:first-child {
+    margin-top: 0
+}
+
+.sheet__lead {
+    margin: 0;
+    color: var(--vellum-dim)
+}
+
+.sheet__hint {
+    margin: 10px 0 0;
+    font-size: .875rem;
+    color: var(--mist)
+}
+
+.sheet__actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px
+}
+
+.sheet__actions .btn {
+    flex: 1
+}
+
+/* Scelta del tipo di marker */
+.type-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px
+}
+
+.type-grid__btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 4px 8px;
+    border: 1px solid rgba(241, 230, 200, .16);
+    border-radius: 10px;
+    background: transparent;
+    color: var(--vellum);
+    font-size: .9375rem
+}
+
+.type-grid__btn:hover {
+    border-color: var(--gold);
+    background: var(--abyss-raised)
+}
+
+/* Elenco dei marker */
+.marker-list {
+    list-style: none;
+    margin: 0 -8px;
+    padding: 0
+}
+
+.marker-list__btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 6px 8px;
+    border: 0;
+    border-radius: 9px;
+    background: transparent;
+    color: var(--vellum);
+    text-align: left
+}
+
+.marker-list__btn:hover {
+    background: var(--abyss-raised)
+}
+
+.marker-list__text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0
+}
+
+.marker-list__name {
+    font-weight: 500;
+    overflow-wrap: anywhere
+}
+
+.marker-list__kind {
+    font-size: .875rem;
+    color: var(--mist)
+}
+
+/* Interruttori dei livelli */
+.toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    cursor: pointer
+}
+
+.toggle__lead {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 22px
+}
+
+.toggle__text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0
+}
+
+.toggle__hint {
+    font-size: .875rem;
+    color: var(--mist)
+}
+
+.toggle__input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none
+}
+
+.toggle__switch {
+    flex: none;
+    position: relative;
+    width: 38px;
+    height: 22px;
+    border-radius: 11px;
+    background: rgba(241, 230, 200, .2);
+    transition: background-color .15s
+}
+
+.toggle__switch::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--vellum);
+    transition: translate .15s
+}
+
+.toggle__input:checked + .toggle__switch {
+    background: var(--gold)
+}
+
+.toggle__input:checked + .toggle__switch::after {
+    translate: 16px 0;
+    background: var(--abyss)
+}
+
+.toggle__input:focus-visible + .toggle__switch {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px
+}
+
+/* Misura */
+.measure__total {
+    margin: 0;
+    font-size: 1.125rem
+}
+
+.measure__total strong {
+    font-family: var(--font-display);
+    font-size: 2.125rem;
+    font-weight: 400;
+    line-height: 1;
+    color: var(--gold)
+}
+
+.measure__legs {
+    margin-left: 8px;
+    font-size: .9375rem;
+    color: var(--mist)
+}
+
+.measure__details {
+    margin-top: 10px
+}
+
+.measure__details summary {
+    padding: 4px 0;
+    font-weight: 500;
+    cursor: pointer
+}
+
+.measure__table {
+    width: 100%;
+    margin-top: 4px;
+    border-collapse: collapse;
+    font-variant-numeric: tabular-nums lining-nums
+}
+
+.measure__table th,
+.measure__table td {
+    padding: 5px 0;
+    border-top: 1px solid rgba(241, 230, 200, .12);
     font-weight: 400;
     text-align: left
 }
 
-.measure-panel__table td {
+.measure__table td {
     text-align: right;
-    font-weight: 600;
+    font-weight: 700;
     white-space: nowrap
 }
 
-.marker-btn:disabled {
-    opacity: .4;
-    cursor: default
-}
-
-/* --- Notifiche ----------------------------------------------------------- */
-
+/* ---------------------------------------------------------------------------
+   Avvisi
+   --------------------------------------------------------------------------- */
+.banner,
 .toast {
     position: absolute;
     left: 50%;
-    top: 68px;
     translate: -50% 0;
-    max-width: calc(100% - 24px);
+    max-width: calc(100% - var(--gap) * 2);
     box-sizing: border-box;
-    z-index: 1100;
-    padding: 8px 14px;
-    border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, .15);
-    background: rgba(9, 9, 11, .92);
-    color: #fafafa;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, .6);
-    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-size: 13px;
+    border: 1px solid var(--abyss-line);
+    background: var(--abyss);
+    box-shadow: var(--shadow-tool)
+}
+
+.banner {
+    bottom: calc(var(--gap) * 2 + var(--dock-height) + var(--safe-bottom));
+    z-index: 1060;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 6px 6px 16px;
+    border-color: var(--gold);
+    border-radius: 12px;
+    font-weight: 500
+}
+
+.toast {
+    top: calc(var(--gap) * 2 + 48px);
+    z-index: 1200;
+    padding: 8px 16px;
+    border-radius: 12px;
     text-align: center;
     pointer-events: none
+}
+
+/* ---------------------------------------------------------------------------
+   Scala
+   --------------------------------------------------------------------------- */
+.scale {
+    position: absolute;
+    left: var(--gap);
+    bottom: calc(var(--gap) + var(--safe-bottom));
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 5px 9px 7px;
+    border: 1px solid var(--abyss-line);
+    border-radius: 9px;
+    background: rgba(12, 34, 51, .88);
+    color: var(--vellum);
+    font-size: .875rem;
+    font-weight: 500;
+    font-variant-numeric: lining-nums;
+    line-height: 1.1;
+    pointer-events: none
+}
+
+.scale__bar {
+    height: 5px;
+    border: 2px solid var(--gold);
+    border-top: 0;
+    box-sizing: border-box
+}
+
+/* ---------------------------------------------------------------------------
+   Schermi stretti: il pannello diventa un foglio dal basso
+   --------------------------------------------------------------------------- */
+@media (max-width: 719px) {
+    :root {
+        --gap: 10px;
+        --dock-height: 62px
+    }
+
+    .search__brand {
+        display: none
+    }
+
+    .dock {
+        left: var(--gap);
+        right: var(--gap);
+        translate: none;
+        justify-content: space-between
+    }
+
+    .dock__btn {
+        flex: 1;
+        flex-direction: column;
+        gap: 2px;
+        height: 50px;
+        padding: 0 2px;
+        font-size: .8125rem
+    }
+
+    .sheet {
+        top: auto;
+        left: var(--gap);
+        right: var(--gap);
+        bottom: calc(var(--gap) * 2 + var(--dock-height) + var(--safe-bottom));
+        width: auto;
+        max-height: min(58%, calc(100% - var(--gap) * 5 - 48px - var(--dock-height)))
+    }
+
+    .sheet[data-sheet="measure"] .sheet__header {
+        padding-top: 2px;
+        padding-bottom: 2px
+    }
+
+    .sheet[data-sheet="measure"] .sheet__body {
+        padding-top: 10px;
+        padding-bottom: 12px
+    }
+
+    .scale {
+        display: none
+    }
+
+    /* Sotto i 16px iOS ingrandisce la pagina quando un campo riceve il focus. */
+    .field__input,
+    .search__input {
+        font-size: 1rem
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sheet {
+        animation: none
+    }
+
+    .toggle__switch,
+    .toggle__switch::after {
+        transition: none
+    }
 }

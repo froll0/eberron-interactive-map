@@ -9,8 +9,11 @@ const STORAGE_KEY = 'eberronMarkers';
 const LAYERS_STORAGE_KEY = 'eberronLayers';
 const PLACES_URL = 'data/places.json';
 const PLACES_MIN_ZOOM = 5; // sotto questo zoom i punti dei luoghi sono nascosti
+const MAX_NAME_LENGTH = 80;
+const MAX_DESCRIPTION_LENGTH = 500;
 const MAX_IMPORT_BYTES = 2 * 1024 * 1024;
 const MAX_MARKERS = 5000;
+const MAX_SEARCH_RESULTS = 8;
 
 // L'immagine della mappa occupa solo una parte del "mondo" delle tile:
 // questi sono i suoi bordi in pixel allo zoom 3, con un po' di margine.
@@ -33,24 +36,98 @@ const TRAVEL_MODES = [
   { label: 'Lightning rail', milesPerHour: 30 }
 ];
 
+// Tipi di marker. "glyph" è il disegno (16×16) dentro il segnaposto.
+const MARKER_TYPES = {
+  party: { label: 'Gruppo', plural: 'Gruppo', glyph: 'M4 1.5h1.6v13H4Zm2.6 1H14l-2.2 3 2.2 3H6.6Z' },
+  city: { label: 'Città', plural: 'Città', glyph: 'M2 14V7h3V3h2v2h2V3h2v4h3v7H9.5v-3h-3v3Z' },
+  village: { label: 'Villaggio', plural: 'Villaggi', glyph: 'M8 2 1.5 8h2v6H7v-4h2v4h3.5V8h2Z' },
+  dungeon: { label: 'Dungeon', plural: 'Dungeon', glyph: 'M3 14V7a5 5 0 0 1 10 0v7h-3V7.5a2 2 0 0 0-4 0V14Z' },
+  monster: { label: 'Mostro', plural: 'Mostri', glyph: 'M3.5 2c1 4 1 8-1 12h2c2-4 2-8 1-12Zm4 0c1 4 1 8-1 12h2c2-4 2-8 1-12Zm4 0c1 4 1 8-1 12h2c2-4 2-8 1-12Z' },
+  other: { label: 'Nota', plural: 'Note', glyph: 'm8 2 1.8 4.2L14 8 9.8 9.8 8 14 6.2 9.8 2 8l4.2-1.8Z' }
+};
+const DEFAULT_MARKER_TYPE = 'other';
+
 const PLACE_KINDS = {
-  continent: { label: 'Continente', dot: false },
-  nation: { label: 'Nazione', dot: false },
+  continent: { label: 'Continente', dot: false, browse: 0 },
+  nation: { label: 'Nazione', dot: false, browse: 1 },
   region: { label: 'Regione', dot: false },
   capital: { label: 'Capitale', dot: true },
   city: { label: 'Città', dot: true },
   site: { label: 'Luogo', dot: true }
 };
-const MAX_NAME_LENGTH = 80;
-const MAX_DESCRIPTION_LENGTH = 500;
 
-const MARKER_TYPES = {
-  city: { label: 'Città', emoji: '🏙️' },
-  monster: { label: 'Posizione Mostro', emoji: '👾' },
-  dungeon: { label: 'Dungeon', emoji: '🏰' },
-  village: { label: 'Villaggio', emoji: '🏡' },
-  other: { label: 'Altro', emoji: '📍' }
+const narrowScreen = window.matchMedia('(max-width: 719px)');
+
+// Le schede si aprono lasciando liberi ricerca, zoom e barra degli strumenti.
+const POPUP_OPTIONS = {
+  autoPanPaddingTopLeft: [12, 76],
+  autoPanPaddingBottomRight: [68, 92]
 };
+
+// ---------------------------------------------------------------------------
+// Utilità
+// ---------------------------------------------------------------------------
+// Crea un elemento DOM. Il testo passa sempre da textContent, mai da innerHTML:
+// il contenuto scritto dall'utente non viene mai interpretato come HTML.
+function el(tag, className, text) {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  if (text !== undefined) node.textContent = text;
+  return node;
+}
+
+function button(className, label, onClick) {
+  const node = el('button', className, label);
+  node.type = 'button';
+  if (onClick) node.addEventListener('click', onClick);
+  return node;
+}
+
+// Impedisce che i clic dentro un pannello o una scheda arrivino alla mappa.
+// Serve fermarli qui: molti pulsanti sostituiscono il proprio contenuto, e
+// Leaflet non riconosce più come "suoi" i clic su elementi già rimossi.
+function shield(node) {
+  node.addEventListener('click', (e) => e.stopPropagation());
+  return node;
+}
+
+// Confronto senza maiuscole, accenti e apostrofi ("Q'barra" ≈ "qbarra").
+function normalizeText(text) {
+  return String(text).toLowerCase().normalize('NFD').replace(/[̀-ͯ'’`]/g, '');
+}
+
+function getMarkerType(type) {
+  return Object.prototype.hasOwnProperty.call(MARKER_TYPES, type) ? type : DEFAULT_MARKER_TYPE;
+}
+
+function getMarkerTypeLabel(type) {
+  return MARKER_TYPES[getMarkerType(type)].label;
+}
+
+// Disegno del segnaposto. È una stringa costruita solo da costanti definite
+// qui sopra: non contiene mai testo dell'utente.
+function pinSvg(type) {
+  return `<svg class="pin pin--${type}" viewBox="0 0 32 42" aria-hidden="true" focusable="false">` +
+    '<path class="pin__body" d="M16 40.5C16 40.5 3.5 26.5 3.5 15.5a12.5 12.5 0 0 1 25 0C28.5 26.5 16 40.5 16 40.5Z"/>' +
+    `<path class="pin__glyph" transform="translate(8 7.5)" d="${MARKER_TYPES[type].glyph}"/></svg>`;
+}
+
+function pinElement(type) {
+  const wrap = el('span', 'pin-wrap');
+  wrap.innerHTML = pinSvg(getMarkerType(type));
+  return wrap;
+}
+
+// Notifica breve sopra la mappa.
+const toastEl = document.getElementById('toast');
+let toastTimer = null;
+
+function toast(text) {
+  clearTimeout(toastTimer);
+  toastEl.textContent = text;
+  toastEl.hidden = false;
+  toastTimer = setTimeout(() => { toastEl.hidden = true; }, 4000);
+}
 
 // ---------------------------------------------------------------------------
 // Mappa
@@ -88,69 +165,64 @@ function parseViewHash(hash) {
 const initialView = parseViewHash(location.hash) || HOME_VIEW;
 eberronmap.setView(initialView.center, initialView.zoom);
 
-L.control.zoom({ position: 'topright' }).addTo(eberronmap);
-
-// ---------------------------------------------------------------------------
-// Utilità
-// ---------------------------------------------------------------------------
-const statusEl = document.getElementById('status');
-
-function setStatus(text) {
-  statusEl.textContent = text;
+function viewHash() {
+  const center = eberronmap.getCenter();
+  return `#${eberronmap.getZoom()}/${center.lat.toFixed(4)}/${center.lng.toFixed(4)}`;
 }
 
-// Notifica breve sopra la mappa, visibile anche su telefono.
-const toastEl = document.getElementById('toast');
-let toastTimer = null;
+// L'indirizzo segue la vista, così si può copiare anche dalla barra del browser.
+eberronmap.on('moveend', () => history.replaceState(null, '', viewHash()));
 
-function toast(text, { sticky = false } = {}) {
-  clearTimeout(toastTimer);
-  toastEl.textContent = text;
-  toastEl.hidden = false;
-  if (!sticky) toastTimer = setTimeout(hideToast, 4000);
-}
-
-function hideToast() {
-  clearTimeout(toastTimer);
-  toastEl.hidden = true;
-}
-
-// Confronto senza maiuscole, accenti e apostrofi ("Q'barra" ≈ "qbarra").
-function normalizeText(text) {
-  return String(text).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f'’`]/g, '');
-}
-
-function getMarkerType(type) {
-  return Object.prototype.hasOwnProperty.call(MARKER_TYPES, type) ? type : 'other';
-}
-
-function getMarkerTypeLabel(type) {
-  return MARKER_TYPES[getMarkerType(type)].label;
-}
-
-// Crea un elemento DOM. Il testo passa sempre da textContent, mai da innerHTML:
-// il contenuto scritto dall'utente non viene mai interpretato come HTML.
-function el(tag, className, text) {
-  const node = document.createElement(tag);
-  if (className) node.className = className;
-  if (text !== undefined) node.textContent = text;
-  return node;
-}
-
-// Le icone sono emoji in un divIcon: nessuna immagine esterna da scaricare.
-const markerIcons = {};
-Object.keys(MARKER_TYPES).forEach((type) => {
-  markerIcons[type] = L.divIcon({
-    className: `map-pin map-pin--${type}`,
-    // Stringa statica definita qui sopra, non contiene input dell'utente.
-    html: `<span class="map-pin__glyph" aria-hidden="true">${MARKER_TYPES[type].emoji}</span>`,
-    iconSize: [36, 36],
-    // La punta del pin (quadrato ruotato di 45°) cade ~7px sotto il riquadro.
-    iconAnchor: [18, 43],
-    popupAnchor: [0, -44],
-    tooltipAnchor: [0, -44]
-  });
+window.addEventListener('hashchange', () => {
+  const view = parseViewHash(location.hash);
+  if (view) eberronmap.setView(view.center, view.zoom);
 });
+
+// Zoom e ritorno alla vista iniziale.
+const ZoomControl = L.Control.extend({
+  options: { position: 'topright' },
+  onAdd(map) {
+    const group = el('div', 'zoom');
+    const make = (label, path, onClick) => {
+      const node = button('zoom__btn', undefined, onClick);
+      node.setAttribute('aria-label', label);
+      node.title = label;
+      node.innerHTML = `<svg viewBox="0 0 20 20" aria-hidden="true"><path d="${path}"/></svg>`;
+      group.append(node);
+      return node;
+    };
+    const zoomIn = make('Ingrandisci', 'M10 4v12M4 10h12', () => map.zoomIn());
+    const zoomOut = make('Riduci', 'M4 10h12', () => map.zoomOut());
+    make('Torna alla vista iniziale', 'M3.5 9.5 10 4l6.5 5.5M5.5 8.5V16h9V8.5',
+      () => map.setView(HOME_VIEW.center, HOME_VIEW.zoom));
+    const sync = () => {
+      zoomIn.disabled = map.getZoom() >= maxZoom;
+      zoomOut.disabled = map.getZoom() <= minZoom;
+    };
+    map.on('zoomend', sync);
+    sync();
+    L.DomEvent.disableClickPropagation(group);
+    return group;
+  }
+});
+
+new ZoomControl().addTo(eberronmap);
+
+// Barra di scala: la lunghezza più "tonda" che sta in circa 120 pixel.
+const scaleLabel = document.getElementById('scaleLabel');
+const scaleBar = document.getElementById('scaleBar');
+
+function updateScale() {
+  const milesPerPixel = MILES_PER_PIXEL_AT_MAX_ZOOM * 2 ** (maxZoom - eberronmap.getZoom());
+  const target = milesPerPixel * 120;
+  const magnitude = 10 ** Math.floor(Math.log10(target));
+  const miles = [5, 2, 1].map((step) => step * magnitude).find((value) => value <= target);
+  scaleBar.style.width = `${Math.round(miles / milesPerPixel)}px`;
+  scaleLabel.textContent = `${miles.toLocaleString('it-IT')} miglia`;
+}
+
+eberronmap.on('zoomend', updateScale);
+updateScale();
 
 // ---------------------------------------------------------------------------
 // Marker: stato e persistenza
@@ -158,13 +230,26 @@ Object.keys(MARKER_TYPES).forEach((type) => {
 // Ogni voce: { data: { lat, lng, text, description, type }, layer: L.Marker }
 const markers = [];
 
+const markerIcons = {};
+Object.keys(MARKER_TYPES).forEach((type) => {
+  markerIcons[type] = L.divIcon({
+    className: 'map-pin',
+    html: pinSvg(type),
+    iconSize: [32, 42],
+    iconAnchor: [16, 41],
+    popupAnchor: [0, -38],
+    tooltipAnchor: [0, -38]
+  });
+});
+
 function saveMarkers() {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(markers.map((m) => m.data)));
   } catch (e) {
     console.error('Impossibile salvare i marker:', e);
-    toast('Impossibile salvare i marker in questo browser');
+    toast('Marker non salvati: lo spazio del browser non è disponibile');
   }
+  refreshSheet();
 }
 
 function normalizeMarkerData(raw) {
@@ -197,7 +282,7 @@ function loadMarkers() {
 }
 
 // ---------------------------------------------------------------------------
-// Marker: popup (vista e modifica)
+// Marker: scheda (lettura e modifica)
 // ---------------------------------------------------------------------------
 function tooltipContent(text) {
   return el('span', '', text);
@@ -210,78 +295,71 @@ function refreshMarker(entry) {
 
 function buildViewPopup(entry) {
   const { data } = entry;
-  const root = el('div', 'marker-popup');
-  root.append(el('strong', 'marker-popup__title', data.text));
-  root.append(el('div', 'marker-popup__meta', `${MARKER_TYPES[data.type].emoji} ${getMarkerTypeLabel(data.type)}`));
-  if (data.description) root.append(el('p', 'marker-popup__description', data.description));
-  root.append(el('div', 'marker-popup__coords', `Lat ${data.lat.toFixed(4)} · Lng ${data.lng.toFixed(4)}`));
+  const root = shield(el('div', 'note'));
+  root.append(el('p', 'note__kind', getMarkerTypeLabel(data.type)));
+  root.append(el('h3', 'note__title', data.text));
+  if (data.description) root.append(el('p', 'note__text', data.description));
 
-  const actions = el('div', 'marker-popup__actions');
-  const editBtn = el('button', 'marker-btn', 'Modifica');
-  editBtn.type = 'button';
-  editBtn.addEventListener('click', () => showEditPopup(entry));
-  const removeBtn = el('button', 'marker-btn marker-btn--danger', 'Rimuovi');
-  removeBtn.type = 'button';
-  removeBtn.addEventListener('click', () => removeMarker(entry));
-  actions.append(editBtn, removeBtn);
+  const actions = el('div', 'note__actions');
+  actions.append(
+    button('btn btn--ink', 'Modifica', () => showEditPopup(entry)),
+    button('btn btn--ink', 'Misura da qui', () => measureFrom(entry.layer.getLatLng())),
+    button('btn btn--danger', 'Elimina', () => removeMarker(entry))
+  );
   root.append(actions);
   return root;
 }
 
+function field(labelText, control) {
+  const label = el('label', 'field');
+  label.append(el('span', 'field__label', labelText), control);
+  return label;
+}
+
 function buildEditPopup(entry, { isNew }) {
   const { data } = entry;
-  const form = el('form', 'marker-popup marker-popup--form');
+  const form = shield(el('form', 'note note--form'));
   form.noValidate = true;
 
-  const nameLabel = el('label', 'marker-field');
-  nameLabel.append(el('span', 'marker-field__label', 'Nome'));
-  const nameInput = el('input', 'marker-field__input');
+  const nameInput = el('input', 'field__input');
   nameInput.type = 'text';
   nameInput.required = true;
   nameInput.maxLength = MAX_NAME_LENGTH;
   nameInput.value = data.text;
-  nameLabel.append(nameInput);
+  nameInput.placeholder = 'Come si chiama?';
 
-  const typeLabel = el('label', 'marker-field');
-  typeLabel.append(el('span', 'marker-field__label', 'Tipo'));
-  const typeSelect = el('select', 'marker-field__input');
+  const typeSelect = el('select', 'field__input');
   Object.keys(MARKER_TYPES).forEach((type) => {
-    const option = el('option', '', `${MARKER_TYPES[type].emoji} ${MARKER_TYPES[type].label}`);
+    const option = el('option', '', MARKER_TYPES[type].label);
     option.value = type;
     option.selected = type === data.type;
     typeSelect.append(option);
   });
-  typeLabel.append(typeSelect);
 
-  const descLabel = el('label', 'marker-field');
-  descLabel.append(el('span', 'marker-field__label', 'Descrizione (facoltativa)'));
-  const descInput = el('textarea', 'marker-field__input');
+  const descInput = el('textarea', 'field__input');
   descInput.rows = 3;
   descInput.maxLength = MAX_DESCRIPTION_LENGTH;
   descInput.value = data.description;
-  descLabel.append(descInput);
+  descInput.placeholder = 'Appunti per la campagna (facoltativi)';
 
-  const error = el('div', 'marker-popup__error');
+  const error = el('p', 'note__error');
   error.setAttribute('role', 'alert');
 
-  const actions = el('div', 'marker-popup__actions');
-  const saveBtn = el('button', 'marker-btn marker-btn--primary', isNew ? 'Aggiungi' : 'Salva');
+  const actions = el('div', 'note__actions');
+  const saveBtn = el('button', 'btn btn--primary', isNew ? 'Aggiungi marker' : 'Salva');
   saveBtn.type = 'submit';
-  const cancelBtn = el('button', 'marker-btn', 'Annulla');
-  cancelBtn.type = 'button';
-  cancelBtn.addEventListener('click', () => {
+  actions.append(saveBtn, button('btn btn--ink', 'Annulla', () => {
     if (isNew) entry.layer.closePopup(); // la chiusura scarta la bozza
     else showViewPopup(entry);
-  });
-  actions.append(saveBtn, cancelBtn);
+  }));
 
-  form.append(nameLabel, typeLabel, descLabel, error, actions);
+  form.append(field('Nome', nameInput), field('Tipo', typeSelect), field('Note', descInput), error, actions);
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const text = nameInput.value.trim();
     if (!text) {
-      error.textContent = 'Inserisci un nome per il marker.';
+      error.textContent = 'Scrivi un nome per il marker.';
       nameInput.focus();
       return;
     }
@@ -291,13 +369,13 @@ function buildEditPopup(entry, { isNew }) {
     entry.draft = false;
     if (!markers.includes(entry)) markers.push(entry);
     refreshMarker(entry);
+    setLayerVisible(`marker:${data.type}`, true);
     saveMarkers();
     showViewPopup(entry);
-    setLayerVisible(`marker:${data.type}`, true);
-    toast(isNew ? `Marker aggiunto: ${text}` : `Marker aggiornato: ${text}`);
+    toast(isNew ? `Marker aggiunto: ${text}` : `Marker salvato: ${text}`);
   });
 
-  // Il focus va dato dopo che Leaflet ha inserito il popup nel DOM.
+  // Il focus va dato dopo che Leaflet ha inserito la scheda nel DOM.
   setTimeout(() => { nameInput.focus(); nameInput.select(); }, 0);
   return form;
 }
@@ -326,7 +404,7 @@ function createEntry(data, { draft = false } = {}) {
   const entry = { data, layer, draft };
 
   layer.bindTooltip(tooltipContent(data.text), { direction: 'top' });
-  layer.bindPopup('', { minWidth: 220, maxWidth: 260, closeButton: true });
+  layer.bindPopup('', { ...POPUP_OPTIONS, minWidth: 264, maxWidth: 290 });
 
   // Il contenuto viene ricostruito a ogni apertura, così è sempre aggiornato.
   layer.on('popupopen', () => {
@@ -361,165 +439,54 @@ function removeMarker(entry) {
   if (index !== -1) markers.splice(index, 1);
   eberronmap.removeLayer(entry.layer);
   saveMarkers();
-  toast(`Marker rimosso: ${entry.data.text}`);
+  toast(`Marker eliminato: ${entry.data.text}`);
+}
+
+function focusMarker(entry) {
+  setLayerVisible(`marker:${entry.data.type}`, true);
+  eberronmap.flyTo(entry.layer.getLatLng(), Math.max(eberronmap.getZoom(), 5), { duration: 0.8 });
+  entry.layer.openPopup();
 }
 
 // ---------------------------------------------------------------------------
-// Modalità "aggiungi marker"
+// Posizionamento di un nuovo marker
 // ---------------------------------------------------------------------------
-const markerMenuBtn = document.getElementById('toggleMarkerMenu');
-const markerMenuDropdown = document.getElementById('markerMenuDropdown');
-const markerMenuText = document.getElementById('markerMenuText');
+const placingBanner = document.getElementById('placing');
+const placingText = document.getElementById('placingText');
+let placingType = null;
 
-let markerMode = false;
-let markerType = 'city';
-
-function setMarkerMode(type) {
-  stopMeasuring();
-  markerMode = true;
-  markerType = getMarkerType(type);
-  markerMenuBtn.classList.add('bg-emerald-600', 'border-emerald-500');
-  markerMenuBtn.classList.remove('bg-white/5', 'border-white/15');
-  markerMenuText.textContent = `Aggiungi: ${getMarkerTypeLabel(markerType)}`;
-  eberronmap.getContainer().classList.add('is-placing-marker');
-  toast(`Clicca sulla mappa per posizionare il marker "${getMarkerTypeLabel(markerType)}"`, { sticky: true });
+function startPlacing(type) {
+  closeSheet();
+  eberronmap.closePopup();
+  placingType = getMarkerType(type);
+  placingText.textContent = `Tocca la mappa per posizionare: ${getMarkerTypeLabel(placingType)}`;
+  placingBanner.hidden = false;
+  eberronmap.getContainer().classList.add('is-placing');
 }
 
-function resetMarkerMode() {
-  markerMode = false;
-  markerMenuBtn.classList.remove('bg-emerald-600', 'border-emerald-500');
-  markerMenuBtn.classList.add('bg-white/5', 'border-white/15');
-  markerMenuText.textContent = 'Aggiungi marker';
-  eberronmap.getContainer().classList.remove('is-placing-marker');
+function stopPlacing() {
+  placingType = null;
+  placingBanner.hidden = true;
+  eberronmap.getContainer().classList.remove('is-placing');
 }
 
-// Menu a tendina dell'header: si aprono al click e se ne tiene aperto uno solo.
-const dropdowns = [];
-
-function setupDropdown(button, panel) {
-  const dropdown = {
-    button,
-    panel,
-    setOpen(open) {
-      panel.classList.toggle('hidden', !open);
-      button.setAttribute('aria-expanded', String(open));
-    }
-  };
-  button.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const willOpen = panel.classList.contains('hidden');
-    closeDropdowns();
-    dropdown.setOpen(willOpen);
-  });
-  dropdowns.push(dropdown);
-  return dropdown;
-}
-
-function closeDropdowns() {
-  dropdowns.forEach((d) => d.setOpen(false));
-}
-
-const markerMenu = setupDropdown(markerMenuBtn, markerMenuDropdown);
-const mainMenu = setupDropdown(document.getElementById('toggleMainMenu'), document.getElementById('mainMenu'));
-
-document.addEventListener('click', (e) => {
-  if (!dropdowns.some((d) => d.button.contains(e.target) || d.panel.contains(e.target))) closeDropdowns();
-});
-
-document.addEventListener('keydown', (e) => {
-  if (e.key !== 'Escape') return;
-  closeDropdowns();
-  if (markerMode) {
-    resetMarkerMode();
-    hideToast();
-  }
-});
-
-document.querySelectorAll('.marker-type-btn').forEach((btn) => {
-  btn.addEventListener('click', () => {
-    setMarkerMode(btn.getAttribute('data-marker-type'));
-    markerMenu.setOpen(false);
-  });
-});
+document.getElementById('placingCancel').addEventListener('click', stopPlacing);
 
 eberronmap.on('click', (e) => {
-  if (!markerMode) return;
+  if (!placingType) return;
   const entry = createEntry({
     lat: e.latlng.lat,
     lng: e.latlng.lng,
-    text: `Nuovo marker: ${getMarkerTypeLabel(markerType)}`,
+    text: '',
     description: '',
-    type: markerType
+    type: placingType
   }, { draft: true });
-  resetMarkerMode();
-  hideToast();
+  stopPlacing();
   showEditPopup(entry);
 });
 
 // ---------------------------------------------------------------------------
-// HUD
-// ---------------------------------------------------------------------------
-const hudZoom = document.getElementById('hudZoom');
-const hudTile = document.getElementById('hudTile');
-
-function refreshHUD() {
-  const z = eberronmap.getZoom();
-  const p = eberronmap.project(eberronmap.getCenter(), z);
-  hudZoom.textContent = `z ${z}`;
-  hudTile.textContent = `x ${Math.floor(p.x / tileSize)}, y ${Math.floor(p.y / tileSize)}`;
-}
-
-eberronmap.on('moveend zoomend', refreshHUD);
-refreshHUD();
-
-// ---------------------------------------------------------------------------
-// Controlli dell'header
-// ---------------------------------------------------------------------------
-document.getElementById('resetView').addEventListener('click', () => {
-  eberronmap.setView(HOME_VIEW.center, HOME_VIEW.zoom);
-  mainMenu.setOpen(false);
-});
-
-const CanvasGrid = L.GridLayer.extend({
-  createTile(coords) {
-    const tile = L.DomUtil.create('canvas', 'leaflet-tile');
-    tile.width = tileSize;
-    tile.height = tileSize;
-    const ctx = tile.getContext('2d');
-    ctx.strokeStyle = 'rgba(255,255,255,0.25)';
-    ctx.lineWidth = 1;
-    ctx.strokeRect(0, 0, tileSize, tileSize);
-    ctx.font = '12px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial';
-    ctx.fillStyle = 'rgba(255,255,255,0.8)';
-    ctx.fillText(`z${coords.z} x${coords.x} y${coords.y}`, 8, 20);
-    return tile;
-  }
-});
-
-let gridLayer = null;
-const gridBtn = document.getElementById('toggleGrid');
-gridBtn.addEventListener('click', () => {
-  if (gridLayer) {
-    eberronmap.removeLayer(gridLayer);
-    gridLayer = null;
-  } else {
-    gridLayer = new CanvasGrid({ tileSize, pane: 'overlayPane', opacity: 1 }).addTo(eberronmap);
-  }
-  gridBtn.setAttribute('aria-pressed', String(Boolean(gridLayer)));
-  document.getElementById('hud').classList.toggle('hidden', !gridLayer);
-  mainMenu.setOpen(false);
-});
-
-// ---------------------------------------------------------------------------
-// Stato di caricamento delle tile
-// ---------------------------------------------------------------------------
-fullmap.on('loading', () => setStatus('Caricamento…'));
-fullmap.on('load', () => setStatus('Pronto'));
-fullmap.on('tileerror', () => setStatus('Alcune tile non trovate'));
-
-
-// ---------------------------------------------------------------------------
-// Livelli (luoghi e tipi di marker)
+// Livelli (luoghi, tipi di marker, griglia)
 // ---------------------------------------------------------------------------
 const layerState = { places: true };
 Object.keys(MARKER_TYPES).forEach((type) => { layerState[`marker:${type}`] = true; });
@@ -533,7 +500,7 @@ try {
   console.error('Preferenze dei livelli non leggibili:', e);
 }
 
-const layerToggles = document.querySelectorAll('.layer-toggle');
+const placesLayer = L.layerGroup();
 
 function isLayerVisible(key) {
   return layerState[key] !== false;
@@ -548,12 +515,10 @@ function setLayerVisible(key, visible) {
     console.error('Impossibile salvare le preferenze dei livelli:', e);
   }
   applyLayers();
+  refreshSheet();
 }
 
 function applyLayers() {
-  layerToggles.forEach((input) => {
-    input.checked = isLayerVisible(input.getAttribute('data-layer'));
-  });
   markers.forEach((entry) => {
     const visible = isLayerVisible(`marker:${entry.data.type}`);
     if (visible && !eberronmap.hasLayer(entry.layer)) entry.layer.addTo(eberronmap);
@@ -564,14 +529,38 @@ function applyLayers() {
   if (!showPlaces && eberronmap.hasLayer(placesLayer)) eberronmap.removeLayer(placesLayer);
 }
 
-layerToggles.forEach((input) => {
-  input.addEventListener('change', () => setLayerVisible(input.getAttribute('data-layer'), input.checked));
+eberronmap.on('zoomend', applyLayers);
+
+// Griglia delle tile, utile a chi lavora sulle immagini della mappa.
+const TileGrid = L.GridLayer.extend({
+  createTile(coords) {
+    const tile = L.DomUtil.create('canvas', 'leaflet-tile');
+    tile.width = tileSize;
+    tile.height = tileSize;
+    const ctx = tile.getContext('2d');
+    ctx.strokeStyle = 'rgba(241,230,200,0.45)';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(0, 0, tileSize, tileSize);
+    ctx.font = '12px sans-serif';
+    ctx.fillStyle = 'rgba(241,230,200,0.9)';
+    ctx.fillText(`z${coords.z} x${coords.x} y${coords.y}`, 8, 20);
+    return tile;
+  }
 });
+
+let gridLayer = null;
+
+function setGridVisible(visible) {
+  if (visible && !gridLayer) gridLayer = new TileGrid({ tileSize, pane: 'overlayPane' }).addTo(eberronmap);
+  if (!visible && gridLayer) {
+    eberronmap.removeLayer(gridLayer);
+    gridLayer = null;
+  }
+}
 
 // ---------------------------------------------------------------------------
 // Luoghi di Eberron (data/places.json)
 // ---------------------------------------------------------------------------
-const placesLayer = L.layerGroup();
 let places = [];
 
 function normalizePlace(raw) {
@@ -593,20 +582,23 @@ function normalizePlace(raw) {
 
 function placeSubtitle(place) {
   const kind = PLACE_KINDS[place.kind].label;
-  return place.parent ? `${kind} · ${place.parent}` : kind;
+  return place.parent ? `${kind}, ${place.parent}` : kind;
 }
 
 function buildPlacePopup(place) {
-  const root = el('div', 'marker-popup');
-  root.append(el('strong', 'marker-popup__title', place.name));
-  root.append(el('div', 'marker-popup__meta', placeSubtitle(place)));
-  if (place.description) root.append(el('p', 'marker-popup__description', place.description));
+  const root = shield(el('div', 'note'));
+  root.append(el('p', 'note__kind', placeSubtitle(place)));
+  root.append(el('h3', 'note__title', place.name));
+  if (place.description) root.append(el('p', 'note__text', place.description));
+  const actions = el('div', 'note__actions');
+  actions.append(button('btn btn--ink', 'Misura da qui', () => measureFrom(L.latLng(place.lat, place.lng))));
+  root.append(actions);
   return root;
 }
 
 function showPlace(place) {
   eberronmap.flyTo([place.lat, place.lng], place.zoom, { duration: 0.8 });
-  L.popup({ minWidth: 200, maxWidth: 260, offset: [0, -4] })
+  L.popup({ ...POPUP_OPTIONS, minWidth: 220, maxWidth: 280, offset: [0, -4] })
     .setLatLng([place.lat, place.lng])
     .setContent(buildPlacePopup(place))
     .openOn(eberronmap);
@@ -624,8 +616,8 @@ function loadPlaces() {
         L.marker([place.lat, place.lng], {
           icon: L.divIcon({
             className: `place-dot place-dot--${place.kind}`,
-            iconSize: [14, 14],
-            iconAnchor: [7, 7],
+            iconSize: [16, 16],
+            iconAnchor: [8, 8],
             popupAnchor: [0, -6],
             tooltipAnchor: [0, -8]
           }),
@@ -633,25 +625,23 @@ function loadPlaces() {
           zIndexOffset: -1000 // sempre sotto i marker dell'utente
         })
           .bindTooltip(tooltipContent(place.name), { direction: 'top' })
-          .bindPopup(() => buildPlacePopup(place), { minWidth: 200, maxWidth: 260 })
+          .bindPopup(() => buildPlacePopup(place), { ...POPUP_OPTIONS, minWidth: 220, maxWidth: 280 })
           .addTo(placesLayer);
       });
       applyLayers();
     })
     .catch((e) => {
       console.error('Impossibile caricare i luoghi:', e);
-      toast('Elenco dei luoghi non disponibile: la ricerca trova solo i tuoi marker');
+      toast('Elenco dei luoghi non caricato: la ricerca trova solo i tuoi marker');
     });
 }
-
-eberronmap.on('zoomend', applyLayers);
 
 // ---------------------------------------------------------------------------
 // Ricerca di luoghi e marker
 // ---------------------------------------------------------------------------
+const searchBox = document.getElementById('searchBox');
 const searchInput = document.getElementById('searchInput');
 const searchResults = document.getElementById('searchResults');
-const MAX_SEARCH_RESULTS = 8;
 let searchMatches = [];
 let searchActiveIndex = -1;
 
@@ -664,24 +654,27 @@ function matchScore(name, query) {
   return normalized.includes(query) ? 2 : -1;
 }
 
+function placeCandidate(place) {
+  return { name: place.name, subtitle: placeSubtitle(place), select: () => showPlace(place) };
+}
+
 function findMatches(rawQuery) {
   const query = normalizeText(rawQuery).trim();
-  if (!query) return [];
+  // Senza testo si sfogliano continenti e nazioni.
+  if (!query) {
+    return places
+      .filter((place) => PLACE_KINDS[place.kind].browse !== undefined)
+      .sort((a, b) => PLACE_KINDS[a.kind].browse - PLACE_KINDS[b.kind].browse || a.name.localeCompare(b.name))
+      .map(placeCandidate);
+  }
   const candidates = [
-    ...places.map((place) => ({
-      name: place.name,
-      subtitle: placeSubtitle(place),
-      select: () => showPlace(place)
-    })),
     ...markers.map((entry) => ({
       name: entry.data.text,
-      subtitle: `Tuo marker · ${getMarkerTypeLabel(entry.data.type)}`,
-      select: () => {
-        setLayerVisible(`marker:${entry.data.type}`, true);
-        eberronmap.flyTo(entry.layer.getLatLng(), Math.max(eberronmap.getZoom(), 5), { duration: 0.8 });
-        entry.layer.openPopup();
-      }
-    }))
+      subtitle: `Tuo marker, ${getMarkerTypeLabel(entry.data.type).toLowerCase()}`,
+      pin: entry.data.type,
+      select: () => focusMarker(entry)
+    })),
+    ...places.map(placeCandidate)
   ];
   return candidates
     .map((candidate) => ({ candidate, score: matchScore(candidate.name, query) }))
@@ -693,8 +686,9 @@ function findMatches(rawQuery) {
 
 function setSearchActive(index) {
   searchActiveIndex = index;
-  Array.from(searchResults.children).forEach((item, i) => {
+  Array.from(searchResults.querySelectorAll('[role="option"]')).forEach((item, i) => {
     item.setAttribute('aria-selected', String(i === index));
+    if (i === index) item.scrollIntoView({ block: 'nearest' });
   });
   if (index >= 0) searchInput.setAttribute('aria-activedescendant', `searchResult${index}`);
   else searchInput.removeAttribute('aria-activedescendant');
@@ -707,20 +701,23 @@ function closeSearch() {
 }
 
 function renderSearch() {
+  const hasQuery = Boolean(searchInput.value.trim());
   searchMatches = findMatches(searchInput.value);
   searchResults.replaceChildren();
-  if (!searchInput.value.trim()) {
+  if (!hasQuery && !searchMatches.length) {
     closeSearch();
     return;
   }
   if (!searchMatches.length) {
-    searchResults.append(el('li', 'search-box__empty', 'Nessun risultato'));
+    searchResults.append(el('li', 'search__empty', `Nessun luogo o marker per "${searchInput.value.trim()}"`));
   }
   searchMatches.forEach((match, index) => {
-    const item = el('li', 'search-box__result');
+    const item = el('li', 'search__result');
     item.id = `searchResult${index}`;
     item.setAttribute('role', 'option');
-    item.append(el('span', 'search-box__name', match.name), el('span', 'search-box__subtitle', match.subtitle));
+    const text = el('span', 'search__text');
+    text.append(el('span', 'search__name', match.name), el('span', 'search__subtitle', match.subtitle));
+    item.append(match.pin ? pinElement(match.pin) : el('span', 'search__dot'), text);
     // mousedown: così la scelta avviene prima che l'input perda il focus.
     item.addEventListener('mousedown', (e) => {
       e.preventDefault();
@@ -730,7 +727,7 @@ function renderSearch() {
   });
   searchResults.hidden = false;
   searchInput.setAttribute('aria-expanded', 'true');
-  setSearchActive(searchMatches.length ? 0 : -1);
+  setSearchActive(hasQuery && searchMatches.length ? 0 : -1);
 }
 
 function chooseSearchResult(index) {
@@ -739,18 +736,20 @@ function chooseSearchResult(index) {
   searchInput.value = match.name;
   closeSearch();
   searchInput.blur();
+  if (narrowScreen.matches) closeSheet();
   match.select();
 }
 
 searchInput.addEventListener('input', renderSearch);
-searchInput.addEventListener('focus', () => { if (searchInput.value.trim()) renderSearch(); });
+searchInput.addEventListener('focus', renderSearch);
 searchInput.addEventListener('blur', closeSearch);
 searchInput.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
     if (!searchMatches.length) return;
     e.preventDefault();
     const step = e.key === 'ArrowDown' ? 1 : -1;
-    setSearchActive((searchActiveIndex + step + searchMatches.length) % searchMatches.length);
+    const from = searchActiveIndex < 0 && step < 0 ? 0 : searchActiveIndex;
+    setSearchActive((from + step + searchMatches.length) % searchMatches.length);
   } else if (e.key === 'Enter') {
     e.preventDefault();
     chooseSearchResult(Math.max(searchActiveIndex, 0));
@@ -761,43 +760,20 @@ searchInput.addEventListener('keydown', (e) => {
   }
 });
 
-// I clic nel riquadro di ricerca non devono arrivare alla mappa.
-L.DomEvent.disableClickPropagation(document.getElementById('searchBox'));
-L.DomEvent.disableScrollPropagation(document.getElementById('searchBox'));
-
 // ---------------------------------------------------------------------------
 // Link alla vista, esportazione e importazione dei marker
 // ---------------------------------------------------------------------------
-function viewHash() {
-  const center = eberronmap.getCenter();
-  return `#${eberronmap.getZoom()}/${center.lat.toFixed(4)}/${center.lng.toFixed(4)}`;
-}
-
-// L'indirizzo segue la vista, così si può copiare anche dalla barra del browser.
-eberronmap.on('moveend', () => history.replaceState(null, '', viewHash()));
-
-window.addEventListener('hashchange', () => {
-  const view = parseViewHash(location.hash);
-  if (view) eberronmap.setView(view.center, view.zoom);
-});
-
 document.getElementById('copyLink').addEventListener('click', () => {
-  mainMenu.setOpen(false);
   const url = location.href.split('#')[0] + viewHash();
   const fallback = () => window.prompt('Copia questo link:', url);
   if (!navigator.clipboard) {
     fallback();
     return;
   }
-  navigator.clipboard.writeText(url).then(() => toast('Link copiato negli appunti'), fallback);
+  navigator.clipboard.writeText(url).then(() => toast('Link a questa vista copiato'), fallback);
 });
 
-document.getElementById('exportMarkers').addEventListener('click', () => {
-  mainMenu.setOpen(false);
-  if (!markers.length) {
-    toast('Non ci sono marker da esportare');
-    return;
-  }
+function exportMarkers() {
   const payload = {
     app: 'eberron-interactive-map',
     version: 1,
@@ -812,8 +788,8 @@ document.getElementById('exportMarkers').addEventListener('click', () => {
   link.click();
   link.remove();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
-  toast(`Esportati ${markers.length} marker`);
-});
+  toast(markers.length === 1 ? 'Esportato 1 marker' : `Esportati ${markers.length} marker`);
+}
 
 function markerKey(data) {
   return [data.lat.toFixed(5), data.lng.toFixed(5), data.type, data.text].join('|');
@@ -842,11 +818,6 @@ function importMarkers(raw) {
 
 const importFile = document.getElementById('importFile');
 
-document.getElementById('importMarkers').addEventListener('click', () => {
-  mainMenu.setOpen(false);
-  importFile.click();
-});
-
 importFile.addEventListener('change', () => {
   const file = importFile.files[0];
   importFile.value = ''; // permette di reimportare lo stesso file
@@ -858,46 +829,38 @@ importFile.addEventListener('change', () => {
   file.text()
     .then((text) => {
       const { added, skipped } = importMarkers(JSON.parse(text));
-      const ignored = skipped ? ` (${skipped} ignorati perché doppi o non validi)` : '';
-      toast(added ? `Importati ${added} marker${ignored}` : `Nessun marker nuovo da importare${ignored}`);
+      const ignored = skipped ? ` (${skipped === 1 ? '1 ignorato' : `${skipped} ignorati`}: doppi o non validi)` : '';
+      if (!added) toast(`Nessun marker nuovo nel file${ignored}`);
+      else toast(`${added === 1 ? 'Importato 1 marker' : `Importati ${added} marker`}${ignored}`);
     })
     .catch((e) => {
       console.error('Importazione fallita:', e);
-      toast('Importazione fallita: il file non è un JSON di marker valido');
+      toast('Importazione non riuscita: scegli un file esportato da questa mappa');
     });
 });
 
 // ---------------------------------------------------------------------------
-// Misuratore di distanze e tempi di viaggio
+// Misura di distanze e tempi di viaggio
 // ---------------------------------------------------------------------------
-const measurePanel = document.getElementById('measurePanel');
-const helpCard = document.getElementById('helpCard');
-const measureStyle = { color: '#ef4444', weight: 3, dashArray: '2,8' };
+const measureStyle = { color: '#b3262b', weight: 3, dashArray: '1,7', lineCap: 'round' };
 const measure = {
   active: false,
   points: [],
   layer: L.layerGroup(),
   line: L.polyline([], measureStyle),
-  preview: L.polyline([], { ...measureStyle, opacity: 0.5, interactive: false }),
-  button: null,
+  preview: L.polyline([], { ...measureStyle, opacity: 0.55, interactive: false }),
   // Su schermi stretti la tabella parte chiusa per non coprire la mappa.
-  showTimes: window.matchMedia('(min-width: 768px)').matches
+  showTimes: !narrowScreen.matches
 };
 
 function milesBetween(a, b) {
-  const pa = eberronmap.project(a, maxZoom);
-  const pb = eberronmap.project(b, maxZoom);
-  return pa.distanceTo(pb) * MILES_PER_PIXEL_AT_MAX_ZOOM;
+  return eberronmap.project(a, maxZoom).distanceTo(eberronmap.project(b, maxZoom)) * MILES_PER_PIXEL_AT_MAX_ZOOM;
 }
 
 function measuredMiles() {
   let total = 0;
   for (let i = 1; i < measure.points.length; i++) total += milesBetween(measure.points[i - 1], measure.points[i]);
   return total;
-}
-
-function formatMiles(miles) {
-  return `${Math.round(miles).toLocaleString('it-IT')} miglia`;
 }
 
 function formatTravelTime(miles, mode) {
@@ -916,65 +879,65 @@ function formatTravelTime(miles, mode) {
   return parts.join(' e ');
 }
 
-function measureButton(label, onClick, disabled) {
-  const button = el('button', 'marker-btn', label);
-  button.type = 'button';
-  button.disabled = Boolean(disabled);
-  button.addEventListener('click', onClick);
-  return button;
-}
-
-function renderMeasure() {
+function drawMeasure() {
   measure.line.setLatLngs(measure.points);
   measure.layer.clearLayers();
   measure.line.addTo(measure.layer);
   measure.preview.setLatLngs([]).addTo(measure.layer);
   measure.points.forEach((point) => {
-    L.circleMarker(point, { radius: 5, color: '#fff', weight: 2, fillColor: '#ef4444', fillOpacity: 1, interactive: false })
+    L.circleMarker(point, { radius: 5, color: '#f1e6c8', weight: 2, fillColor: '#b3262b', fillOpacity: 1, interactive: false })
       .addTo(measure.layer);
   });
+}
 
+function renderMeasureSheet(body) {
+  const count = measure.points.length;
   const miles = measuredMiles();
-  const root = document.createDocumentFragment();
-  const header = el('div', 'measure-panel__header');
-  header.append(el('strong', 'measure-panel__total', measure.points.length > 1 ? formatMiles(miles) : 'Misura distanza'));
-  if (measure.points.length > 2) header.append(el('span', 'measure-panel__legs', `${measure.points.length - 1} tratti`));
-  root.append(header);
 
-  if (measure.points.length < 2) {
-    root.append(el('p', 'measure-panel__hint', measure.points.length
-      ? 'Clicca il punto successivo. Puoi aggiungere quante tappe vuoi.'
-      : 'Clicca sulla mappa per segnare il punto di partenza.'));
+  if (count < 2) {
+    body.append(el('p', 'sheet__lead', count
+      ? 'Tocca il punto successivo. Puoi aggiungere tutte le tappe che vuoi.'
+      : 'Tocca la mappa per segnare il punto di partenza. Puoi toccare anche città e marker.'));
   } else {
-    const details = el('details', 'measure-panel__details');
+    const total = el('p', 'measure__total');
+    total.append(el('strong', '', Math.round(miles).toLocaleString('it-IT')), el('span', '', ' miglia'));
+    if (count > 2) total.append(el('span', 'measure__legs', `in ${count - 1} tratti`));
+    body.append(total);
+
+    const details = el('details', 'measure__details');
     details.open = measure.showTimes;
     details.addEventListener('toggle', () => { measure.showTimes = details.open; });
     details.append(el('summary', '', 'Tempi di viaggio'));
-    const table = el('table', 'measure-panel__table');
+    const table = el('table', 'measure__table');
     TRAVEL_MODES.forEach((mode) => {
       const row = el('tr');
-      row.append(el('th', '', mode.label), el('td', '', formatTravelTime(miles, mode)));
-      row.firstChild.scope = 'row';
+      const head = el('th', '', mode.label);
+      head.scope = 'row';
+      row.append(head, el('td', '', formatTravelTime(miles, mode)));
       table.append(row);
     });
-    details.append(table, el('p', 'measure-panel__hint',
-      'Stime lungo il percorso tracciato; i mezzi non a piedi viaggiano giorno e notte.'));
-    root.append(details);
+    details.append(table, el('p', 'sheet__hint',
+      'Stime sul percorso tracciato. Navi, aeronavi e lightning rail viaggiano giorno e notte.'));
+    body.append(details);
   }
 
-  const actions = el('div', 'marker-popup__actions');
-  actions.append(
-    measureButton('Annulla', () => { measure.points.pop(); renderMeasure(); }, !measure.points.length),
-    measureButton('Azzera', () => { measure.points = []; renderMeasure(); }, !measure.points.length),
-    measureButton('Chiudi', stopMeasuring)
-  );
-  root.append(actions);
-  measurePanel.replaceChildren(root);
+  const actions = el('div', 'sheet__actions');
+  const undo = button('btn', 'Togli ultima tappa', () => { measure.points.pop(); updateMeasure(); });
+  const reset = button('btn', 'Ricomincia', () => { measure.points = []; updateMeasure(); });
+  undo.disabled = !count;
+  reset.disabled = !count;
+  actions.append(undo, reset);
+  body.append(actions);
+}
+
+function updateMeasure() {
+  drawMeasure();
+  refreshSheet();
 }
 
 function onMeasureClick(e) {
   measure.points.push(e.latlng);
-  renderMeasure();
+  updateMeasure();
 }
 
 // Su desktop una linea tratteggiata segue il mouse fino al prossimo punto.
@@ -985,10 +948,6 @@ function onMeasureMove(e) {
 
 function startMeasuring() {
   if (measure.active) return;
-  if (markerMode) {
-    resetMarkerMode();
-    hideToast();
-  }
   eberronmap.closePopup();
   measure.active = true;
   measure.points = [];
@@ -997,11 +956,7 @@ function startMeasuring() {
   eberronmap.on('mousemove', onMeasureMove);
   eberronmap.doubleClickZoom.disable();
   eberronmap.getContainer().classList.add('is-measuring');
-  measure.button.classList.add('leaflet-ruler-clicked');
-  measure.button.setAttribute('aria-pressed', 'true');
-  measurePanel.hidden = false;
-  helpCard.classList.add('is-hidden');
-  renderMeasure();
+  drawMeasure();
 }
 
 function stopMeasuring() {
@@ -1013,35 +968,164 @@ function stopMeasuring() {
   eberronmap.off('mousemove', onMeasureMove);
   eberronmap.doubleClickZoom.enable();
   eberronmap.getContainer().classList.remove('is-measuring');
-  measure.button.classList.remove('leaflet-ruler-clicked');
-  measure.button.setAttribute('aria-pressed', 'false');
-  measurePanel.hidden = true;
-  helpCard.classList.remove('is-hidden');
 }
 
-const MeasureControl = L.Control.extend({
-  options: { position: 'topright' },
-  onAdd() {
-    const button = L.DomUtil.create('button', 'leaflet-bar leaflet-ruler');
-    button.type = 'button';
-    button.title = 'Misura distanza e tempi di viaggio';
-    button.setAttribute('aria-label', button.title);
-    button.setAttribute('aria-pressed', 'false');
-    L.DomEvent.disableClickPropagation(button);
-    L.DomEvent.on(button, 'click', () => (measure.active ? stopMeasuring() : startMeasuring()));
-    measure.button = button;
-    return button;
+// Avvia una misura con il primo punto già fissato (da un luogo o un marker).
+function measureFrom(latlng) {
+  openSheet('measure');
+  measure.points = [latlng];
+  updateMeasure();
+}
+
+// ---------------------------------------------------------------------------
+// Pannello unico: marker, livelli, misura
+// ---------------------------------------------------------------------------
+const sheet = document.getElementById('sheet');
+const sheetTitle = document.getElementById('sheetTitle');
+const sheetBody = document.getElementById('sheetBody');
+const dockButtons = document.querySelectorAll('.dock__btn[data-tool]');
+let openTool = null;
+
+function renderMarkersSheet(body) {
+  body.append(el('h3', 'sheet__heading', 'Aggiungi un marker'));
+  const types = el('div', 'type-grid');
+  Object.keys(MARKER_TYPES).forEach((type) => {
+    const choice = button('type-grid__btn', undefined, () => startPlacing(type));
+    choice.append(pinElement(type), el('span', '', MARKER_TYPES[type].label));
+    types.append(choice);
+  });
+  body.append(types);
+
+  body.append(el('h3', 'sheet__heading', markers.length ? `I tuoi marker (${markers.length})` : 'I tuoi marker'));
+  if (!markers.length) {
+    body.append(el('p', 'sheet__lead',
+      'Ancora nessun marker. Scegli un tipo qui sopra e tocca la mappa per segnare un luogo della tua campagna.'));
+  } else {
+    const list = el('ul', 'marker-list');
+    [...markers]
+      .sort((a, b) => a.data.text.localeCompare(b.data.text))
+      .forEach((entry) => {
+        const item = el('li');
+        const row = button('marker-list__btn', undefined, () => {
+          if (narrowScreen.matches) closeSheet();
+          focusMarker(entry);
+        });
+        const text = el('span', 'marker-list__text');
+        text.append(el('span', 'marker-list__name', entry.data.text),
+          el('span', 'marker-list__kind', getMarkerTypeLabel(entry.data.type)));
+        row.append(pinElement(entry.data.type), text);
+        item.append(row);
+        list.append(item);
+      });
+    body.append(list);
   }
+
+  const actions = el('div', 'sheet__actions');
+  const exportBtn = button('btn', 'Esporta marker', exportMarkers);
+  exportBtn.disabled = !markers.length;
+  actions.append(exportBtn, button('btn', 'Importa marker', () => importFile.click()));
+  body.append(actions, el('p', 'sheet__hint',
+    'I marker restano in questo browser. Esportali per salvarli o passarli ai tuoi giocatori.'));
+}
+
+function toggleRow(labelText, hint, checked, onChange, lead) {
+  const row = el('label', 'toggle');
+  const input = el('input', 'toggle__input');
+  input.type = 'checkbox';
+  input.checked = checked;
+  input.addEventListener('change', () => onChange(input.checked));
+  const text = el('span', 'toggle__text');
+  text.append(el('span', 'toggle__label', labelText));
+  if (hint) text.append(el('span', 'toggle__hint', hint));
+  row.append(lead || el('span', 'toggle__lead'), text, input, el('span', 'toggle__switch'));
+  return row;
+}
+
+function renderLayersSheet(body) {
+  const dot = el('span', 'toggle__lead');
+  dot.append(el('span', 'search__dot'));
+  body.append(toggleRow('Città e luoghi di Eberron', 'Compaiono ingrandendo la mappa',
+    isLayerVisible('places'), (on) => setLayerVisible('places', on), dot));
+
+  body.append(el('h3', 'sheet__heading', 'I tuoi marker'));
+  Object.keys(MARKER_TYPES).forEach((type) => {
+    const count = markers.filter((m) => m.data.type === type).length;
+    const lead = el('span', 'toggle__lead');
+    lead.append(pinElement(type));
+    body.append(toggleRow(MARKER_TYPES[type].plural, count ? `${count} sulla mappa` : '',
+      isLayerVisible(`marker:${type}`), (on) => setLayerVisible(`marker:${type}`, on), lead));
+  });
+
+  body.append(el('h3', 'sheet__heading', 'Strumenti'));
+  body.append(toggleRow('Griglia delle tile', 'Mostra zoom e coordinate di ogni riquadro',
+    Boolean(gridLayer), setGridVisible));
+}
+
+const SHEETS = {
+  markers: { title: 'Marker', render: renderMarkersSheet },
+  layers: { title: 'Livelli', render: renderLayersSheet },
+  measure: { title: 'Misura un percorso', render: renderMeasureSheet }
+};
+
+function refreshSheet() {
+  if (!openTool) return;
+  const scroll = sheetBody.scrollTop;
+  const body = document.createDocumentFragment();
+  SHEETS[openTool].render(body);
+  sheetBody.replaceChildren(body);
+  sheetBody.scrollTop = scroll;
+}
+
+function syncDock() {
+  dockButtons.forEach((btn) => {
+    btn.setAttribute('aria-pressed', String(btn.getAttribute('data-tool') === openTool));
+  });
+}
+
+function openSheet(tool) {
+  if (openTool === tool) return;
+  stopPlacing();
+  if (tool === 'measure') startMeasuring();
+  else stopMeasuring();
+  openTool = tool;
+  sheetTitle.textContent = SHEETS[tool].title;
+  sheet.dataset.sheet = tool;
+  sheet.hidden = false;
+  sheetBody.scrollTop = 0;
+  refreshSheet();
+  syncDock();
+}
+
+function closeSheet() {
+  if (!openTool) return;
+  stopMeasuring();
+  openTool = null;
+  sheet.hidden = true;
+  syncDock();
+}
+
+dockButtons.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const tool = btn.getAttribute('data-tool');
+    if (openTool === tool) closeSheet();
+    else openSheet(tool);
+  });
 });
 
-new MeasureControl().addTo(eberronmap);
+document.getElementById('sheetClose').addEventListener('click', closeSheet);
 
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') stopMeasuring();
+  if (e.key !== 'Escape') return;
+  if (placingType) stopPlacing();
+  else closeSheet();
 });
 
-L.DomEvent.disableClickPropagation(measurePanel);
-L.DomEvent.disableScrollPropagation(measurePanel);
+// I clic sugli strumenti non devono arrivare alla mappa.
+[searchBox, sheet, placingBanner, document.querySelector('.dock')].forEach((node) => {
+  shield(node);
+  L.DomEvent.disableClickPropagation(node);
+  L.DomEvent.disableScrollPropagation(node);
+});
 
 // ---------------------------------------------------------------------------
 // Avvio

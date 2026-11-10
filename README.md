@@ -13,15 +13,15 @@ This project is also developing a user interface inspired by World of Warcraft. 
 
 ## Features
 
-- Search for Eberron places (continents, nations, major cities) and your own markers
-- Interactive marker creation (cities, monsters, dungeons, villages, etc.), with editable name, type and description and drag-to-move
+- Full-screen map with a search box, a four-button toolbar and a single side panel (a bottom sheet on phones)
+- Search for Eberron places (continents, nations, major cities) and your own markers; focus the empty box to browse continents and nations
+- Campaign markers in six types (party, city, village, dungeon, monster, note) with name, notes, drag-to-move, and a list to jump between them
 - Toggleable layers: the places overlay and each marker type
-- Measuring tool with multi-leg routes and travel-time estimates (on foot, ship, airship, lightning rail)
+- Measuring tool with multi-leg routes and travel-time estimates (on foot, ship, airship, lightning rail), startable from any place or marker
 - Shareable links: the URL always reflects the current view (`#zoom/lat/lng`)
 - Export and import markers as JSON, to back them up or share them with your players
-- Responsive UI (mobile and desktop)
 - Markers are stored locally in the browser (`localStorage`)
-- Built with Tailwind CSS and Leaflet, with no runtime dependency on external CDNs apart from the title font
+- No build step and no external requests: Leaflet and the fonts are vendored in `assets/`
 
 ### Places data
 
@@ -53,16 +53,9 @@ python3 -m http.server 8000
 
 Then open <http://localhost:8000>. A web server is required: the places list is loaded with `fetch`, which browsers block when the page is opened directly from disk.
 
-### Editing styles
+### Editing the interface
 
-Tailwind is compiled ahead of time into `assets/tailwind.css`, which is committed, so no build step is needed just to run the map. If you add or change Tailwind classes in `index.html` or `assets/map.js`, regenerate it (requires Node.js):
-
-```bash
-npm install
-npm run build:css
-```
-
-Styles for map controls, markers and popups live in `assets/map.css` and need no build.
+There is nothing to compile. The page is `index.html`, the behaviour is `assets/map.js` and all styles are in `assets/map.css`, where the colours and fonts are defined once as CSS variables at the top.
 
 ## Contributing
 
@@ -72,7 +65,8 @@ If you have ideas for new features, bug fixes, or want to help with documentatio
 ## Credits
 
 - Original map concept and tiles: [eberronmap.johnarcadian.com](https://eberronmap.johnarcadian.com)
-- Built with [Leaflet](https://leafletjs.com/) and [Tailwind CSS](https://tailwindcss.com/)
+- Map engine: [Leaflet](https://leafletjs.com/) 1.9 (BSD 2-Clause, see `assets/LEAFLET-LICENSE.txt`)
+- Typefaces: [Marcellus](https://fonts.google.com/specimen/Marcellus) and [Alegreya Sans](https://fonts.google.com/specimen/Alegreya+Sans), both under the SIL Open Font License (see `assets/fonts/`)
 
 ## License
 
