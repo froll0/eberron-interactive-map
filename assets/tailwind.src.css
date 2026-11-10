@@ -1,0 +1,4 @@
+/* Sorgente Tailwind: rigenera assets/tailwind.css con `npm run build:css`. */
+@import "tailwindcss" source(none);
+@source "../index.html";
+@source "./map.js";

@@ -3,16 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Eberron Interactive Map — Tailwind v4 + Leaflet</title>
+  <title>Eberron Interactive Map</title>
 
-  <!-- Tailwind CSS v4 via Play CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <!-- Tailwind CSS v4, compilato in locale (npm run build:css) -->
+  <link rel="stylesheet" href="assets/tailwind.css" />
 
-  <!-- Leaflet via CDN -->
-  <link
-    rel="stylesheet"
-    href="assets/leaflet.css"
-  />
+  <!-- Leaflet (copia locale) -->
+  <link rel="stylesheet" href="assets/leaflet.css" />
   <script src="assets/leaflet.js"></script>
 
   <!-- Leaflet Ruler Plugin -->
@@ -20,7 +17,7 @@
 
   <!-- Map Script -->
   <script src="assets/map.js" defer></script>
-    <link rel="stylesheet" href="assets/map.css" />
+  <link rel="stylesheet" href="assets/map.css" />
 
   <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
   <meta name="color-scheme" content="dark light" />
@@ -29,36 +26,36 @@
   <!-- Header -->
   <header class="fixed top-0 left-0 right-0 px-4 py-3 border-b border-white/10 bg-zinc-900/60 backdrop-blur supports-[backdrop-filter]:bg-zinc-900/40 z-50">
     <div class="mx-auto max-w-screen-xl flex items-center gap-3">
-      <div class="size-2 rounded-full bg-emerald-400 animate-pulse"></div>
-      <h1 class="text-lg md:text-xl font-semibold tracking-tight" style="font-family: 'MedievalSharp', cursive;">
-        Eberron — Interactive Map
+      <div class="size-2 shrink-0 rounded-full bg-emerald-400 animate-pulse"></div>
+      <h1 class="min-w-0 truncate text-lg md:text-xl font-semibold tracking-tight" style="font-family: 'MedievalSharp', cursive;">
+        Eberron<span class="hidden sm:inline"> — Interactive Map</span>
       </h1>
-      <div class="ms-auto flex items-center gap-2">
-        <div class="relative group" style="z-index: 100;">
-          <button id="toggleMarkerMenu" class="px-3 py-1.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 transition text-sm cursor-pointer flex items-center gap-1">
+      <div class="ms-auto flex shrink-0 items-center gap-2">
+        <div class="relative" style="z-index: 100;">
+          <button id="toggleMarkerMenu" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="markerMenuDropdown" class="px-3 py-1.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 transition text-sm whitespace-nowrap cursor-pointer flex items-center gap-1">
             <span id="markerMenuText">Aggiungi marker</span>
             <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
           </button>
-          <div id="markerMenuDropdown" class="hidden group-hover:block absolute left-0 mt-2 min-w-[180px] rounded-xl border border-white/15 bg-zinc-900/95 shadow-lg py-1">
-            <button class="w-full text-left px-4 py-2 hover:bg-zinc-800 transition text-sm marker-type-btn" data-marker-type="city">🏙️ Città</button>
-            <button class="w-full text-left px-4 py-2 hover:bg-zinc-800 transition text-sm marker-type-btn" data-marker-type="monster">👾 Posizione Mostro</button>
-            <button class="w-full text-left px-4 py-2 hover:bg-zinc-800 transition text-sm marker-type-btn" data-marker-type="dungeon">🏰 Dungeon</button>
-            <button class="w-full text-left px-4 py-2 hover:bg-zinc-800 transition text-sm marker-type-btn" data-marker-type="village">🏡 Villaggio</button>
-            <button class="w-full text-left px-4 py-2 hover:bg-zinc-800 transition text-sm marker-type-btn" data-marker-type="other">📍 Altro</button>
+          <div id="markerMenuDropdown" class="hidden absolute right-0 mt-2 min-w-[180px] rounded-xl border border-white/15 bg-zinc-900/95 shadow-lg py-1">
+            <button type="button" class="w-full text-left px-4 py-2 hover:bg-zinc-800 transition text-sm marker-type-btn" data-marker-type="city">🏙️ Città</button>
+            <button type="button" class="w-full text-left px-4 py-2 hover:bg-zinc-800 transition text-sm marker-type-btn" data-marker-type="monster">👾 Posizione Mostro</button>
+            <button type="button" class="w-full text-left px-4 py-2 hover:bg-zinc-800 transition text-sm marker-type-btn" data-marker-type="dungeon">🏰 Dungeon</button>
+            <button type="button" class="w-full text-left px-4 py-2 hover:bg-zinc-800 transition text-sm marker-type-btn" data-marker-type="village">🏡 Villaggio</button>
+            <button type="button" class="w-full text-left px-4 py-2 hover:bg-zinc-800 transition text-sm marker-type-btn" data-marker-type="other">📍 Altro</button>
           </div>
         </div>
-        <button id="resetView" class="px-3 py-1.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 transition text-sm cursor-pointer" style="position: relative; z-index: 100;">
-          Reset view
+        <button id="resetView" type="button" class="px-3 py-1.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 transition text-sm whitespace-nowrap cursor-pointer" style="position: relative; z-index: 100;">
+          Centra mappa
         </button>
-        <button id="toggleGrid" class="px-3 py-1.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 transition text-sm cursor-pointer" style="position: relative; z-index: 100;">
-          Toggle grid
+        <button id="toggleGrid" type="button" aria-pressed="false" class="hidden md:block px-3 py-1.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 transition text-sm cursor-pointer" style="position: relative; z-index: 100;">
+          Griglia
         </button>
       </div>
     </div>
   </header>
 
   <!-- Map -->
-  <main class="fixed inset-0" style="top: 70px; bottom: 50px;">
+  <main class="fixed inset-x-0 top-[58px] bottom-0 md:bottom-[37px]">
     <div id="map" class="absolute inset-0"></div>
 
     <!-- HUD bottom-left -->
@@ -74,7 +71,7 @@
     <div class="absolute right-3 bottom-3 max-w-[380px] pointer-events-auto hidden md:block" style="z-index: 1000;">
       <div class="rounded-xl border border-white/10 bg-zinc-900/70 backdrop-blur px-4 py-3 text-xs md:text-sm leading-relaxed">
         <p class="opacity-90">
-          <strong>Modalità marker:</strong> Clicca su "Aggiungi marker" e poi sulla mappa per creare marker personalizzati.
+          <strong>Modalità marker:</strong> Clicca su "Aggiungi marker" e poi sulla mappa per creare un marker. Puoi modificarlo dal suo popup e trascinarlo per spostarlo.
         </p>
         <p class="mt-2 opacity-80">
           Sorgente tile: <code class="px-1 py-0.5 rounded bg-white/10">eberron/{z}/{x}/{y}.jpg</code>
@@ -86,7 +83,7 @@
   <!-- Footer -->
   <footer class="fixed bottom-0 left-0 right-0 px-4 py-2 border-t border-white/10 bg-zinc-900/60 backdrop-blur supports-[backdrop-filter]:bg-zinc-900/40 z-50 hidden md:block">
     <div class="mx-auto max-w-screen-xl flex items-center justify-between text-xs md:text-sm opacity-80">
-      <p>Leaflet + Tailwind v4 (CDN). Mappa interattiva con marker personalizzabili e misuratore di distanze.</p>
+      <p>Mappa interattiva con marker personalizzabili e misuratore di distanze.</p>
       <p><span id="status" class="font-medium">Pronto</span></p>
     </div>
   </footer>

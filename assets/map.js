@@ -1,165 +1,318 @@
-// Leaflet setup
+// ---------------------------------------------------------------------------
+// Configurazione
+// ---------------------------------------------------------------------------
 const minZoom = 1;
 const maxZoom = 7;
 const tileSize = 256;
+const HOME_VIEW = { center: [20.009428770699756, 0.07578125], zoom: 4 };
+const STORAGE_KEY = 'eberronMarkers';
+const MAX_NAME_LENGTH = 80;
+const MAX_DESCRIPTION_LENGTH = 500;
 
-var fullmap = L.tileLayer('eberron/{z}/{x}/{y}.jpg', {
+const MARKER_TYPES = {
+  city: { label: 'Città', emoji: '🏙️' },
+  monster: { label: 'Posizione Mostro', emoji: '👾' },
+  dungeon: { label: 'Dungeon', emoji: '🏰' },
+  village: { label: 'Villaggio', emoji: '🏡' },
+  other: { label: 'Altro', emoji: '📍' }
+};
+
+// ---------------------------------------------------------------------------
+// Mappa
+// ---------------------------------------------------------------------------
+const fullmap = L.tileLayer('eberron/{z}/{x}/{y}.jpg', {
   minZoom, maxZoom, tileSize,
   updateWhenZooming: false,
   updateWhenIdle: true,
   keepBuffer: 8,
-  continuousWorld: !1,
-  noWrap: !0
-})
+  noWrap: true
+});
 
-var eberronmap = L.map('map', {
+const eberronmap = L.map('map', {
   minZoom, maxZoom,
   worldCopyJump: false,
   layers: [fullmap],
-  zoomControl: !1,
-  attributionControl: !1
-}).setView([20.009428770699756, .07578125], 3.5);
+  zoomControl: false,
+  attributionControl: false
+}).setView(HOME_VIEW.center, HOME_VIEW.zoom);
 
-var baseMaps = {
-    "Full Map": fullmap
-};
+L.control.zoom({ position: 'topright' }).addTo(eberronmap);
 
-L.control.zoom({
-    position: "topright"
+L.control.ruler({
+  position: 'topright',
+  lengthUnit: { factor: 3.233, display: 'miles', decimal: 0 }
 }).addTo(eberronmap);
 
-var ruleroptions = {
-    position: "topright",
-    lengthUnit: {
-        factor: 3.233,
-        display: "miles",
-        decimal: 0
-    }
-};
-
-// Add ruler control directly to map
-L.control.ruler(ruleroptions).addTo(eberronmap);
-
-const markerIcons = {
-  city: L.icon({
-    iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
-    iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
-    shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
-  }),
-  monster: L.icon({
-    iconUrl: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f47e.png", // 👾
-    iconSize: [32, 32],
-    iconAnchor: [16, 32],
-    popupAnchor: [0, -32]
-  }),
-  dungeon: L.icon({
-    iconUrl: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f3f0.png", // 🏰
-    iconSize: [32, 32],
-    iconAnchor: [16, 32],
-    popupAnchor: [0, -32]
-  }),
-  village: L.icon({
-    iconUrl: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f3e1.png", // 🏡
-    iconSize: [32, 32],
-    iconAnchor: [16, 32],
-    popupAnchor: [0, -32]
-  }),
-  other: L.icon({
-    iconUrl: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f4cd.png", // 📍
-    iconSize: [32, 32],
-    iconAnchor: [16, 32],
-    popupAnchor: [0, -32]
-  })
-};
-
-let markerMode = false;
-let markerType = "city";
-let markers = [];
-
-// Carica marker da localStorage all'avvio
-window.addEventListener('DOMContentLoaded', () => {
-  const saved = localStorage.getItem('eberronMarkers');
-  if (saved) {
-    try {
-      const arr = JSON.parse(saved);
-      arr.forEach(m => {
-        const marker = L.marker([m.lat, m.lng], {
-          icon: markerIcons[m.type] || markerIcons.other
-        })
-          .addTo(eberronmap)
-          .bindTooltip(m.text, { permanent: false, direction: 'top' })
-          .bindPopup(`
-            <div class="text-sm">
-              <strong>${m.text}</strong><br>
-              Tipo: ${getMarkerTypeLabel(m.type)}<br>
-              Lat: ${m.lat.toFixed(4)}<br>
-              Lng: ${m.lng.toFixed(4)}<br>
-              <button onclick="removeMarker(${markers.length})" class="mt-2 px-2 py-1 bg-red-600 text-white rounded text-xs">
-                Rimuovi marker
-              </button>
-            </div>
-          `);
-        markers.push(marker);
-      });
-    } catch (e) {
-      console.error('Errore nel parsing dei marker salvati:', e);
-    }
-  }
-});
-
-// Salva tutti i marker attuali su localStorage
-function saveMarkersToLocalStorage() {
-  const arr = [];
-  markers.forEach(m => {
-    if (m && m.getLatLng) {
-      arr.push({
-        lat: m.getLatLng().lat,
-        lng: m.getLatLng().lng,
-        text: m.getTooltip().getContent(),
-        type: Object.keys(markerIcons).find(key => m.options.icon === markerIcons[key]) || "other"
-      });
-    }
-  });
-  localStorage.setItem('eberronMarkers', JSON.stringify(arr));
-}
-
-// HUD bindings
-const hudZoom = document.getElementById('hudZoom');
-const hudTile = document.getElementById('hudTile');
+// ---------------------------------------------------------------------------
+// Utilità
+// ---------------------------------------------------------------------------
 const statusEl = document.getElementById('status');
 
-function latLngToTileXY(lat, lng, z) {
-  const p = eberronmap.project([lat, lng], z);
-  return { x: Math.floor(p.x / tileSize), y: Math.floor(p.y / tileSize) };
+function setStatus(text) {
+  statusEl.textContent = text;
 }
 
-function refreshHUD(e) {
-  const z = eberronmap.getZoom();
-  const center = eberronmap.getCenter();
-  const t = latLngToTileXY(center.lat, center.lng, z);
-  hudZoom.textContent = `z ${z}`;
-  hudTile.textContent = `x ${t.x}, y ${t.y}`;
+function getMarkerType(type) {
+  return Object.prototype.hasOwnProperty.call(MARKER_TYPES, type) ? type : 'other';
 }
 
-eberronmap.on('moveend zoomend', refreshHUD);
-refreshHUD();
+function getMarkerTypeLabel(type) {
+  return MARKER_TYPES[getMarkerType(type)].label;
+}
 
-// Marker menu logic
+// Crea un elemento DOM. Il testo passa sempre da textContent, mai da innerHTML:
+// il contenuto scritto dall'utente non viene mai interpretato come HTML.
+function el(tag, className, text) {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  if (text !== undefined) node.textContent = text;
+  return node;
+}
+
+// Le icone sono emoji in un divIcon: nessuna immagine esterna da scaricare.
+const markerIcons = {};
+Object.keys(MARKER_TYPES).forEach((type) => {
+  markerIcons[type] = L.divIcon({
+    className: `map-pin map-pin--${type}`,
+    // Stringa statica definita qui sopra, non contiene input dell'utente.
+    html: `<span class="map-pin__glyph" aria-hidden="true">${MARKER_TYPES[type].emoji}</span>`,
+    iconSize: [36, 36],
+    // La punta del pin (quadrato ruotato di 45°) cade ~7px sotto il riquadro.
+    iconAnchor: [18, 43],
+    popupAnchor: [0, -44],
+    tooltipAnchor: [0, -44]
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Marker: stato e persistenza
+// ---------------------------------------------------------------------------
+// Ogni voce: { data: { lat, lng, text, description, type }, layer: L.Marker }
+const markers = [];
+
+function saveMarkers() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(markers.map((m) => m.data)));
+  } catch (e) {
+    console.error('Impossibile salvare i marker:', e);
+    setStatus('Impossibile salvare i marker in questo browser');
+  }
+}
+
+function normalizeMarkerData(raw) {
+  if (!raw || typeof raw !== 'object') return null;
+  const lat = Number(raw.lat);
+  const lng = Number(raw.lng);
+  if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null;
+  return {
+    lat,
+    lng,
+    text: String(raw.text ?? '').slice(0, MAX_NAME_LENGTH) || 'Marker senza nome',
+    description: String(raw.description ?? '').slice(0, MAX_DESCRIPTION_LENGTH),
+    type: getMarkerType(raw.type)
+  };
+}
+
+function loadMarkers() {
+  let saved;
+  try {
+    saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  } catch (e) {
+    console.error('Errore nel parsing dei marker salvati:', e);
+    return;
+  }
+  if (!Array.isArray(saved)) return;
+  saved.forEach((raw) => {
+    const data = normalizeMarkerData(raw);
+    if (data) addMarker(data);
+  });
+}
+
+// ---------------------------------------------------------------------------
+// Marker: popup (vista e modifica)
+// ---------------------------------------------------------------------------
+function tooltipContent(text) {
+  return el('span', '', text);
+}
+
+function refreshMarker(entry) {
+  entry.layer.setIcon(markerIcons[entry.data.type]);
+  entry.layer.setTooltipContent(tooltipContent(entry.data.text));
+}
+
+function buildViewPopup(entry) {
+  const { data } = entry;
+  const root = el('div', 'marker-popup');
+  root.append(el('strong', 'marker-popup__title', data.text));
+  root.append(el('div', 'marker-popup__meta', `${MARKER_TYPES[data.type].emoji} ${getMarkerTypeLabel(data.type)}`));
+  if (data.description) root.append(el('p', 'marker-popup__description', data.description));
+  root.append(el('div', 'marker-popup__coords', `Lat ${data.lat.toFixed(4)} · Lng ${data.lng.toFixed(4)}`));
+
+  const actions = el('div', 'marker-popup__actions');
+  const editBtn = el('button', 'marker-btn', 'Modifica');
+  editBtn.type = 'button';
+  editBtn.addEventListener('click', () => showEditPopup(entry));
+  const removeBtn = el('button', 'marker-btn marker-btn--danger', 'Rimuovi');
+  removeBtn.type = 'button';
+  removeBtn.addEventListener('click', () => removeMarker(entry));
+  actions.append(editBtn, removeBtn);
+  root.append(actions);
+  return root;
+}
+
+function buildEditPopup(entry, { isNew }) {
+  const { data } = entry;
+  const form = el('form', 'marker-popup marker-popup--form');
+  form.noValidate = true;
+
+  const nameLabel = el('label', 'marker-field');
+  nameLabel.append(el('span', 'marker-field__label', 'Nome'));
+  const nameInput = el('input', 'marker-field__input');
+  nameInput.type = 'text';
+  nameInput.required = true;
+  nameInput.maxLength = MAX_NAME_LENGTH;
+  nameInput.value = data.text;
+  nameLabel.append(nameInput);
+
+  const typeLabel = el('label', 'marker-field');
+  typeLabel.append(el('span', 'marker-field__label', 'Tipo'));
+  const typeSelect = el('select', 'marker-field__input');
+  Object.keys(MARKER_TYPES).forEach((type) => {
+    const option = el('option', '', `${MARKER_TYPES[type].emoji} ${MARKER_TYPES[type].label}`);
+    option.value = type;
+    option.selected = type === data.type;
+    typeSelect.append(option);
+  });
+  typeLabel.append(typeSelect);
+
+  const descLabel = el('label', 'marker-field');
+  descLabel.append(el('span', 'marker-field__label', 'Descrizione (facoltativa)'));
+  const descInput = el('textarea', 'marker-field__input');
+  descInput.rows = 3;
+  descInput.maxLength = MAX_DESCRIPTION_LENGTH;
+  descInput.value = data.description;
+  descLabel.append(descInput);
+
+  const error = el('div', 'marker-popup__error');
+  error.setAttribute('role', 'alert');
+
+  const actions = el('div', 'marker-popup__actions');
+  const saveBtn = el('button', 'marker-btn marker-btn--primary', isNew ? 'Aggiungi' : 'Salva');
+  saveBtn.type = 'submit';
+  const cancelBtn = el('button', 'marker-btn', 'Annulla');
+  cancelBtn.type = 'button';
+  cancelBtn.addEventListener('click', () => {
+    if (isNew) entry.layer.closePopup(); // la chiusura scarta la bozza
+    else showViewPopup(entry);
+  });
+  actions.append(saveBtn, cancelBtn);
+
+  form.append(nameLabel, typeLabel, descLabel, error, actions);
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const text = nameInput.value.trim();
+    if (!text) {
+      error.textContent = 'Inserisci un nome per il marker.';
+      nameInput.focus();
+      return;
+    }
+    data.text = text;
+    data.type = getMarkerType(typeSelect.value);
+    data.description = descInput.value.trim();
+    entry.draft = false;
+    if (!markers.includes(entry)) markers.push(entry);
+    refreshMarker(entry);
+    saveMarkers();
+    showViewPopup(entry);
+    setStatus(isNew ? `Marker aggiunto: ${text}` : `Marker aggiornato: ${text}`);
+  });
+
+  // Il focus va dato dopo che Leaflet ha inserito il popup nel DOM.
+  setTimeout(() => { nameInput.focus(); nameInput.select(); }, 0);
+  return form;
+}
+
+function showViewPopup(entry) {
+  entry.layer.setPopupContent(buildViewPopup(entry));
+  if (!entry.layer.isPopupOpen()) entry.layer.openPopup();
+}
+
+function showEditPopup(entry) {
+  entry.layer.setPopupContent(buildEditPopup(entry, { isNew: Boolean(entry.draft) }));
+  if (!entry.layer.isPopupOpen()) entry.layer.openPopup();
+}
+
+// ---------------------------------------------------------------------------
+// Marker: creazione, spostamento, rimozione
+// ---------------------------------------------------------------------------
+function createEntry(data) {
+  const layer = L.marker([data.lat, data.lng], {
+    icon: markerIcons[data.type],
+    draggable: true,
+    autoPan: true,
+    keyboard: true,
+    alt: data.text
+  });
+  const entry = { data, layer, draft: false };
+
+  layer.bindTooltip(tooltipContent(data.text), { direction: 'top' });
+  layer.bindPopup('', { minWidth: 220, maxWidth: 260, closeButton: true });
+
+  // Il contenuto viene ricostruito a ogni apertura, così è sempre aggiornato.
+  layer.on('popupopen', () => {
+    layer.closeTooltip();
+    if (!entry.draft) layer.setPopupContent(buildViewPopup(entry));
+  });
+  // Una bozza chiusa senza salvare viene scartata.
+  layer.on('popupclose', () => {
+    if (entry.draft) eberronmap.removeLayer(layer);
+  });
+  layer.on('dragend', () => {
+    const { lat, lng } = layer.getLatLng();
+    data.lat = lat;
+    data.lng = lng;
+    if (entry.draft) return;
+    saveMarkers();
+    setStatus(`Marker spostato: ${data.text}`);
+  });
+
+  layer.addTo(eberronmap);
+  return entry;
+}
+
+function addMarker(data) {
+  const entry = createEntry(data);
+  markers.push(entry);
+  return entry;
+}
+
+function removeMarker(entry) {
+  const index = markers.indexOf(entry);
+  if (index !== -1) markers.splice(index, 1);
+  eberronmap.removeLayer(entry.layer);
+  saveMarkers();
+  setStatus(`Marker rimosso: ${entry.data.text}`);
+}
+
+// ---------------------------------------------------------------------------
+// Modalità "aggiungi marker"
+// ---------------------------------------------------------------------------
 const markerMenuBtn = document.getElementById('toggleMarkerMenu');
 const markerMenuDropdown = document.getElementById('markerMenuDropdown');
 const markerMenuText = document.getElementById('markerMenuText');
 
+let markerMode = false;
+let markerType = 'city';
+
 function setMarkerMode(type) {
   markerMode = true;
-  markerType = type;
+  markerType = getMarkerType(type);
   markerMenuBtn.classList.add('bg-emerald-600', 'border-emerald-500');
   markerMenuBtn.classList.remove('bg-white/5', 'border-white/15');
-  markerMenuText.textContent = `Aggiungi: ${getMarkerTypeLabel(type)}`;
-  statusEl.textContent = `Clicca sulla mappa per aggiungere un marker "${getMarkerTypeLabel(type)}"`;
+  markerMenuText.textContent = `Aggiungi: ${getMarkerTypeLabel(markerType)}`;
+  eberronmap.getContainer().classList.add('is-placing-marker');
+  setStatus(`Clicca sulla mappa per aggiungere un marker "${getMarkerTypeLabel(markerType)}" (Esc per annullare)`);
 }
 
 function resetMarkerMode() {
@@ -167,154 +320,112 @@ function resetMarkerMode() {
   markerMenuBtn.classList.remove('bg-emerald-600', 'border-emerald-500');
   markerMenuBtn.classList.add('bg-white/5', 'border-white/15');
   markerMenuText.textContent = 'Aggiungi marker';
-  statusEl.textContent = 'Pronto';
+  eberronmap.getContainer().classList.remove('is-placing-marker');
 }
 
-function getMarkerTypeLabel(type) {
-  switch (type) {
-    case "city": return "Città";
-    case "monster": return "Posizione Mostro";
-    case "dungeon": return "Dungeon";
-    case "village": return "Villaggio";
-    case "other": return "Altro";
-    default: return "Altro";
-  }
+function setMarkerMenuOpen(open) {
+  markerMenuDropdown.classList.toggle('hidden', !open);
+  markerMenuBtn.setAttribute('aria-expanded', String(open));
 }
 
-// Dropdown show/hide on click (mobile friendly)
 markerMenuBtn.addEventListener('click', (e) => {
-  e.preventDefault();
   e.stopPropagation();
-  markerMenuDropdown.classList.toggle('hidden');
+  setMarkerMenuOpen(markerMenuDropdown.classList.contains('hidden'));
 });
 
-// Dropdown hide on click outside
 document.addEventListener('click', (e) => {
   if (!markerMenuBtn.contains(e.target) && !markerMenuDropdown.contains(e.target)) {
-    markerMenuDropdown.classList.add('hidden');
+    setMarkerMenuOpen(false);
   }
 });
 
-// Marker type selection
-document.querySelectorAll('.marker-type-btn').forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    const type = btn.getAttribute('data-marker-type');
-    setMarkerMode(type);
-    markerMenuDropdown.classList.add('hidden');
-  });
-});
-
-// Map click for marker creation
-eberronmap.on('click', function(e) {
+document.addEventListener('keydown', (e) => {
+  if (e.key !== 'Escape') return;
+  setMarkerMenuOpen(false);
   if (markerMode) {
-    const label = getMarkerTypeLabel(markerType);
-    const defaultText = `Nuovo marker: ${label}`;
-    const customText = prompt(`Inserisci il testo per il tooltip del marker "${label}":`, defaultText);
-    if (customText !== null) {
-      const marker = L.marker([e.latlng.lat, e.latlng.lng], {
-        icon: markerIcons[markerType] || markerIcons.other
-      })
-        .addTo(eberronmap)
-        .bindTooltip(customText, { permanent: false, direction: 'top' })
-        .bindPopup(`
-          <div class="text-sm">
-            <strong>${customText}</strong><br>
-            Tipo: ${label}<br>
-            Lat: ${e.latlng.lat.toFixed(4)}<br>
-            Lng: ${e.latlng.lng.toFixed(4)}<br>
-            <button onclick="removeMarker(${markers.length})" class="mt-2 px-2 py-1 bg-red-600 text-white rounded text-xs">
-              Rimuovi marker
-            </button>
-          </div>
-        `);
-      markers.push(marker);
-      saveMarkersToLocalStorage();
-      statusEl.textContent = `Marker aggiunto: ${customText}`;
-      resetMarkerMode();
-    }
+    resetMarkerMode();
+    setStatus('Pronto');
   }
 });
 
-// Function to remove marker
-window.removeMarker = function(index) {
-  if (markers[index]) {
-    eberronmap.removeLayer(markers[index]);
-    markers[index] = null;
-    saveMarkersToLocalStorage();
-    statusEl.textContent = 'Marker rimosso';
-  }
-};
-
-// Reset view
-document.getElementById('resetView').addEventListener('click', (e) => {
-  console.log('Reset view button clicked');
-  e.preventDefault();
-  e.stopPropagation();
-  eberronmap.setView([20.009428770699756, .07578125], 3.5);
-});
-
-// Grid overlay
-let gridLayer = null;
-function buildGrid() {
-  const CanvasGrid = L.GridLayer.extend({
-    createTile: function (coords) {
-      const tile = L.DomUtil.create('canvas', 'leaflet-tile');
-      tile.width = tileSize;
-      tile.height = tileSize;
-      const ctx = tile.getContext('2d');
-      ctx.strokeStyle = 'rgba(255,255,255,0.25)';
-      ctx.lineWidth = 1;
-      ctx.strokeRect(0, 0, tileSize, tileSize);
-      ctx.font = '12px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial';
-      ctx.fillStyle = 'rgba(255,255,255,0.8)';
-      ctx.fillText(`z${coords.z} x${coords.x} y${coords.y}`, 8, 20);
-      return tile;
-    }
+document.querySelectorAll('.marker-type-btn').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    setMarkerMode(btn.getAttribute('data-marker-type'));
+    setMarkerMenuOpen(false);
   });
-  return new CanvasGrid({ tileSize, pane: 'overlayPane', opacity: 1 });
-}
-
-document.getElementById('toggleGrid').addEventListener('click', (e) => {
-  console.log('Grid button clicked');
-  e.preventDefault();
-  e.stopPropagation();
-  if (gridLayer) { eberronmap.removeLayer(gridLayer); gridLayer = null; }
-  else { gridLayer = buildGrid(); gridLayer.addTo(eberronmap); }
 });
 
-// Basic tile load status
-fullmap.on('tileloadstart', () => statusEl.textContent = 'Caricamento…');
-fullmap.on('load', () => statusEl.textContent = 'Pronto');
-fullmap.on('tileerror', () => statusEl.textContent = 'Alcune tile non trovate');
+eberronmap.on('click', (e) => {
+  if (!markerMode) return;
+  const entry = createEntry({
+    lat: e.latlng.lat,
+    lng: e.latlng.lng,
+    text: `Nuovo marker: ${getMarkerTypeLabel(markerType)}`,
+    description: '',
+    type: markerType
+  });
+  entry.draft = true;
+  resetMarkerMode();
+  setStatus('Compila i dati del marker e premi "Aggiungi"');
+  showEditPopup(entry);
+});
 
-// Map navigation function
-function markerFunction(r) {
-    // Check if linkarray exists
-    if (typeof linkarray !== 'undefined') {
-        for (var a in linkarray) {
-            if (linkarray[a].options.title == r) return linkarray[a].openPopup(), linkarray[a]
-        }
-    }
-    return null;
+// ---------------------------------------------------------------------------
+// HUD
+// ---------------------------------------------------------------------------
+const hudZoom = document.getElementById('hudZoom');
+const hudTile = document.getElementById('hudTile');
+
+function refreshHUD() {
+  const z = eberronmap.getZoom();
+  const p = eberronmap.project(eberronmap.getCenter(), z);
+  hudZoom.textContent = `z ${z}`;
+  hudTile.textContent = `x ${Math.floor(p.x / tileSize)}, y ${Math.floor(p.y / tileSize)}`;
 }
 
-// Check if map-navigation element exists before assigning onclick
-var mapNavigation = document.getElementById("map-navigation");
-if (mapNavigation) {
-    mapNavigation.onclick = function(r) {
-        var a = r.target.getAttribute("data-position"),
-            e = r.target.getAttribute("data-zoom"),
-            o = r.target.getAttribute("data-marker");
-        if (a && e) {
-            var t = a.split(","),
-                i = parseInt(e);
-            eberronmap.setView(t, i, {
-                animation: !0
-            });
-            var n = markerFunction(o);
-            return n && !n.getPopup().isOpen() && (n.on("popupclose", function() {
-                n.removeFrom(eberronmap)
-            }), n.addTo(eberronmap).openPopup()), !1
-        }
-    };
-}
+eberronmap.on('moveend zoomend', refreshHUD);
+refreshHUD();
+
+// ---------------------------------------------------------------------------
+// Controlli dell'header
+// ---------------------------------------------------------------------------
+document.getElementById('resetView').addEventListener('click', () => {
+  eberronmap.setView(HOME_VIEW.center, HOME_VIEW.zoom);
+});
+
+const CanvasGrid = L.GridLayer.extend({
+  createTile(coords) {
+    const tile = L.DomUtil.create('canvas', 'leaflet-tile');
+    tile.width = tileSize;
+    tile.height = tileSize;
+    const ctx = tile.getContext('2d');
+    ctx.strokeStyle = 'rgba(255,255,255,0.25)';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(0, 0, tileSize, tileSize);
+    ctx.font = '12px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial';
+    ctx.fillStyle = 'rgba(255,255,255,0.8)';
+    ctx.fillText(`z${coords.z} x${coords.x} y${coords.y}`, 8, 20);
+    return tile;
+  }
+});
+
+let gridLayer = null;
+const gridBtn = document.getElementById('toggleGrid');
+gridBtn.addEventListener('click', () => {
+  if (gridLayer) {
+    eberronmap.removeLayer(gridLayer);
+    gridLayer = null;
+  } else {
+    gridLayer = new CanvasGrid({ tileSize, pane: 'overlayPane', opacity: 1 }).addTo(eberronmap);
+  }
+  gridBtn.setAttribute('aria-pressed', String(Boolean(gridLayer)));
+});
+
+// ---------------------------------------------------------------------------
+// Stato di caricamento delle tile
+// ---------------------------------------------------------------------------
+fullmap.on('loading', () => setStatus('Caricamento…'));
+fullmap.on('load', () => setStatus('Pronto'));
+fullmap.on('tileerror', () => setStatus('Alcune tile non trovate'));
+
+loadMarkers();
