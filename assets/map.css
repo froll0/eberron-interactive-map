@@ -3,392 +3,32 @@ html {
     height: 100%;
     margin: 0;
     padding: 0;
-    background-color: #000;
-    font-family: Lato, sans-serif
+    background-color: #000
 }
 
 #map {
     width: 100%;
     height: 100%;
-    background-color: #010101
+    background-color: #010101;
+    font-family: inherit
 }
 
-span.loading {
-    display: block;
-    text-align: center
+#map.is-placing-marker,
+#map.is-measuring,
+#map.is-measuring .leaflet-interactive {
+    cursor: crosshair
 }
 
-a:hover {
-    opacity: .8
+/* Mentre si misura, i clic su marker e luoghi devono arrivare alla mappa:
+   così si può misurare da una città all'altra cliccandoci sopra. */
+#map.is-measuring .leaflet-marker-icon {
+    pointer-events: none
 }
 
+/* --- Controlli Leaflet --------------------------------------------------- */
 
-
-.navigationfilter {
-    width: 90%;
-    height: 30px;
-    display: block;
-    margin: 10px auto;
-    font-color: #666;
-    text-transform: uppercase
-}
-
-.navigationlist a {
-    color: #fff;
-    font-size: 18px;
-    text-decoration: none
-}
-
-.navigationlist a:hover {
-    opacity: .8
-}
-
-.filtertext {
-    width: 80%
-}
-
-.map-navigation {
-    overflow-y: scroll;
-    overflow-x: hidden;
-    height: 75%;
-    width: 100%;
-    width: 130%;
-    min-width: 380px
-}
-
-#attribution a {
-    color: #fff;
-
-}
-
-.sidebar {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-    overflow: hidden;
-    z-index: 2000;
-    background-color: rgba(0, 0, 0, .8)
-}
-
-.sidebar.collapsed {
-    width: 40px
-}
-
-@media (min-width:768px) {
-    .sidebar {
-        top: 0;
-        bottom: 0;
-        transition: width .5s
-    }
-}
-
-@media (min-width:768px) and (max-width:991px) {
-    .sidebar {
-        width: 370px
-    }
-}
-
-@media (min-width:992px) and (max-width:1199px) {
-    .sidebar {
-        width:400px
-    }
-}
-
-@media (min-width:1200px) {
-    .sidebar {
-        width: 480px
-    }
-}
-
-.sidebar-left {
-    left: 0
-}
-
-@media (min-width:768px) {
-    .sidebar-left {
-        left: 0
-    }
-}
-
-.sidebar-right {
-    right: 0
-}
-
-@media (min-width:768px) { 
-    .sidebar-right {
-        right: 0
-    }
-}
-
-.sidebar-tabs {
-    top: 0;
-    bottom: 0;
-    height: 100%;
-    background-color: rgba(0, 0, 0, .8)
-}
-
-.sidebar-left .sidebar-tabs {
-    left: 0
-}
-
-.sidebar-right .sidebar-tabs {
-    right: 0
-}
-
-.sidebar-tabs,
-.sidebar-tabs>ul {
-    position: absolute;
-    width: 40px;
-    margin: 0;
-    padding: 0;
-    list-style-type: none
-}
-
-.sidebar-tabs>li,
-.sidebar-tabs>ul>li {
-    width: 100%;
-    margin: 25px 0;
-    color: #fff;
-    font-size: 24px;
-    line-height: 1.2em;
-    overflow: hidden;
-    transition: all 80ms
-}
-
-.sidebar-tabs>li:hover,
-.sidebar-tabs>ul>li:hover {
-    color: #fff;
-    opacity: .5;
-    background-color: rgba(0, 0, 0, .8)
-}
-
-.sidebar-tabs>li.active,
-.sidebar-tabs>ul>li.active {
-    color: #fff
-}
-
-.sidebar-tabs>li.disabled,
-.sidebar-tabs>ul>li.disabled {
-    color: rgba(51, 51, 51, .4)
-}
-
-.sidebar-tabs>li.disabled:hover,
-.sidebar-tabs>ul>li.disabled:hover {
-    background: 0 0
-}
-
-.sidebar-tabs>li.disabled>a,
-.sidebar-tabs>ul>li.disabled>a {
-    cursor: default
-}
-
-.sidebar-tabs>li>a,
-.sidebar-tabs>ul>li>a {
-    display: block;
-    width: 100%;
-    height: 100%;
-    color: inherit;
-    text-decoration: none;
-    text-align: center
-}
-
-.sidebar-tabs>ul+ul {
-    bottom: 0
-}
-
-.sidebar-content {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, .2);
-    overflow-x: hidden;
-    overflow-y: auto;
-    color: #fff
-}
-
-.sidebar-content a {
-    color: #fff;
-    text-decoration: underline;
-}
-
-.sidebar-left .sidebar-content {
-    left: 40px;
-    right: 0;
-    padding-left: 10px
-}
-
-.sidebar-right .sidebar-content {
-    left: 0;
-    right: 40px
-}
-
-.sidebar.collapsed>.sidebar-content {
-    overflow-y: hidden
-}
-
-.sidebar-pane {
-    display: none;
-    left: 0;
-    right: 0;
-    box-sizing: border-box;
-    padding: 10px 20px
-}
-
-.sidebar-pane.active {
-    display: block
-}
-
-@media (min-width:768px) and (max-width:991px) {
-    .sidebar-pane {
-        min-width: 300px
-    }
-}
-
-@media (min-width:992px) and (max-width:1199px) {
-    .sidebar-pane {
-        min-width: 350px
-    }
-}
-
-@media (min-width:1200px) {
-    .sidebar-pane {
-        min-width: 420px
-    }
-}
-
-.sidebar-header {
-    margin: -10px -20px 0;
-    height: 40px;
-    padding: 10px 20px 0 0;
-    color: #fff;
-    border-bottom: 2px solid #fff;
-    text-transform: uppercase
-}
-
-.sidebar-right .sidebar-header {
-    padding-left: 40px
-}
-
-.sidebar-close {
-    position: absolute;
-    top: 0;
-    width: 40px;
-    height: 40px;
-    text-align: center;
+.leaflet-control {
     cursor: pointer
-}
-
-.sidebar-left .sidebar-close {
-    right: 0
-}
-
-.sidebar-right .sidebar-close {
-    left: 0
-}
-
-.sidebar-left~.sidebar-map {
-    margin-left: 40px
-}
-
-@media (min-width:768px) {
-    .sidebar-left~.sidebar-map {
-        margin-left: 0
-    }
-}
-
-.sidebar {
-    box-shadow: 0 1px 5px rgba(0, 0, 0, .65)
-}
-
-.sidebar.leaflet-touch {
-    box-shadow: none
-}
-
-.sidebar-right~.sidebar-map {
-    margin-right: 40px
-}
-
-@media (min-width:768px) {
-    .sidebar-right~.sidebar-map {
-        margin-right: 0
-    }
-}
-
-@media (min-width:768px) {
-    .sidebar {
-        border-radius: 4px
-    }
-}
-
-@media (min-width:768px) {
-    .sidebar-left~.sidebar-map .leaflet-left {
-        transition: left .5s
-    }
-}
-
-@media (min-width:768px) and (max-width:991px) {
-    .sidebar-left~.sidebar-map .leaflet-left {
-        left: 315px
-    }
-}
-
-@media (min-width:992px) and (max-width:1199px) {
-    .sidebar-left~.sidebar-map .leaflet-left {
-        left: 400px
-    }
-}
-
-@media (min-width:1200px) {
-    .sidebar-left~.sidebar-map .leaflet-left {
-        left: 470px
-    }
-}
-
-@media (min-width:768px) {
-    .sidebar-left.collapsed~.sidebar-map .leaflet-left {
-        left: 50px
-    }
-}
-
-@media (min-width:768px) {
-    .sidebar-right~.sidebar-map .leaflet-right {
-        transition: right .5s
-    }
-}
-
-@media (min-width:768px) and (max-width:991px) {
-    .sidebar-right~.sidebar-map .leaflet-right {
-        right: 315px
-    }
-}
-
-@media (min-width:992px) and (max-width:1199px) {
-    .sidebar-right~.sidebar-map .leaflet-right {
-        right: 400px
-    }
-}
-
-@media (min-width:1200px) {
-    .sidebar-right~.sidebar-map .leaflet-right {
-        right: 470px
-    }
-}
-
-@media (min-width:768px) {
-    .sidebar-right.collapsed~.sidebar-map .leaflet-right {
-        right: 50px
-    }
-}
-
-.sidebar-content li {
-    margin-bottom: 10px;
-}
-
-.homepane h3 {
-    padding-bottom: 0;
-    margin-bottom: 0;
-    border-bottom: 1px solid #fff
 }
 
 .leaflet-bar a:last-child {
@@ -405,12 +45,6 @@ a:hover {
     border-bottom: 1px solid #ccc
 }
 
-.leaflet-control-layers {
-    background-color: rgba(0, 0, 0, .8);
-    color: #fff;
-    font-size: 18px
-}
-
 .leaflet-control-zoom-in,
 .leaflet-control-zoom-out {
     width: 44px!important;
@@ -418,7 +52,12 @@ a:hover {
     line-height: 44px!important
 }
 
+/* --- Righello (leaflet-ruler) ------------------------------------------- */
+
 .leaflet-ruler {
+    display: block;
+    padding: 0;
+    box-sizing: content-box;
     height: 44px;
     width: 44px;
     background-color: rgba(0, 0, 0, .7);
@@ -440,57 +79,400 @@ a:hover {
     border-color: #de0000!important
 }
 
-.leaflet-control {
-    cursor: pointer
+/* --- Marker -------------------------------------------------------------- */
+
+/* La forma del pin sta su ::before: ruotare direttamente .map-pin
+   ruoterebbe anche la traslazione con cui Leaflet posiziona l'icona. */
+.map-pin {
+    display: flex;
+    align-items: center;
+    justify-content: center
 }
 
-.result-tooltip {
-    background-color: rgba(0, 0, 0, .7);
-    border-width: narrow;
-    border-color: #de0000;
-    font-size: medium;
+.map-pin::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50% 50% 50% 0;
+    background: #18181b;
+    border: 2px solid var(--pin-color, #fff);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .6);
+    rotate: -45deg
+}
+
+.map-pin__glyph {
+    position: relative;
+    font-size: 17px;
+    line-height: 1;
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif
+}
+
+.map-pin--city { --pin-color: #38bdf8 }
+.map-pin--monster { --pin-color: #c084fc }
+.map-pin--dungeon { --pin-color: #f87171 }
+.map-pin--village { --pin-color: #4ade80 }
+.map-pin--other { --pin-color: #facc15 }
+
+.map-pin:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 6px;
+    border-radius: 50%
+}
+
+/* --- Popup dei marker ---------------------------------------------------- */
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+    background: #18181b;
+    color: #fafafa;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, .7)
+}
+
+.leaflet-popup-content-wrapper {
+    border: 1px solid rgba(255, 255, 255, .15);
+    border-radius: 12px
+}
+
+.leaflet-popup-content {
+    margin: 14px 16px;
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    line-height: 1.45
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+    color: #a1a1aa
+}
+
+.leaflet-container a.leaflet-popup-close-button:hover {
     color: #fff
 }
 
-.moving-tooltip {
-    background-color: rgba(0, 0, 0, .7);
-    background-clip: padding-box;
-    opacity: .5;
-    border: dotted;
-    border-color: #de0000;
-    font-size: medium;
-    color: #fff;
-    border-width: narrow
+.marker-popup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left
 }
 
-.plus-length {
-    padding-left: 30px
+.marker-popup__title {
+    font-size: 15px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+    padding-right: 12px
 }
 
-.sidebar-submap-list ul {
-    margin: 0.75em 0;
-    padding: 0 1em;
+.marker-popup__meta {
+    color: #d4d4d8
+}
+
+.marker-popup__description {
+    margin: 0;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    max-height: 140px;
+    overflow-y: auto
+}
+
+.marker-popup__coords {
+    color: #a1a1aa;
+    font-size: 11px;
+    font-variant-numeric: tabular-nums
+}
+
+.marker-popup__error {
+    color: #fca5a5;
+    font-size: 12px
+}
+
+.marker-popup__error:empty {
+    display: none
+}
+
+.marker-popup__actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 2px
+}
+
+.marker-field {
+    display: flex;
+    flex-direction: column;
+    gap: 3px
+}
+
+.marker-field__label {
+    font-size: 11px;
+    color: #a1a1aa;
+    text-transform: uppercase;
+    letter-spacing: .04em
+}
+
+.marker-field__input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 6px 8px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, .2);
+    background: #09090b;
+    color: #fafafa;
+    font: inherit;
+    resize: vertical
+}
+
+.marker-field__input:focus-visible,
+.marker-btn:focus-visible {
+    outline: 2px solid #34d399;
+    outline-offset: 1px
+}
+
+.marker-btn {
+    flex: 1;
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, .2);
+    background: rgba(255, 255, 255, .06);
+    color: #fafafa;
+    font: inherit;
+    font-weight: 500;
+    cursor: pointer
+}
+
+.marker-btn:hover {
+    background: rgba(255, 255, 255, .14)
+}
+
+.marker-btn--primary {
+    background: #059669;
+    border-color: #10b981
+}
+
+.marker-btn--primary:hover {
+    background: #047857
+}
+
+.marker-btn--danger {
+    background: #b91c1c;
+    border-color: #dc2626
+}
+
+.marker-btn--danger:hover {
+    background: #991b1b
+}
+
+/* Sotto i 16px iOS ingrandisce la pagina quando un campo riceve il focus. */
+@media (pointer: coarse) {
+    .marker-field__input {
+        font-size: 16px
+    }
+}
+
+/* --- Luoghi di Eberron --------------------------------------------------- */
+
+.place-dot {
+    border-radius: 50%;
+    border: 2px solid #fbbf24;
+    background: rgba(251, 191, 36, .25);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .7), 0 0 6px rgba(0, 0, 0, .6);
+    box-sizing: border-box;
+    cursor: pointer
+}
+
+.place-dot:hover,
+.place-dot:focus-visible {
+    background: rgba(251, 191, 36, .7);
+    outline: none
+}
+
+.place-dot--capital {
+    border-color: #fff;
+    background: rgba(251, 191, 36, .75)
+}
+
+.place-dot--site {
+    border-color: #f87171;
+    background: rgba(248, 113, 113, .25)
+}
+
+/* --- Ricerca ------------------------------------------------------------- */
+
+.search-box {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: min(20rem, calc(100% - 80px));
+    z-index: 1000;
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 14px
+}
+
+.search-box__input {
+    width: 100%;
+    box-sizing: border-box;
+    height: 44px;
+    padding: 0 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, .2);
+    background: rgba(9, 9, 11, .88);
+    color: #fafafa;
+    font: inherit;
+    font-size: 16px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .5)
+}
+
+.search-box__input::placeholder {
+    color: #a1a1aa
+}
+
+.search-box__input:focus-visible {
+    outline: 2px solid #34d399;
+    outline-offset: 1px
+}
+
+.search-box__results {
     list-style: none;
-}
-.sidebar-submap-list li:before { 
-    content: "";
-    border-color: transparent #fff;
-    border-style: solid;
-    border-width: 0.35em 0 0.35em 0.45em;
-    display: block;
-    height: 0;
-    width: 0;
-    left: -1em;
-    top: 1.05em;
-    position: relative;
+    margin: 6px 0 0;
+    padding: 4px;
+    max-height: min(60vh, 420px);
+    overflow-y: auto;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, .15);
+    background: rgba(24, 24, 27, .97);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, .6)
 }
 
+.search-box__result {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    cursor: pointer
+}
 
+.search-box__result:hover,
+.search-box__result[aria-selected="true"] {
+    background: rgba(52, 211, 153, .18)
+}
 
-.sidebar-submap-list li {margin: 5px 5px 15px 5px; }
-.sidebar-submap-list a {text-decoration: none;
-margin: 0 0 15px 0px; font-size: 18px; font-weight: bold; text-transform: uppercase;}
-.leaflet-popup-content {    text-align: center !important; min-width: 128px !important; max-width: 200px !important; }
-.leaflet-popup-content a {text-decoration: none; font-weight:bold;}
-.leaflet-popup-content img.submapimage {max-width: 160px; height: auto; width: 100%;}
+.search-box__name {
+    font-weight: 600;
+    overflow-wrap: anywhere
+}
 
+.search-box__subtitle {
+    font-size: 12px;
+    color: #a1a1aa
+}
+
+.search-box__empty {
+    padding: 8px 10px;
+    color: #a1a1aa
+}
+
+/* --- Misuratore ---------------------------------------------------------- */
+
+.measure-panel {
+    position: absolute;
+    left: 50%;
+    bottom: 12px;
+    translate: -50% 0;
+    width: min(24rem, calc(100% - 24px));
+    box-sizing: border-box;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, .15);
+    background: rgba(24, 24, 27, .95);
+    color: #fafafa;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, .6);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    line-height: 1.4
+}
+
+.measure-panel[hidden],
+.toast[hidden],
+.is-hidden {
+    display: none !important
+}
+
+.measure-panel__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px
+}
+
+.measure-panel__total {
+    font-size: 17px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums
+}
+
+.measure-panel__legs,
+.measure-panel__hint {
+    margin: 0;
+    color: #a1a1aa;
+    font-size: 12px
+}
+
+.measure-panel__details summary {
+    cursor: pointer;
+    padding: 2px 0;
+    color: #d4d4d8
+}
+
+.measure-panel__details .measure-panel__hint {
+    margin-top: 6px
+}
+
+.measure-panel__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-variant-numeric: tabular-nums
+}
+
+.measure-panel__table th,
+.measure-panel__table td {
+    padding: 3px 0;
+    border-top: 1px solid rgba(255, 255, 255, .08);
+    font-weight: 400;
+    text-align: left
+}
+
+.measure-panel__table td {
+    text-align: right;
+    font-weight: 600;
+    white-space: nowrap
+}
+
+.marker-btn:disabled {
+    opacity: .4;
+    cursor: default
+}
+
+/* --- Notifiche ----------------------------------------------------------- */
+
+.toast {
+    position: absolute;
+    left: 50%;
+    top: 68px;
+    translate: -50% 0;
+    max-width: calc(100% - 24px);
+    box-sizing: border-box;
+    z-index: 1100;
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, .15);
+    background: rgba(9, 9, 11, .92);
+    color: #fafafa;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, .6);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    text-align: center;
+    pointer-events: none
+}
