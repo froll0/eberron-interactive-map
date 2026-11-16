@@ -1,12 +1,55 @@
 [
   {
+    "name": "The Acid Green",
+    "kind": "site",
+    "parent": "Argonnessen",
+    "lat": -40.9799,
+    "lng": 44.3408,
+    "zoom": 5
+  },
+  {
     "name": "Adar",
     "kind": "region",
     "parent": "Sarlona",
     "lat": -24.8466,
     "lng": 85.4297,
     "zoom": 5,
-    "description": "Rifugio montano dei kalashtar, in Sarlona."
+    "description": "Regione montuosa nel sud-est di Sarlona, abitata da umani e kalashtar.",
+    "wiki": "https://eberron.fandom.com/wiki/Adar"
+  },
+  {
+    "name": "Adder Bay",
+    "kind": "water",
+    "lat": 14.0087,
+    "lng": 3.0762,
+    "zoom": 5
+  },
+  {
+    "name": "Adderport",
+    "kind": "town",
+    "parent": "Q'barra",
+    "lat": 15.5172,
+    "lng": 3.4277,
+    "zoom": 6,
+    "description": "Grande cittadina portuale: il primo insediamento umano di Q'barra, fondato dal duca Ven ir'Kesslan.",
+    "wiki": "https://eberron.fandom.com/wiki/Adderport"
+  },
+  {
+    "name": "Aelyndar",
+    "kind": "village",
+    "parent": "Thrane",
+    "lat": 21.494,
+    "lng": -24.939,
+    "zoom": 6,
+    "description": "Borgo del Thrane tra la Imistil Forest e gli Harrowcrowns.",
+    "wiki": "https://eberron.fandom.com/wiki/Aelyndar"
+  },
+  {
+    "name": "Aeren's Sound",
+    "kind": "water",
+    "lat": -7.2753,
+    "lng": 0.4834,
+    "zoom": 5
   },
   {
     "name": "Aerenal",
@@ -14,7 +57,81 @@
     "lat": -6.3153,
     "lng": -14.7656,
     "zoom": 4,
-    "description": "Le isole degli elfi, governate dalla Corte Immortale."
+    "description": "Le isole degli elfi, governate dalla Corte Immortale.",
+    "wiki": "https://eberron.fandom.com/wiki/Aerenal"
+  },
+  {
+    "name": "Aerie",
+    "kind": "fort",
+    "parent": "Valenar",
+    "lat": 14.307,
+    "lng": -0.6812,
+    "zoom": 6
+  },
+  {
+    "name": "Alvirad",
+    "kind": "village",
+    "parent": "Eldeen Reaches",
+    "lat": 33.3213,
+    "lng": -32.5854,
+    "zoom": 6
+  },
+  {
+    "name": "Angwar Keep",
+    "kind": "fort",
+    "parent": "Thrane",
+    "lat": 25.0856,
+    "lng": -18.1494,
+    "zoom": 6,
+    "wiki": "https://eberron.fandom.com/wiki/Angwar_Keep"
+  },
+  {
+    "name": "Arashuul",
+    "kind": "village",
+    "parent": "Droaam",
+    "lat": 21.5144,
+    "lng": -51.7236,
+    "zoom": 6
+  },
+  {
+    "name": "Arcanix",
+    "kind": "village",
+    "parent": "Aundair",
+    "lat": 25.0856,
+    "lng": -31.2891,
+    "zoom": 6,
+    "description": "Villaggio agricolo sulle rive del Lake Galifar e celebre istituto di studi arcani, con le sue torri fluttuanti.",
+    "wiki": "https://eberron.fandom.com/wiki/Arcanix"
+  },
+  {
+    "name": "Ardev",
+    "kind": "town",
+    "parent": "Breland",
+    "lat": 16.5098,
+    "lng": -38.9355,
+    "zoom": 6,
+    "description": "Piccola cittadina agricola del Breland occidentale, sulla via Orien che porta a Graywall.",
+    "wiki": "https://eberron.fandom.com/wiki/Ardev"
+  },
+  {
+    "name": "Ardhmen",
+    "kind": "town",
+    "parent": "Syrkarn",
+    "lat": -30.6379,
+    "lng": 90.9229,
+    "zoom": 5,
+    "description": "Porto meridionale del Syrkarn.",
+    "wiki": "https://eberron.fandom.com/wiki/Ardhmen"
+  },
+  {
+    "name": "Areksul",
+    "kind": "village",
+    "parent": "Aundair",
+    "lat": 31.7655,
+    "lng": -24.6094,
+    "zoom": 6,
+    "description": "Villaggio dell'Aundair orientale, vicino alla linea del lightning rail tra Fairhaven e Thaliost.",
+    "wiki": "https://eberron.fandom.com/wiki/Areksul"
   },
   {
     "name": "Argonnessen",
@@ -22,7 +139,24 @@
     "lat": -36.8796,
     "lng": 34.4531,
     "zoom": 3,
-    "description": "La patria dei draghi, quasi inaccessibile agli stranieri."
+    "description": "La patria dei draghi, quasi inaccessibile agli stranieri.",
+    "wiki": "https://eberron.fandom.com/wiki/Argonnessen"
+  },
+  {
+    "name": "Ariolan",
+    "kind": "village",
+    "parent": "Valenar",
+    "lat": 12.2112,
+    "lng": -4.834,
+    "zoom": 6
+  },
+  {
+    "name": "Arthuun",
+    "kind": "village",
+    "parent": "Darguun",
+    "lat": 6.7083,
+    "lng": -20.4126,
+    "zoom": 6
   },
   {
     "name": "Aruldusk",
@@ -31,16 +165,73 @@
     "lat": 23.9863,
     "lng": -19.2261,
     "zoom": 6,
-    "description": "Città del Thrane orientale."
+    "description": "Piccola città del Thrane vicino alla riva occidentale del Lake Arul.",
+    "wiki": "https://eberron.fandom.com/wiki/Aruldusk"
+  },
+  {
+    "name": "Arythawn Keep",
+    "kind": "fort",
+    "parent": "Thrane",
+    "lat": 21.2689,
+    "lng": -17.6221,
+    "zoom": 6,
+    "description": "Forte isolato del Thrane sud-orientale, separato dal lightning rail dalla Thornwood.",
+    "wiki": "https://eberron.fandom.com/wiki/Arythawn_Keep"
+  },
+  {
+    "name": "The Ash Beacon",
+    "kind": "volcano",
+    "parent": "Demon Wastes",
+    "lat": 39.6734,
+    "lng": -33.8818,
+    "zoom": 6
+  },
+  {
+    "name": "The Ash Cauldrons",
+    "kind": "mountains",
+    "parent": "Xen'drik",
+    "lat": -51.9713,
+    "lng": -58.7109,
+    "zoom": 5,
+    "wiki": "https://eberron.fandom.com/wiki/Ash_Cauldrons"
+  },
+  {
+    "name": "Ashen Spires",
+    "kind": "mountains",
+    "parent": "Karrnath",
+    "lat": 30.5623,
+    "lng": -9.5581,
+    "zoom": 5
   },
   {
     "name": "Ashtakala",
-    "kind": "site",
+    "kind": "city",
     "parent": "Demon Wastes",
     "lat": 38.9936,
     "lng": -34.3433,
     "zoom": 6,
-    "description": "La città dei demoni, nel cuore delle Demon Wastes."
+    "description": "La \"capitale\" delle Demon Wastes: dimora dei più potenti demoni sopravvissuti all'Era dei Demoni, un'oasi tra sabbie e vetro vulcanico.",
+    "wiki": "https://eberron.fandom.com/wiki/Ashtakala"
+  },
+  {
+    "name": "Askelios",
+    "kind": "village",
+    "parent": "Aundair",
+    "lat": 32.7503,
+    "lng": -23.1152,
+    "zoom": 6,
+    "description": "Villaggio dell'Aundair nord-orientale, all'imbocco occidentale del Passo di Daskara.",
+    "wiki": "https://eberron.fandom.com/wiki/Askelios"
+  },
+  {
+    "name": "Athandra",
+    "kind": "town",
+    "parent": "Thrane",
+    "lat": 27.2937,
+    "lng": -22.8516,
+    "zoom": 6,
+    "description": "Piccola cittadina del Thrane centrale, all'incrocio di tre vie commerciali Orien.",
+    "wiki": "https://eberron.fandom.com/wiki/Athandra"
   },
   {
     "name": "Atur",
@@ -49,7 +240,8 @@
     "lat": 30.9776,
     "lng": -12.1069,
     "zoom": 6,
-    "description": "La Città della Notte."
+    "description": "Grande città del Karrnath centrale a sud del fiume Karrn, tra gli Ashen Spires e la Nightwood.",
+    "wiki": "https://eberron.fandom.com/wiki/Atur"
   },
   {
     "name": "Aundair",
@@ -58,7 +250,246 @@
     "lat": 29.3439,
     "lng": -27.4219,
     "zoom": 5,
-    "description": "Una delle Cinque Nazioni, patria della magia arcana."
+    "description": "Una delle Cinque Nazioni, patria della magia arcana.",
+    "wiki": "https://eberron.fandom.com/wiki/Aundair"
+  },
+  {
+    "name": "Auxylgard",
+    "kind": "fort",
+    "parent": "Thrane",
+    "lat": 30.297,
+    "lng": -21.9067,
+    "zoom": 6,
+    "wiki": "https://eberron.fandom.com/wiki/Auxylgard"
+  },
+  {
+    "name": "Avaroth",
+    "kind": "town",
+    "parent": "Thrane",
+    "lat": 26.0173,
+    "lng": -22.522,
+    "zoom": 6,
+    "description": "Cittadina del Thrane centrale, a metà della via commerciale Orien tra Sigilstar e Athandra.",
+    "wiki": "https://eberron.fandom.com/wiki/Avaroth"
+  },
+  {
+    "name": "Aventus Islands",
+    "kind": "island",
+    "parent": "Sarlona",
+    "lat": -22.2281,
+    "lng": 70.9277,
+    "zoom": 5,
+    "description": "Isole legate alla leggendaria civiltà di Aventus, che si ritiene sprofondata nel mare.",
+    "wiki": "https://eberron.fandom.com/wiki/Aventus"
+  },
+  {
+    "name": "Azure Bay",
+    "kind": "water",
+    "lat": 16.3834,
+    "lng": -51.8335,
+    "zoom": 5
+  },
+  {
+    "name": "Balinor's Sorrow",
+    "kind": "forest",
+    "parent": "Shadow Marches",
+    "lat": 17.7278,
+    "lng": -54.0527,
+    "zoom": 6
+  },
+  {
+    "name": "Baran's Keep",
+    "kind": "fort",
+    "parent": "Breland",
+    "lat": 12.7689,
+    "lng": -30.8496,
+    "zoom": 6,
+    "description": "Fortificazione in rovina a nord degli Howling Peaks, sulla via tra Dragonroost e Wroat.",
+    "wiki": "https://eberron.fandom.com/wiki/Baran's_Keep"
+  },
+  {
+    "name": "Barren Keep",
+    "kind": "fort",
+    "parent": "Mournland",
+    "lat": 9.2322,
+    "lng": -18.7646,
+    "zoom": 6,
+    "description": "Rovina di un'ex fortificazione all'estremo sud-ovest del Mournland.",
+    "wiki": "https://eberron.fandom.com/wiki/Barren_Keep"
+  },
+  {
+    "name": "Barren Sea",
+    "kind": "water",
+    "lat": -35.9958,
+    "lng": 109.5996,
+    "zoom": 5,
+    "description": "Mare su cui si affacciano i porti di Dar Jin e Zarash'ak.",
+    "wiki": "https://eberron.fandom.com/wiki/Barren_Sea"
+  },
+  {
+    "name": "Bastion",
+    "kind": "fort",
+    "parent": "Karrnath",
+    "lat": 31.8776,
+    "lng": -9.3823,
+    "zoom": 6,
+    "description": "Installazione militare del Karrnath centrale, tra il Karrnwood e gli Ashen Spires.",
+    "wiki": "https://eberron.fandom.com/wiki/Bastion"
+  },
+  {
+    "name": "Basura Swamp",
+    "kind": "forest",
+    "parent": "Q'barra",
+    "lat": 20.4682,
+    "lng": 8.3057,
+    "zoom": 6
+  },
+  {
+    "name": "Bay of Madness",
+    "kind": "water",
+    "lat": 24.1668,
+    "lng": -58.0957,
+    "zoom": 5
+  },
+  {
+    "name": "Bay of Swords",
+    "kind": "water",
+    "lat": 6.621,
+    "lng": -2.1533,
+    "zoom": 5
+  },
+  {
+    "name": "Bazek Mohl",
+    "kind": "ruin",
+    "parent": "Xen'drik",
+    "lat": -47.3388,
+    "lng": -51.1963,
+    "zoom": 5
+  },
+  {
+    "name": "The Bear's Wood",
+    "kind": "forest",
+    "parent": "Breland",
+    "lat": 13.7527,
+    "lng": -34.1455,
+    "zoom": 6
+  },
+  {
+    "name": "Bitter Sea",
+    "kind": "water",
+    "lat": 59.0857,
+    "lng": -32.6953,
+    "zoom": 5,
+    "wiki": "https://eberron.fandom.com/wiki/Bitter_Sea"
+  },
+  {
+    "name": "Black Pit",
+    "kind": "village",
+    "parent": "Breland",
+    "lat": 20.5299,
+    "lng": -30.1904,
+    "zoom": 6,
+    "description": "Villaggio in una valle isolata dei Blackcaps, accanto all'enorme voragine nera da cui prende il nome.",
+    "wiki": "https://eberron.fandom.com/wiki/Black_Pit"
+  },
+  {
+    "name": "The Blackcaps",
+    "kind": "mountains",
+    "parent": "Breland",
+    "lat": 21.3917,
+    "lng": -32.0142,
+    "zoom": 5,
+    "wiki": "https://eberron.fandom.com/wiki/Blackcaps"
+  },
+  {
+    "name": "Blackwater Lake",
+    "kind": "water",
+    "lat": 22.9584,
+    "lng": -49.9219,
+    "zoom": 5
+  },
+  {
+    "name": "Blackwood Bay",
+    "kind": "water",
+    "lat": -23.926,
+    "lng": -7.7344,
+    "zoom": 5
+  },
+  {
+    "name": "The Blackwood Jungle",
+    "kind": "forest",
+    "parent": "Aerenal",
+    "lat": -25.5623,
+    "lng": -12.1289,
+    "zoom": 6,
+    "description": "Giungla che domina il sud dell'isola maggiore di Aerenal, oltre i Sundering Peaks.",
+    "wiki": "https://eberron.fandom.com/wiki/Blackwood_Jungle"
+  },
+  {
+    "name": "Blade Desert",
+    "kind": "region",
+    "parent": "Talenta Plains",
+    "lat": 16.0247,
+    "lng": -6.9434,
+    "zoom": 5,
+    "description": "Grande deserto del Khorvaire sud-orientale, tra Talenta Plains e Valenar.",
+    "wiki": "https://eberron.fandom.com/wiki/Blade_Desert"
+  },
+  {
+    "name": "Blood Crescent",
+    "kind": "village",
+    "parent": "Demon Wastes",
+    "lat": 29.3822,
+    "lng": -54.2944,
+    "zoom": 6,
+    "description": "Avamposto di 82 abitanti all'estremo sud delle Demon Wastes, fondato e abitato dal Casato Tharashk.",
+    "wiki": "https://eberron.fandom.com/wiki/Blood_Crescent"
+  },
+  {
+    "name": "Bloodcliff Bay",
+    "kind": "water",
+    "lat": 40.5806,
+    "lng": -41.2427,
+    "zoom": 5
+  },
+  {
+    "name": "The Bluespine Peaks",
+    "kind": "mountains",
+    "parent": "Xen'drik",
+    "lat": -60.9091,
+    "lng": -41.1328,
+    "zoom": 5,
+    "wiki": "https://eberron.fandom.com/wiki/Bluespine_Peaks"
+  },
+  {
+    "name": "Bluevine",
+    "kind": "village",
+    "parent": "Aundair",
+    "lat": 27.0591,
+    "lng": -26.2573,
+    "zoom": 6,
+    "description": "Villaggio dell'Aundair orientale sulla via commerciale Orien tra Lathleer e Ghalt.",
+    "wiki": "https://eberron.fandom.com/wiki/Bluevine"
+  },
+  {
+    "name": "Boneyard",
+    "kind": "site",
+    "parent": "Talenta Plains",
+    "lat": 23.6445,
+    "lng": 4.0869,
+    "zoom": 6,
+    "description": "Valle delle Talenta Plains piena di scheletri di draghi, dove si incontrano Endworld Mountains, Ironroot Mountains e Blade Desert.",
+    "wiki": "https://eberron.fandom.com/wiki/Boneyard"
+  },
+  {
+    "name": "Borunan Province",
+    "kind": "region",
+    "parent": "Riedra",
+    "lat": -12.3829,
+    "lng": 97.0752,
+    "zoom": 5,
+    "description": "Provincia di Riedra, terra d'origine degli ogre.",
+    "wiki": "https://eberron.fandom.com/wiki/Borunan"
   },
   {
     "name": "Breland",
@@ -67,7 +498,327 @@
     "lat": 17.1828,
     "lng": -31.333,
     "zoom": 5,
-    "description": "La più popolosa delle Cinque Nazioni."
+    "description": "La più popolosa delle Cinque Nazioni.",
+    "wiki": "https://eberron.fandom.com/wiki/Breland"
+  },
+  {
+    "name": "The Broken Blade Mountains",
+    "kind": "mountains",
+    "parent": "Riedra",
+    "lat": -7.1881,
+    "lng": 97.5146,
+    "zoom": 5
+  },
+  {
+    "name": "Broken Stone",
+    "kind": "ruin",
+    "parent": "Demon Wastes",
+    "lat": 38.8397,
+    "lng": -39.6167,
+    "zoom": 6
+  },
+  {
+    "name": "Brokentooth",
+    "kind": "village",
+    "parent": "Darguun",
+    "lat": 8.8417,
+    "lng": -20.4126,
+    "zoom": 6
+  },
+  {
+    "name": "Bronze Bay",
+    "kind": "water",
+    "lat": -24.0465,
+    "lng": 34.6729,
+    "zoom": 5
+  },
+  {
+    "name": "Burning Keep",
+    "kind": "ruin",
+    "parent": "Demon Wastes",
+    "lat": 34.0891,
+    "lng": -46.4282,
+    "zoom": 6
+  },
+  {
+    "name": "The Burnt Wood",
+    "kind": "forest",
+    "parent": "Thrane",
+    "lat": 26.8045,
+    "lng": -19.2261,
+    "zoom": 6
+  },
+  {
+    "name": "Byeshk Mountains",
+    "kind": "mountains",
+    "parent": "Droaam",
+    "lat": 27.7808,
+    "lng": -45.9668,
+    "zoom": 5,
+    "description": "Monti che prendono il nome dal byeshk, il metallo violaceo che vi abbonda.",
+    "wiki": "https://eberron.fandom.com/wiki/Byeshk_Mountains"
+  },
+  {
+    "name": "Cape Far",
+    "kind": "island",
+    "parent": "Lhazaar Principalities",
+    "lat": 35.7108,
+    "lng": 13.9526,
+    "zoom": 6
+  },
+  {
+    "name": "Castle Arakhain",
+    "kind": "fort",
+    "parent": "Breland",
+    "lat": 17.4345,
+    "lng": -38.6719,
+    "zoom": 6,
+    "wiki": "https://eberron.fandom.com/wiki/Castle_Arakhain"
+  },
+  {
+    "name": "Castle Garodya",
+    "kind": "fort",
+    "parent": "Q'barra",
+    "lat": 15.623,
+    "lng": 2.395,
+    "zoom": 6,
+    "description": "Fortezza di Q'barra, base di Mishva Garodya Stormhorn, detta la Conquistatrice.",
+    "wiki": "https://eberron.fandom.com/wiki/Castle_Garodya"
+  },
+  {
+    "name": "Cazhaak Draal",
+    "kind": "ruin",
+    "parent": "Droaam",
+    "lat": 25.6019,
+    "lng": -46.2524,
+    "zoom": 6,
+    "description": "Rovina di quella che fu una vasta metropoli hobgoblin, nelle Stonelands del Droaam.",
+    "wiki": "https://eberron.fandom.com/wiki/Cazhaak_Draal"
+  },
+  {
+    "name": "The Chanthwood",
+    "kind": "forest",
+    "parent": "Aundair",
+    "lat": 32.2128,
+    "lng": -27.9932,
+    "zoom": 6
+  },
+  {
+    "name": "Claw Islands",
+    "kind": "island",
+    "parent": "Argonnessen",
+    "lat": -48.691,
+    "lng": 67.8516,
+    "zoom": 5
+  },
+  {
+    "name": "The Claws of Kylaryx",
+    "kind": "island",
+    "parent": "Argonnessen",
+    "lat": -34.7416,
+    "lng": 80.376,
+    "zoom": 5
+  },
+  {
+    "name": "Cliff's End",
+    "kind": "water",
+    "lat": 26.8437,
+    "lng": 12.6123,
+    "zoom": 5
+  },
+  {
+    "name": "Cliffscrape",
+    "kind": "town",
+    "parent": "Lhazaar Principalities",
+    "lat": 25.9778,
+    "lng": 11.0083,
+    "zoom": 6
+  },
+  {
+    "name": "Corvagura Province",
+    "kind": "region",
+    "parent": "Riedra",
+    "lat": -20.3858,
+    "lng": 111.1377,
+    "zoom": 5,
+    "description": "La provincia della corona di Riedra, la più popolosa e sede di molti rami del governo.",
+    "wiki": "https://eberron.fandom.com/wiki/Corvagura"
+  },
+  {
+    "name": "Courdain",
+    "kind": "island",
+    "parent": "Lhazaar Principalities",
+    "lat": 42.5854,
+    "lng": 10.2612,
+    "zoom": 6
+  },
+  {
+    "name": "Cragwar",
+    "kind": "town",
+    "parent": "Breland",
+    "lat": 21.6166,
+    "lng": -28.7622,
+    "zoom": 6,
+    "description": "Grande cittadina del Breland settentrionale.",
+    "wiki": "https://eberron.fandom.com/wiki/Cragwar"
+  },
+  {
+    "name": "The Crawling Swamp",
+    "kind": "forest",
+    "parent": "Shadow Marches",
+    "lat": 24.5271,
+    "lng": -55.459,
+    "zoom": 6
+  },
+  {
+    "name": "Cree",
+    "kind": "town",
+    "parent": "Eldeen Reaches",
+    "lat": 28.7484,
+    "lng": -34.8486,
+    "zoom": 6
+  },
+  {
+    "name": "Crescent Bay",
+    "kind": "water",
+    "lat": 28.6135,
+    "lng": -54.2725,
+    "zoom": 5
+  },
+  {
+    "name": "Crimson Water",
+    "kind": "site",
+    "parent": "Mournland",
+    "lat": 16.1514,
+    "lng": -11.6895,
+    "zoom": 6,
+    "wiki": "https://eberron.fandom.com/wiki/Crimson_Water"
+  },
+  {
+    "name": "Crown Island",
+    "kind": "island",
+    "parent": "Lhazaar Principalities",
+    "lat": 37.736,
+    "lng": 19.292,
+    "zoom": 6
+  },
+  {
+    "name": "Dagger Wood",
+    "kind": "forest",
+    "parent": "Breland",
+    "lat": 7.1009,
+    "lng": -44.1431,
+    "zoom": 6
+  },
+  {
+    "name": "Dajar Orioth",
+    "kind": "forest",
+    "parent": "Aerenal",
+    "lat": -14.9448,
+    "lng": -19.8193,
+    "zoom": 6
+  },
+  {
+    "name": "Danthaven",
+    "kind": "town",
+    "parent": "Thrane",
+    "lat": 29.2672,
+    "lng": -22.3901,
+    "zoom": 6,
+    "description": "Piccola cittadina del Thrane centrale, sulla via commerciale Orien tra Flamekeep e Lathleer.",
+    "wiki": "https://eberron.fandom.com/wiki/Danthaven"
+  },
+  {
+    "name": "Dar Darath",
+    "kind": "city",
+    "parent": "Riedra",
+    "lat": -1.7575,
+    "lng": 87.9346,
+    "zoom": 5
+  },
+  {
+    "name": "Dar Ilash",
+    "kind": "city",
+    "parent": "Riedra",
+    "lat": -13.8381,
+    "lng": 108.1934,
+    "zoom": 5
+  },
+  {
+    "name": "Dar Jin",
+    "kind": "city",
+    "parent": "Riedra",
+    "lat": -13.1544,
+    "lng": 116.4551,
+    "zoom": 5,
+    "description": "Il maggiore porto di Riedra; il suo quartiere straniero è uno dei due soli luoghi aperti ai forestieri.",
+    "wiki": "https://eberron.fandom.com/wiki/Dar_Jin"
+  },
+  {
+    "name": "Dar Mirn",
+    "kind": "city",
+    "parent": "Riedra",
+    "lat": -25.7207,
+    "lng": 109.9072,
+    "zoom": 5
+  },
+  {
+    "name": "Dar Myan",
+    "kind": "city",
+    "parent": "Riedra",
+    "lat": -17.8951,
+    "lng": 110.5225,
+    "zoom": 5
+  },
+  {
+    "name": "Dar Qat",
+    "kind": "town",
+    "parent": "Xen'drik",
+    "lat": -51.0966,
+    "lng": -103.0518,
+    "zoom": 5,
+    "description": "Remoto porto di Riedra sulla costa occidentale di Xen'drik.",
+    "wiki": "https://eberron.fandom.com/wiki/Dar_Qat"
+  },
+  {
+    "name": "Dar Reth",
+    "kind": "city",
+    "parent": "Riedra",
+    "lat": 4.6093,
+    "lng": 89.9121,
+    "zoom": 5
+  },
+  {
+    "name": "Dar Terash",
+    "kind": "city",
+    "parent": "Riedra",
+    "lat": 6.359,
+    "lng": 93.8232,
+    "zoom": 5
+  },
+  {
+    "name": "Dar Ulatesh",
+    "kind": "city",
+    "parent": "Riedra",
+    "lat": -5.441,
+    "lng": 76.4209,
+    "zoom": 5
+  },
+  {
+    "name": "Dar Uldane",
+    "kind": "city",
+    "parent": "Riedra",
+    "lat": -12.5546,
+    "lng": 114.873,
+    "zoom": 5
+  },
+  {
+    "name": "Dar Vuleer",
+    "kind": "city",
+    "parent": "Riedra",
+    "lat": 7.2753,
+    "lng": 75.4102,
+    "zoom": 5
   },
   {
     "name": "Darguun",
@@ -76,7 +827,69 @@
     "lat": 5.9658,
     "lng": -19.8193,
     "zoom": 5,
-    "description": "Il regno dei goblinoidi."
+    "description": "Il regno dei goblinoidi.",
+    "wiki": "https://eberron.fandom.com/wiki/Darguun"
+  },
+  {
+    "name": "Dark Sea",
+    "kind": "water",
+    "lat": -46.9803,
+    "lng": 5.6689,
+    "zoom": 5,
+    "description": "Mare in gran parte inesplorato, il cui nome allude a quanto poco se ne sa.",
+    "wiki": "https://eberron.fandom.com/wiki/Dark_Sea"
+  },
+  {
+    "name": "Daskaran",
+    "kind": "town",
+    "parent": "Thrane",
+    "lat": 31.3349,
+    "lng": -21.0938,
+    "zoom": 6,
+    "description": "Grande cittadina ai piedi degli Starpeaks; fu capitale del Thrane fino al grande incendio del 696 YK.",
+    "wiki": "https://eberron.fandom.com/wiki/Daskaran"
+  },
+  {
+    "name": "Dayne Bay",
+    "kind": "water",
+    "lat": 57.5158,
+    "lng": 81.9141,
+    "zoom": 5
+  },
+  {
+    "name": "Death's Finger Channel",
+    "kind": "water",
+    "lat": 46.5135,
+    "lng": -1.5381,
+    "zoom": 5
+  },
+  {
+    "name": "The Deep Mine",
+    "kind": "village",
+    "parent": "Zilargo",
+    "lat": 10.8117,
+    "lng": -25.0269,
+    "zoom": 6,
+    "description": "Miniera di platino nei Seawall Mountains che scende fino a un miglio di profondità.",
+    "wiki": "https://eberron.fandom.com/wiki/Deep_Mine"
+  },
+  {
+    "name": "The Deepwood",
+    "kind": "forest",
+    "parent": "Shadow Marches",
+    "lat": 24.627,
+    "lng": -52.6025,
+    "zoom": 6
+  },
+  {
+    "name": "Delethorn",
+    "kind": "town",
+    "parent": "Eldeen Reaches",
+    "lat": 27.8002,
+    "lng": -36.8481,
+    "zoom": 6,
+    "description": "Piccola cittadina nel centro delle Eldeen Reaches.",
+    "wiki": "https://eberron.fandom.com/wiki/Delethorn"
   },
   {
     "name": "Demon Wastes",
@@ -85,7 +898,137 @@
     "lat": 37.9962,
     "lng": -38.2764,
     "zoom": 5,
-    "description": "Terra desolata infestata da demoni e barbari."
+    "description": "Terra desolata infestata da demoni e barbari.",
+    "wiki": "https://eberron.fandom.com/wiki/Demon_Wastes"
+  },
+  {
+    "name": "Demonsong Bay",
+    "kind": "water",
+    "lat": 38.5138,
+    "lng": -46.4062,
+    "zoom": 5
+  },
+  {
+    "name": "Demonsong Channel",
+    "kind": "water",
+    "lat": 38.1691,
+    "lng": -52.8882,
+    "zoom": 5
+  },
+  {
+    "name": "Desolate",
+    "kind": "ruin",
+    "parent": "Demon Wastes",
+    "lat": 40.8138,
+    "lng": -24.8511,
+    "zoom": 6,
+    "description": "Insediamento ritenuto maledetto sul margine orientale delle Demon Wastes, passato di mano molte volte.",
+    "wiki": "https://eberron.fandom.com/wiki/Desolate"
+  },
+  {
+    "name": "Dhavin's Post",
+    "kind": "village",
+    "parent": "Shadow Marches",
+    "lat": 19.8081,
+    "lng": -52.5586,
+    "zoom": 6,
+    "description": "Villaggio delle Shadow Marches al confine con il Droaam.",
+    "wiki": "https://eberron.fandom.com/wiki/Dhavin's_Post"
+  },
+  {
+    "name": "Dollen on the River",
+    "kind": "ruin",
+    "parent": "Mournland",
+    "lat": 27.5083,
+    "lng": -15.9082,
+    "zoom": 6,
+    "description": "Rovina nel nord del Mournland, poco a sud del fiume Cyre e della nebbia grigia.",
+    "wiki": "https://eberron.fandom.com/wiki/Dollen_on_the_River"
+  },
+  {
+    "name": "Dor Maleer Province",
+    "kind": "region",
+    "parent": "Riedra",
+    "lat": 10.0987,
+    "lng": 75.3223,
+    "zoom": 5,
+    "description": "La provincia più a nord-ovest dell'Unità di Riedra.",
+    "wiki": "https://eberron.fandom.com/wiki/Dor_Maleer"
+  },
+  {
+    "name": "Dowron's Shield",
+    "kind": "region",
+    "parent": "Xen'drik",
+    "lat": -63.3324,
+    "lng": -99.7998,
+    "zoom": 5,
+    "description": "Penisola montuosa coperta di ghiaccio all'angolo sud-orientale di Xen'drik.",
+    "wiki": "https://eberron.fandom.com/wiki/Dowron's_Shield"
+  },
+  {
+    "name": "Dragon's Crown",
+    "kind": "site",
+    "parent": "Breland",
+    "lat": 16.2569,
+    "lng": -25.73,
+    "zoom": 6,
+    "description": "Anello di dieci monoliti giganti di origine ignota, attorno ai quali non cresce quasi nulla.",
+    "wiki": "https://eberron.fandom.com/wiki/Dragon's_Crown"
+  },
+  {
+    "name": "Dragonroost",
+    "kind": "town",
+    "parent": "Zilargo",
+    "lat": 10.6174,
+    "lng": -27.0264,
+    "zoom": 6,
+    "description": "Piccola cittadina nel nord dello Zilargo, primo ingresso dal Breland per i mercanti sulla via Orien.",
+    "wiki": "https://eberron.fandom.com/wiki/Dragonroost"
+  },
+  {
+    "name": "Dragonwatch Isles",
+    "kind": "island",
+    "parent": "Valenar",
+    "lat": 12.3615,
+    "lng": 0.6152,
+    "zoom": 6
+  },
+  {
+    "name": "The Dragonwood",
+    "kind": "forest",
+    "parent": "Breland",
+    "lat": 18.0205,
+    "lng": -32.6733,
+    "zoom": 6,
+    "description": "Foresta del Breland centro-settentrionale, dove nasce il fiume Dagger.",
+    "wiki": "https://eberron.fandom.com/wiki/Dragonwood"
+  },
+  {
+    "name": "Dread Lake",
+    "kind": "water",
+    "lat": -51.0138,
+    "lng": -44.4287,
+    "zoom": 5,
+    "description": "Grande lago interno nell'est di Xen'drik, circondato dalla giungla.",
+    "wiki": "https://eberron.fandom.com/wiki/Dread_Lake"
+  },
+  {
+    "name": "Dreadhold",
+    "kind": "site",
+    "parent": "Lhazaar Principalities",
+    "lat": 37.736,
+    "lng": 14.3921,
+    "zoom": 6,
+    "description": "Isola-prigione al largo di Cape Far, zona manifesta di Lamannia.",
+    "wiki": "https://eberron.fandom.com/wiki/Dreadhold"
+  },
+  {
+    "name": "Dreadwood Isle",
+    "kind": "island",
+    "parent": "Lhazaar Principalities",
+    "lat": 16.1936,
+    "lng": 12.7441,
+    "zoom": 6
   },
   {
     "name": "Droaam",
@@ -94,7 +1037,128 @@
     "lat": 20.5505,
     "lng": -46.3184,
     "zoom": 5,
-    "description": "La nazione dei mostri, governata dalle Figlie di Sora Kell."
+    "description": "La nazione dei mostri, governata dalle Figlie di Sora Kell.",
+    "wiki": "https://eberron.fandom.com/wiki/Droaam"
+  },
+  {
+    "name": "Drum Keep",
+    "kind": "fort",
+    "parent": "Breland",
+    "lat": 22.472,
+    "lng": -34.2554,
+    "zoom": 6,
+    "description": "Installazione militare del Breland sul margine occidentale dei Blackcaps, a sud di Xandrar.",
+    "wiki": "https://eberron.fandom.com/wiki/Drum_Keep"
+  },
+  {
+    "name": "Dul Darat",
+    "kind": "city",
+    "parent": "Riedra",
+    "lat": -11.8243,
+    "lng": 111.0059,
+    "zoom": 5
+  },
+  {
+    "name": "Dul El",
+    "kind": "city",
+    "parent": "Riedra",
+    "lat": -13.2399,
+    "lng": 102.7881,
+    "zoom": 5
+  },
+  {
+    "name": "Dul Jhaar",
+    "kind": "city",
+    "parent": "Riedra",
+    "lat": -1.8893,
+    "lng": 78.0469,
+    "zoom": 5
+  },
+  {
+    "name": "Dul Kabana",
+    "kind": "city",
+    "parent": "Riedra",
+    "lat": -16.552,
+    "lng": 113.2471,
+    "zoom": 5
+  },
+  {
+    "name": "Dul Natath",
+    "kind": "city",
+    "parent": "Riedra",
+    "lat": 0.9228,
+    "lng": 96.1963,
+    "zoom": 5
+  },
+  {
+    "name": "Dul Zeer",
+    "kind": "city",
+    "parent": "Riedra",
+    "lat": -11.049,
+    "lng": 101.0303,
+    "zoom": 5
+  },
+  {
+    "name": "Dul Zerath",
+    "kind": "city",
+    "parent": "Riedra",
+    "lat": 6.2279,
+    "lng": 99.8877,
+    "zoom": 5
+  },
+  {
+    "name": "Durat Tal",
+    "kind": "capital",
+    "parent": "Riedra",
+    "lat": -18.0205,
+    "lng": 113.0273,
+    "zoom": 5,
+    "description": "La più grande città di Riedra e cuore amministrativo della nazione.",
+    "wiki": "https://eberron.fandom.com/wiki/Durat_Tal"
+  },
+  {
+    "name": "Duskwing Clanhold",
+    "kind": "village",
+    "parent": "Q'barra",
+    "lat": 14.456,
+    "lng": 6.2183,
+    "zoom": 6,
+    "description": "Dimora del clan di dragonidi Duskwing, la più meridionale, nascosta nella giungla.",
+    "wiki": "https://eberron.fandom.com/wiki/Duskwing_Clanhold"
+  },
+  {
+    "name": "The Duskwood",
+    "kind": "forest",
+    "parent": "Aundair",
+    "lat": 28.7869,
+    "lng": -29.9048,
+    "zoom": 6,
+    "description": "Foresta dell'Aundair sulle rive del Lake Galifar e del fiume Wynarn.",
+    "wiki": "https://eberron.fandom.com/wiki/Duskwood"
+  },
+  {
+    "name": "Dvaarnava",
+    "kind": "city",
+    "parent": "Adar",
+    "lat": -34.597,
+    "lng": 100.0635,
+    "zoom": 5,
+    "description": "Monastero nascosto e unico porto dell'Adar.",
+    "wiki": "https://eberron.fandom.com/wiki/Dvaarnava"
+  },
+  {
+    "name": "Eel Bay",
+    "kind": "water",
+    "lat": 38.4622,
+    "lng": 10.6348,
+    "zoom": 5
+  },
+  {
+    "name": "Eldeen Bay",
+    "kind": "water",
+    "lat": 37.4749,
+    "lng": -27.1143,
+    "zoom": 5
   },
   {
     "name": "Eldeen Reaches",
@@ -103,7 +1167,53 @@
     "lat": 30.8645,
     "lng": -39.5947,
     "zoom": 5,
-    "description": "Foreste custodite dai druidi e dai mutaforma."
+    "description": "Foreste custodite dai druidi e dai mutaforma.",
+    "wiki": "https://eberron.fandom.com/wiki/Eldeen_Reaches"
+  },
+  {
+    "name": "The Eldritch Groves",
+    "kind": "forest",
+    "parent": "Aundair",
+    "lat": 25.7603,
+    "lng": -28.894,
+    "zoom": 6
+  },
+  {
+    "name": "Endworld Mountains",
+    "kind": "mountains",
+    "parent": "Q'barra",
+    "lat": 20.6739,
+    "lng": 1.7139,
+    "zoom": 5,
+    "wiki": "https://eberron.fandom.com/wiki/Endworld_Mountains"
+  },
+  {
+    "name": "Erlaskar",
+    "kind": "town",
+    "parent": "Eldeen Reaches",
+    "lat": 23.3019,
+    "lng": -36.936,
+    "zoom": 6,
+    "description": "Piccola cittadina nel sud delle Eldeen Reaches.",
+    "wiki": "https://eberron.fandom.com/wiki/Erlaskar"
+  },
+  {
+    "name": "Eska Mountains",
+    "kind": "mountains",
+    "parent": "Tashana Tundra",
+    "lat": 28.652,
+    "lng": 66.9727,
+    "zoom": 5
+  },
+  {
+    "name": "Eston",
+    "kind": "ruin",
+    "parent": "Mournland",
+    "lat": 24.4871,
+    "lng": -18.0176,
+    "zoom": 6,
+    "description": "Una delle maggiori città del Cyre, oggi rovina sul margine del Mournland.",
+    "wiki": "https://eberron.fandom.com/wiki/Eston"
   },
   {
     "name": "Everice",
@@ -111,7 +1221,35 @@
     "lat": -63.86,
     "lng": -71.0156,
     "zoom": 4,
-    "description": "I ghiacci perenni all'estremo sud."
+    "description": "Calotta di ghiaccio in movimento che copre il polo sud di Eberron.",
+    "wiki": "https://eberron.fandom.com/wiki/Everice"
+  },
+  {
+    "name": "The Face of Eberron",
+    "kind": "site",
+    "parent": "Argonnessen",
+    "lat": -50.1769,
+    "lng": 54.3164,
+    "zoom": 5,
+    "wiki": "https://eberron.fandom.com/wiki/Face_of_Eberron"
+  },
+  {
+    "name": "The Face of Tira",
+    "kind": "site",
+    "parent": "Thrane",
+    "lat": 29.4205,
+    "lng": -20.896,
+    "zoom": 6
+  },
+  {
+    "name": "Faded Forest",
+    "kind": "forest",
+    "parent": "Breland",
+    "lat": 14.4985,
+    "lng": -28.2129,
+    "zoom": 6,
+    "description": "Vasta distesa boscosa del Breland vicino a Mistmarsh, a nord degli Howling Peaks.",
+    "wiki": "https://eberron.fandom.com/wiki/Faded_Forest"
   },
   {
     "name": "Fairhaven",
@@ -120,7 +1258,122 @@
     "lat": 30.6568,
     "lng": -25.686,
     "zoom": 6,
-    "description": "Capitale dell'Aundair."
+    "description": "Capitale e maggiore città dell'Aundair, residenza della regina Aurala ir'Wynarn e grande centro commerciale e culturale.",
+    "wiki": "https://eberron.fandom.com/wiki/Fairhaven"
+  },
+  {
+    "name": "The Fallen Demesne",
+    "kind": "ruin",
+    "parent": "Droaam",
+    "lat": 18.2294,
+    "lng": -48.1201,
+    "zoom": 6
+  },
+  {
+    "name": "Fang Crater",
+    "kind": "site",
+    "parent": "Argonnessen",
+    "lat": -22.8369,
+    "lng": 49.1748,
+    "zoom": 5
+  },
+  {
+    "name": "Fangs of Argarak",
+    "kind": "mountains",
+    "parent": "Xen'drik",
+    "lat": -44.6843,
+    "lng": -74.5312,
+    "zoom": 5,
+    "wiki": "https://eberron.fandom.com/wiki/Fangs_of_Argarak"
+  },
+  {
+    "name": "Far Strait",
+    "kind": "water",
+    "lat": 35.048,
+    "lng": 16.5015,
+    "zoom": 5
+  },
+  {
+    "name": "Farlnen",
+    "kind": "island",
+    "parent": "Lhazaar Principalities",
+    "lat": 49.4538,
+    "lng": 3.4717,
+    "zoom": 6,
+    "description": "Isola fredda nel nord dei principati, governata dagli elfi fuggiti da Aerenal dopo la distruzione del Casato Vol.",
+    "wiki": "https://eberron.fandom.com/wiki/Farlnen"
+  },
+  {
+    "name": "Farwatch",
+    "kind": "island",
+    "parent": "Lhazaar Principalities",
+    "lat": 37.2303,
+    "lng": 12.4805,
+    "zoom": 6
+  },
+  {
+    "name": "Festering Holt",
+    "kind": "village",
+    "parent": "Demon Wastes",
+    "lat": 38.5653,
+    "lng": -35.354,
+    "zoom": 6,
+    "description": "Borgo di circa 200 abitanti vicino ad Ashtakala.",
+    "wiki": "https://eberron.fandom.com/wiki/Festering_Holt"
+  },
+  {
+    "name": "Field of Ruins",
+    "kind": "site",
+    "parent": "Mournland",
+    "lat": 12.576,
+    "lng": -16.853,
+    "zoom": 6,
+    "description": "L'ultimo campo di battaglia dell'Ultima Guerra prima del Giorno del Lutto.",
+    "wiki": "https://eberron.fandom.com/wiki/Field_of_Ruins"
+  },
+  {
+    "name": "Fiendfell",
+    "kind": "ruin",
+    "parent": "Demon Wastes",
+    "lat": 31.1658,
+    "lng": -53.4375,
+    "zoom": 6
+  },
+  {
+    "name": "Fingerbone Mountains",
+    "kind": "mountains",
+    "parent": "Lhazaar Principalities",
+    "lat": 48.1514,
+    "lng": -0.1538,
+    "zoom": 5
+  },
+  {
+    "name": "First Tower",
+    "kind": "village",
+    "parent": "Breland",
+    "lat": 8.1027,
+    "lng": -40.144,
+    "zoom": 6,
+    "description": "Minuscolo insediamento accanto a Sharn, raccolto attorno a una torre di pietra che si dice sia stata la prima della città.",
+    "wiki": "https://eberron.fandom.com/wiki/First_Tower"
+  },
+  {
+    "name": "Fist of Onatar",
+    "kind": "volcano",
+    "parent": "Aundair",
+    "lat": 25.7603,
+    "lng": 4.9438,
+    "zoom": 6,
+    "description": "Vulcano attivo reso più violento dalla magia, sacro a Onatar per i nani della zona.",
+    "wiki": "https://eberron.fandom.com/wiki/Fist_of_Onatar"
+  },
+  {
+    "name": "Flamebrow Clanhold",
+    "kind": "village",
+    "parent": "Q'barra",
+    "lat": 16.9938,
+    "lng": 4.2847,
+    "zoom": 6
   },
   {
     "name": "Flamekeep",
@@ -129,7 +1382,92 @@
     "lat": 28.7484,
     "lng": -19.6436,
     "zoom": 6,
-    "description": "Capitale del Thrane e sede della Chiesa della Fiamma Argentea."
+    "description": "La più grande metropoli del Thrane, 150.000 abitanti: cuore religioso e politico della nazione.",
+    "wiki": "https://eberron.fandom.com/wiki/Flamekeep"
+  },
+  {
+    "name": "Flint Keep",
+    "kind": "fort",
+    "parent": "Breland",
+    "lat": 5.4629,
+    "lng": -40.8032,
+    "zoom": 6,
+    "description": "Fortificazione sul margine meridionale del Breland, a guardia dell'Hilt.",
+    "wiki": "https://eberron.fandom.com/wiki/Flint_Keep"
+  },
+  {
+    "name": "The Forest of Lurking Shadows",
+    "kind": "forest",
+    "parent": "Riedra",
+    "lat": 8.2767,
+    "lng": 108.7207,
+    "zoom": 5
+  },
+  {
+    "name": "Forsaken Forest",
+    "kind": "forest",
+    "parent": "Mror Holds",
+    "lat": 38.6855,
+    "lng": 6.2402,
+    "zoom": 6
+  },
+  {
+    "name": "Fort Bones",
+    "kind": "fort",
+    "parent": "Karrnath",
+    "lat": 25.0458,
+    "lng": -8.811,
+    "zoom": 6,
+    "description": "Forte del Karrnath presidiato da non morti: non vi è accesa alcuna luce.",
+    "wiki": "https://eberron.fandom.com/wiki/Fort_Bones"
+  },
+  {
+    "name": "Fort Deepdark",
+    "kind": "fort",
+    "parent": "Karrnath",
+    "lat": 29.4587,
+    "lng": -1.8018,
+    "zoom": 6,
+    "description": "Il più orientale dei forti che sorvegliano il confine tra Karrnath e Talenta Plains.",
+    "wiki": "https://eberron.fandom.com/wiki/Fort_Deepdark"
+  },
+  {
+    "name": "Fort Light",
+    "kind": "fort",
+    "parent": "Thrane",
+    "lat": 22.3501,
+    "lng": -26.8506,
+    "zoom": 6,
+    "description": "Forte del Thrane vicinissimo ai confini di Breland e Aundair, passato di mano molte volte.",
+    "wiki": "https://eberron.fandom.com/wiki/Fort_Light"
+  },
+  {
+    "name": "Fort Tansend",
+    "kind": "fort",
+    "parent": "Breland",
+    "lat": 10.0554,
+    "lng": -33.6621,
+    "zoom": 6,
+    "description": "Installazione militare del Breland al confine con lo Zilargo, a sud degli Howling Peaks.",
+    "wiki": "https://eberron.fandom.com/wiki/Fort_Tansend"
+  },
+  {
+    "name": "Fort Zombie",
+    "kind": "fort",
+    "parent": "Karrnath",
+    "lat": 25.5623,
+    "lng": -10.8105,
+    "zoom": 6,
+    "description": "Installazione militare a guardia del confine tra Karrnath e Talenta Plains, fermata del lightning rail.",
+    "wiki": "https://eberron.fandom.com/wiki/Fort_Zombie"
+  },
+  {
+    "name": "The Frostblade Mountains",
+    "kind": "mountains",
+    "parent": "Riedra",
+    "lat": 10.747,
+    "lng": 81.4746,
+    "zoom": 5
   },
   {
     "name": "Frostfell",
@@ -137,16 +1475,33 @@
     "lat": 64.4728,
     "lng": -4.2188,
     "zoom": 3,
-    "description": "La distesa ghiacciata a nord del mondo."
+    "description": "La distesa ghiacciata a nord del mondo.",
+    "wiki": "https://eberron.fandom.com/wiki/Frostfell"
+  },
+  {
+    "name": "Frostmantle",
+    "kind": "town",
+    "parent": "Mror Holds",
+    "lat": 28.5942,
+    "lng": 5.9326,
+    "zoom": 6
   },
   {
     "name": "Galethspyre",
-    "kind": "city",
+    "kind": "town",
     "parent": "Breland",
     "lat": 13.6887,
     "lng": -38.3423,
     "zoom": 6,
-    "description": "Città sul fiume Dagger."
+    "description": "Grande cittadina del Breland e importante porto fluviale sul Dagger.",
+    "wiki": "https://eberron.fandom.com/wiki/Galethspyre"
+  },
+  {
+    "name": "The Gates of Sorrow",
+    "kind": "water",
+    "lat": -20.3034,
+    "lng": -16.7432,
+    "zoom": 5
   },
   {
     "name": "Gatherhold",
@@ -155,7 +1510,145 @@
     "lat": 20.1178,
     "lng": -8.4155,
     "zoom": 6,
-    "description": "L'unico insediamento stabile delle pianure, sede del Casato Ghallanda."
+    "description": "Il maggiore insediamento delle Talenta Plains, scavato nelle rocce sulla riva orientale del Lake Cyre e condiviso da tutte le tribù halfling.",
+    "wiki": "https://eberron.fandom.com/wiki/Gatherhold"
+  },
+  {
+    "name": "The Gathering Stone",
+    "kind": "site",
+    "parent": "Darguun",
+    "lat": 11.2431,
+    "lng": -20.4565,
+    "zoom": 6,
+    "description": "Enorme lastra di scisto nelle pianure settentrionali del Darguun, punto di raduno di molte tribù goblinoidi.",
+    "wiki": "https://eberron.fandom.com/wiki/Gathering_Stone"
+  },
+  {
+    "name": "Ghaal'tash",
+    "kind": "village",
+    "parent": "Darguun",
+    "lat": 9.3407,
+    "lng": -21.4453,
+    "zoom": 6
+  },
+  {
+    "name": "Ghaash Dar",
+    "kind": "town",
+    "parent": "Demon Wastes",
+    "lat": 37.1253,
+    "lng": -40.3638,
+    "zoom": 6
+  },
+  {
+    "name": "Ghalt",
+    "kind": "town",
+    "parent": "Aundair",
+    "lat": 26.1357,
+    "lng": -27.5757,
+    "zoom": 6,
+    "description": "Piccola cittadina dell'Aundair centrale.",
+    "wiki": "https://eberron.fandom.com/wiki/Ghalt"
+  },
+  {
+    "name": "Ghoza",
+    "kind": "town",
+    "parent": "Adar",
+    "lat": -23.926,
+    "lng": 96.1084,
+    "zoom": 5,
+    "description": "Monastero-fortezza nascosto dell'Adar, i cui monaci sono noti per lo spirito libero e l'abilità nel nuoto.",
+    "wiki": "https://eberron.fandom.com/wiki/Ghoza"
+  },
+  {
+    "name": "Glamer Bay",
+    "kind": "water",
+    "lat": 2.5041,
+    "lng": -30.9375,
+    "zoom": 5
+  },
+  {
+    "name": "Glass Plateau",
+    "kind": "site",
+    "parent": "Mournland",
+    "lat": 14.8599,
+    "lng": -13.9966,
+    "zoom": 6,
+    "description": "Regione del Mournland.",
+    "wiki": "https://eberron.fandom.com/wiki/Glass_Plateau"
+  },
+  {
+    "name": "The Gloaming",
+    "kind": "forest",
+    "parent": "Eldeen Reaches",
+    "lat": 26.0568,
+    "lng": -40.5396,
+    "zoom": 6,
+    "description": "La parte più oscura della Towering Wood: una zona manifesta di Mabar, la Notte Eterna.",
+    "wiki": "https://eberron.fandom.com/wiki/Gloaming"
+  },
+  {
+    "name": "The Glowing Chasm",
+    "kind": "site",
+    "parent": "Mournland",
+    "lat": 24.1868,
+    "lng": -13.2715,
+    "zoom": 6,
+    "description": "Misterioso grande crepaccio nel nord del Mournland.",
+    "wiki": "https://eberron.fandom.com/wiki/Glowing_Chasm"
+  },
+  {
+    "name": "Glumtown",
+    "kind": "village",
+    "parent": "Shadow Marches",
+    "lat": 20.8383,
+    "lng": -55.6787,
+    "zoom": 6
+  },
+  {
+    "name": "Glyphstone Keep",
+    "kind": "fort",
+    "parent": "Breland",
+    "lat": 13.026,
+    "lng": -36.936,
+    "zoom": 6,
+    "description": "Rovina di un'installazione militare del Breland sulla riva orientale del Dagger, a nord di Wroat.",
+    "wiki": "https://eberron.fandom.com/wiki/Glyphstone_Keep"
+  },
+  {
+    "name": "Goldmire",
+    "kind": "village",
+    "parent": "Shadow Marches",
+    "lat": 26.5296,
+    "lng": -50.2515,
+    "zoom": 6
+  },
+  {
+    "name": "Goradra Gap",
+    "kind": "site",
+    "parent": "Mror Holds",
+    "lat": 28.8447,
+    "lng": 4.1748,
+    "zoom": 6,
+    "description": "Squarcio nella terra lungo cento miglia, così profondo da raggiungere Khyber.",
+    "wiki": "https://eberron.fandom.com/wiki/Goradra_Gap"
+  },
+  {
+    "name": "Gorgonhorn",
+    "kind": "ruin",
+    "parent": "Darguun",
+    "lat": 14.7749,
+    "lng": -16.7432,
+    "zoom": 6,
+    "description": "Villaggio fortificato di hobgoblin nel Darguun, a ridosso del Mournland.",
+    "wiki": "https://eberron.fandom.com/wiki/Gorgonhorn"
+  },
+  {
+    "name": "The Gray Wood",
+    "kind": "forest",
+    "parent": "Aundair",
+    "lat": 35.978,
+    "lng": -19.8193,
+    "zoom": 6
   },
   {
     "name": "Graywall",
@@ -164,7 +1657,35 @@
     "lat": 19.5391,
     "lng": -42.2095,
     "zoom": 6,
-    "description": "Città di frontiera del Droaam."
+    "description": "Piccola città del Droaam sulla via Orien dal Breland: di solito la prima tappa di chi entra nella nazione dei mostri.",
+    "wiki": "https://eberron.fandom.com/wiki/Graywall"
+  },
+  {
+    "name": "Graywall Mountains",
+    "kind": "mountains",
+    "parent": "Droaam",
+    "lat": 16.2991,
+    "lng": -42.3413,
+    "zoom": 5,
+    "description": "Catena lungo la quale si trova il byeshk, minerale violaceo efficace contro le aberrazioni.",
+    "wiki": "https://eberron.fandom.com/wiki/Graywall_Mountains"
+  },
+  {
+    "name": "Graywall Outpost",
+    "kind": "fort",
+    "parent": "Droaam",
+    "lat": 17.7278,
+    "lng": -41.9897,
+    "zoom": 6,
+    "wiki": "https://eberron.fandom.com/wiki/Graywall_Outpost"
+  },
+  {
+    "name": "Great Barrier",
+    "kind": "mountains",
+    "parent": "Argonnessen",
+    "lat": -20.3858,
+    "lng": 46.0986,
+    "zoom": 5
   },
   {
     "name": "Great Crag",
@@ -173,7 +1694,33 @@
     "lat": 21.6574,
     "lng": -45.7031,
     "zoom": 6,
-    "description": "Capitale del Droaam."
+    "description": "Capitale del Droaam e sede del potere delle Figlie di Sora Kell: una città giovane e in rapida crescita.",
+    "wiki": "https://eberron.fandom.com/wiki/Great_Crag"
+  },
+  {
+    "name": "The Great Eyrie",
+    "kind": "site",
+    "parent": "Argonnessen",
+    "lat": -39.3683,
+    "lng": 57.085,
+    "zoom": 5,
+    "wiki": "https://eberron.fandom.com/wiki/Great_Eyrie"
+  },
+  {
+    "name": "Greenblade",
+    "kind": "village",
+    "parent": "Eldeen Reaches",
+    "lat": 22.9786,
+    "lng": -38.4741,
+    "zoom": 6
+  },
+  {
+    "name": "The Greenhaunt",
+    "kind": "forest",
+    "parent": "Breland",
+    "lat": 19.8907,
+    "lng": -28.3447,
+    "zoom": 6
   },
   {
     "name": "Greenheart",
@@ -182,16 +1729,324 @@
     "lat": 28.5749,
     "lng": -40.9351,
     "zoom": 6,
-    "description": "Il cuore druidico delle Eldeen Reaches."
+    "description": "Cittadina e capitale delle Eldeen Reaches, base dei Custodi del Bosco e del Grande Druido Oalian.",
+    "wiki": "https://eberron.fandom.com/wiki/Greenheart"
+  },
+  {
+    "name": "Greentarn",
+    "kind": "island",
+    "parent": "Lhazaar Principalities",
+    "lat": 36.4036,
+    "lng": 18.501,
+    "zoom": 6,
+    "description": "Isola dei Lhazaar Principalities oltre il Far Strait; ospita Regalport, capitale di fatto dei principati.",
+    "wiki": "https://eberron.fandom.com/wiki/Greentarn"
+  },
+  {
+    "name": "Griffonclaw",
+    "kind": "ruin",
+    "parent": "Valenar",
+    "lat": 17.0778,
+    "lng": -10.2173,
+    "zoom": 6
+  },
+  {
+    "name": "Grimstone Keep",
+    "kind": "fort",
+    "parent": "Droaam",
+    "lat": 20.8793,
+    "lng": -43.418,
+    "zoom": 6
+  },
+  {
+    "name": "Grove of Guardian Trees",
+    "kind": "site",
+    "parent": "Eldeen Reaches",
+    "lat": 32.0267,
+    "lng": -38.606,
+    "zoom": 6
+  },
+  {
+    "name": "Gulf of Ingjald",
+    "kind": "water",
+    "lat": 37.7533,
+    "lng": 7.5366,
+    "zoom": 5
+  },
+  {
+    "name": "Gulf of the Moon",
+    "kind": "water",
+    "lat": -8.8417,
+    "lng": -14.3262,
+    "zoom": 5
+  },
+  {
+    "name": "Hailana Islands",
+    "kind": "island",
+    "parent": "Sarlona",
+    "lat": -22.0245,
+    "lng": 83.6719,
+    "zoom": 5
+  },
+  {
+    "name": "Haka'torvhak",
+    "kind": "ruin",
+    "parent": "Q'barra",
+    "lat": 16.552,
+    "lng": 6.0205,
+    "zoom": 6,
+    "description": "Antica rovina nel centro di Q'barra, scavata nel fianco di un vulcano.",
+    "wiki": "https://eberron.fandom.com/wiki/Haka'torvhak"
+  },
+  {
+    "name": "Hall of a Thousand Mirrors",
+    "kind": "ruin",
+    "parent": "Q'barra",
+    "lat": 18.2919,
+    "lng": 4.5044,
+    "zoom": 6,
+    "wiki": "https://eberron.fandom.com/wiki/Hall_of_a_Thousand_Mirrors"
+  },
+  {
+    "name": "The Hammer",
+    "kind": "island",
+    "parent": "Lhazaar Principalities",
+    "lat": 15.9825,
+    "lng": 15.1172,
+    "zoom": 6
+  },
+  {
+    "name": "The Harrowcrowns",
+    "kind": "forest",
+    "parent": "Thrane",
+    "lat": 21.2894,
+    "lng": -22.9614,
+    "zoom": 6,
+    "description": "Foresta del Thrane meridionale a nord del Lake Brey, nota per essere infestata dai mostri.",
+    "wiki": "https://eberron.fandom.com/wiki/Harrowcrowns"
+  },
+  {
+    "name": "Hatheril",
+    "kind": "village",
+    "parent": "Breland",
+    "lat": 18.2919,
+    "lng": -26.3452,
+    "zoom": 6,
+    "description": "Borgo del Breland settentrionale.",
+    "wiki": "https://eberron.fandom.com/wiki/Hatheril"
+  },
+  {
+    "name": "Havenglen",
+    "kind": "village",
+    "parent": "Eldeen Reaches",
+    "lat": 29.7453,
+    "lng": -32.7612,
+    "zoom": 6
+  },
+  {
+    "name": "Haztaratain Monastery",
+    "kind": "site",
+    "parent": "Adar",
+    "lat": -28.6906,
+    "lng": 107.4023,
+    "zoom": 5,
+    "description": "Monastero nascosto dell'Adar, luogo di nascita dei kalashtar e meta di pellegrinaggio del Sentiero della Luce.",
+    "wiki": "https://eberron.fandom.com/wiki/Haztaratain_Monastery"
+  },
+  {
+    "name": "The Hilt",
+    "kind": "water",
+    "lat": 6.8392,
+    "lng": -41.3525,
+    "zoom": 5,
+    "wiki": "https://eberron.fandom.com/wiki/The_Hilt"
+  },
+  {
+    "name": "Hoarfrost Mountains",
+    "kind": "mountains",
+    "parent": "Mror Holds",
+    "lat": 33.7243,
+    "lng": 6.438,
+    "zoom": 5,
+    "wiki": "https://eberron.fandom.com/wiki/Hoarfrost_Mountains"
+  },
+  {
+    "name": "The Howling Peaks",
+    "kind": "mountains",
+    "parent": "Breland",
+    "lat": 11.8243,
+    "lng": -29.707,
+    "zoom": 5,
+    "wiki": "https://eberron.fandom.com/wiki/Howling_Peaks"
+  },
+  {
+    "name": "The Hydra",
+    "kind": "water",
+    "lat": -29.3439,
+    "lng": -58.2715,
+    "zoom": 5
+  },
+  {
+    "name": "Ice Shear Isle",
+    "kind": "island",
+    "parent": "Lhazaar Principalities",
+    "lat": 48.4438,
+    "lng": 12.7441,
+    "zoom": 6
+  },
+  {
+    "name": "Iceflow Sea",
+    "kind": "water",
+    "lat": -56.8249,
+    "lng": -70.7959,
+    "zoom": 5,
+    "wiki": "https://eberron.fandom.com/wiki/Iceflow_Sea"
+  },
+  {
+    "name": "Icehaven Sound",
+    "kind": "water",
+    "lat": 46.9503,
+    "lng": -57.1729,
+    "zoom": 5
+  },
+  {
+    "name": "Icehorn Mountains",
+    "kind": "mountains",
+    "parent": "Demon Wastes",
+    "lat": 35.8891,
+    "lng": -36.2988,
+    "zoom": 5,
+    "wiki": "https://eberron.fandom.com/wiki/Icehorn_Mountains"
+  },
+  {
+    "name": "Iceneedle Forest",
+    "kind": "forest",
+    "parent": "Mror Holds",
+    "lat": 35.9424,
+    "lng": 7.9321,
+    "zoom": 6
+  },
+  {
+    "name": "Icetop Mountains",
+    "kind": "mountains",
+    "parent": "Karrnath",
+    "lat": 33.0455,
+    "lng": -2.3071,
+    "zoom": 5,
+    "wiki": "https://eberron.fandom.com/wiki/Icetop_Mountains"
+  },
+  {
+    "name": "Icewhite Island",
+    "kind": "island",
+    "parent": "Frostfell",
+    "lat": 51.618,
+    "lng": -62.2266,
+    "zoom": 5
+  },
+  {
+    "name": "Icewood",
+    "kind": "forest",
+    "parent": "Karrnath",
+    "lat": 34.7236,
+    "lng": -3.999,
+    "zoom": 6
+  },
+  {
+    "name": "Illmarrow Castle",
+    "kind": "fort",
+    "parent": "Lhazaar Principalities",
+    "lat": 47.7393,
+    "lng": -0.1978,
+    "zoom": 6,
+    "wiki": "https://eberron.fandom.com/wiki/Illmarrow_Castle"
+  },
+  {
+    "name": "The Imistil Forest",
+    "kind": "forest",
+    "parent": "Thrane",
+    "lat": 22.411,
+    "lng": -25.9937,
+    "zoom": 6
+  },
+  {
+    "name": "Io'lokar",
+    "kind": "city",
+    "parent": "Argonnessen",
+    "lat": -34.6332,
+    "lng": 44.2529,
+    "zoom": 5
+  },
+  {
+    "name": "Io'vakas",
+    "kind": "ruin",
+    "parent": "Argonnessen",
+    "lat": -34.8138,
+    "lng": 45.8789,
+    "zoom": 5
+  },
+  {
+    "name": "Ironroot Mountains",
+    "kind": "mountains",
+    "parent": "Mror Holds",
+    "lat": 32.9902,
+    "lng": 1.7139,
+    "zoom": 5,
+    "description": "Monti dove i nani dei Mror Holds scavano e commerciano, sotto la minaccia dei clan di orchi Jhorash'tar.",
+    "wiki": "https://eberron.fandom.com/wiki/Ironroot_Mountains"
   },
   {
     "name": "Irontown",
-    "kind": "city",
+    "kind": "town",
     "parent": "Karrnath",
     "lat": 30.6568,
     "lng": -0.9229,
     "zoom": 6,
-    "description": "Città mineraria ai piedi dei monti Ironroot."
+    "description": "Piccola cittadina del Karrnath orientale sulla linea del lightning rail tra Vulyar e Krona Peak.",
+    "wiki": "https://eberron.fandom.com/wiki/Irontown"
+  },
+  {
+    "name": "Jaelarthal Orioth",
+    "kind": "forest",
+    "parent": "Aerenal",
+    "lat": -11.8674,
+    "lng": -12.1289,
+    "zoom": 6
+  },
+  {
+    "name": "Jal Paeridor",
+    "kind": "town",
+    "parent": "Valenar",
+    "lat": 9.8173,
+    "lng": -5.0977,
+    "zoom": 6
+  },
+  {
+    "name": "Ka'rhashan",
+    "kind": "town",
+    "parent": "Q'barra",
+    "lat": 19.7253,
+    "lng": 5.1636,
+    "zoom": 6,
+    "description": "Il più grande insediamento di dragonidi di tutto il Khorvaire, luogo sacro per i dragonidi di Q'barra.",
+    "wiki": "https://eberron.fandom.com/wiki/Ka'rhashan"
+  },
+  {
+    "name": "Kalazart",
+    "kind": "ruin",
+    "parent": "Mournland",
+    "lat": 21.3712,
+    "lng": -15.249,
+    "zoom": 6,
+    "description": "Rovine di una delle grandi città del Cyre, nel Mournland.",
+    "wiki": "https://eberron.fandom.com/wiki/Kalazart"
+  },
+  {
+    "name": "Kapaerian Island",
+    "kind": "island",
+    "parent": "Xen'drik",
+    "lat": -23.0393,
+    "lng": -89.4727,
+    "zoom": 5
   },
   {
     "name": "Karrlakton",
@@ -200,7 +2055,15 @@
     "lat": 27.2546,
     "lng": -12.5684,
     "zoom": 6,
-    "description": "Città al confine con il Mournland, sede del Casato Deneith."
+    "description": "Seconda città del Karrnath, separata dal Mournland soltanto dal fiume Cyre.",
+    "wiki": "https://eberron.fandom.com/wiki/Karrlakton"
+  },
+  {
+    "name": "Karrn Bay",
+    "kind": "water",
+    "lat": 36.3328,
+    "lng": -6.5698,
+    "zoom": 5
   },
   {
     "name": "Karrnath",
@@ -209,7 +2072,106 @@
     "lat": 31.3912,
     "lng": -8.3057,
     "zoom": 5,
-    "description": "Una delle Cinque Nazioni, dalla forte tradizione militare."
+    "description": "Una delle Cinque Nazioni, dalla forte tradizione militare.",
+    "wiki": "https://eberron.fandom.com/wiki/Karrnath"
+  },
+  {
+    "name": "Karrnwood",
+    "kind": "forest",
+    "parent": "Karrnath",
+    "lat": 33.9616,
+    "lng": -10.8765,
+    "zoom": 6,
+    "description": "Immensa foresta che copre il nord-ovest del Karrnath.",
+    "wiki": "https://eberron.fandom.com/wiki/Karrnwood"
+  },
+  {
+    "name": "Karthoon Tor",
+    "kind": "fort",
+    "parent": "Droaam",
+    "lat": 20.7561,
+    "lng": -51.416,
+    "zoom": 6,
+    "description": "Rovina nel Droaam.",
+    "wiki": "https://eberron.fandom.com/wiki/Karthoon_Tor"
+  },
+  {
+    "name": "Kashakanta",
+    "kind": "ruin",
+    "parent": "Demon Wastes",
+    "lat": 33.2295,
+    "lng": -49.6143,
+    "zoom": 6
+  },
+  {
+    "name": "Kasserine",
+    "kind": "village",
+    "parent": "Valenar",
+    "lat": 10.5958,
+    "lng": -6.3062,
+    "zoom": 6
+  },
+  {
+    "name": "Kasshta Keep",
+    "kind": "city",
+    "parent": "Adar",
+    "lat": -20.7972,
+    "lng": 97.5146,
+    "zoom": 5,
+    "description": "Monastero-fortezza e capitale di fatto dell'Adar, dimora dei Custodi della Parola.",
+    "wiki": "https://eberron.fandom.com/wiki/Kasshta_Keep"
+  },
+  {
+    "name": "Kathuran",
+    "kind": "town",
+    "parent": "Aerenal",
+    "lat": -14.8174,
+    "lng": -6.2402,
+    "zoom": 6
+  },
+  {
+    "name": "The Keeper's Maw",
+    "kind": "water",
+    "lat": 43.7711,
+    "lng": -33.1128,
+    "zoom": 5
+  },
+  {
+    "name": "Kelneluun",
+    "kind": "water",
+    "lat": 5.5285,
+    "lng": 76.2012,
+    "zoom": 5
+  },
+  {
+    "name": "Kennrun",
+    "kind": "fort",
+    "parent": "Breland",
+    "lat": 16.1725,
+    "lng": -18.3032,
+    "zoom": 6,
+    "description": "Fortificazione del Breland nord-orientale, che difende senza tregua dai mostri del Mournland.",
+    "wiki": "https://eberron.fandom.com/wiki/Kennrun"
+  },
+  {
+    "name": "Keth",
+    "kind": "town",
+    "parent": "Valenar",
+    "lat": 13.5178,
+    "lng": -4.6143,
+    "zoom": 6,
+    "description": "Grande cittadina nel centro del Valenar, sul fiume Redwater.",
+    "wiki": "https://eberron.fandom.com/wiki/Keth"
+  },
+  {
+    "name": "Khalesh Province",
+    "kind": "region",
+    "parent": "Riedra",
+    "lat": -6.5336,
+    "lng": 90.9229,
+    "zoom": 5,
+    "description": "Provincia dell'Unità di Riedra.",
+    "wiki": "https://eberron.fandom.com/wiki/Khalesh"
   },
   {
     "name": "Khorvaire",
@@ -217,7 +2179,49 @@
     "lat": 29.2289,
     "lng": -28.8281,
     "zoom": 4,
-    "description": "Il continente delle Cinque Nazioni, cuore dell'antico regno di Galifar."
+    "description": "Il continente delle Cinque Nazioni, cuore dell'antico regno di Galifar.",
+    "wiki": "https://eberron.fandom.com/wiki/Khorvaire"
+  },
+  {
+    "name": "The Khraal",
+    "kind": "forest",
+    "parent": "Darguun",
+    "lat": 7.0573,
+    "lng": -16.9629,
+    "zoom": 6
+  },
+  {
+    "name": "Khunan Province",
+    "kind": "region",
+    "parent": "Syrkarn",
+    "lat": -19.477,
+    "lng": 89.3848,
+    "zoom": 5
+  },
+  {
+    "name": "King's Forest",
+    "kind": "forest",
+    "parent": "Breland",
+    "lat": 8.7331,
+    "lng": -36.9141,
+    "zoom": 6,
+    "description": "Considerata il parco nazionale del Breland: meta di battute dei nobili e via panoramica verso Sharn.",
+    "wiki": "https://eberron.fandom.com/wiki/King's_Forest"
+  },
+  {
+    "name": "Koralandaluun",
+    "kind": "water",
+    "lat": -4.1273,
+    "lng": 110.6982,
+    "zoom": 5
+  },
+  {
+    "name": "Korran's Maw",
+    "kind": "site",
+    "parent": "Mror Holds",
+    "lat": 26.5099,
+    "lng": 6.2842,
+    "zoom": 6
   },
   {
     "name": "Korranberg",
@@ -226,7 +2230,8 @@
     "lat": 4.193,
     "lng": -24.5435,
     "zoom": 6,
-    "description": "Sede della grande Biblioteca di Korranberg."
+    "description": "La più antica città dello Zilargo, sede della celebre Biblioteca di Korranberg.",
+    "wiki": "https://eberron.fandom.com/wiki/Korranberg"
   },
   {
     "name": "Korth",
@@ -235,7 +2240,8 @@
     "lat": 30.2021,
     "lng": -15.1831,
     "zoom": 6,
-    "description": "Capitale del Karrnath."
+    "description": "Capitale e maggiore città del Karrnath, tra il fiume Karrn e la Nightwood.",
+    "wiki": "https://eberron.fandom.com/wiki/Korth"
   },
   {
     "name": "Korunda Gate",
@@ -244,7 +2250,34 @@
     "lat": 34.976,
     "lng": -0.3735,
     "zoom": 6,
-    "description": "Roccaforte del Casato Kundarak."
+    "description": "Città ed enclave nei monti Ironroot, sede del potere del Casato Kundarak.",
+    "wiki": "https://eberron.fandom.com/wiki/Korunda_Gate"
+  },
+  {
+    "name": "Krag",
+    "kind": "island",
+    "parent": "Lhazaar Principalities",
+    "lat": 22.0449,
+    "lng": 20.9619,
+    "zoom": 6,
+    "description": "Isola dei Lhazaar Principalities; ospita Port Krez, base dei Cloudreavers.",
+    "wiki": "https://eberron.fandom.com/wiki/Krag"
+  },
+  {
+    "name": "Kraken Bay",
+    "kind": "water",
+    "lat": 6.2716,
+    "lng": -11.1401,
+    "zoom": 5,
+    "wiki": "https://eberron.fandom.com/wiki/Kraken_Bay"
+  },
+  {
+    "name": "Krezent",
+    "kind": "ruin",
+    "parent": "Talenta Plains",
+    "lat": 22.6951,
+    "lng": 1.7139,
+    "zoom": 6
   },
   {
     "name": "Krona Peak",
@@ -253,16 +2286,142 @@
     "lat": 32.0453,
     "lng": 1.0547,
     "zoom": 6,
-    "description": "Capitale dei Mror Holds."
+    "description": "Capitale dei Mror Holds e sede del Consiglio di Ferro, capolinea del lightning rail.",
+    "wiki": "https://eberron.fandom.com/wiki/Krona_Peak"
+  },
+  {
+    "name": "The Labyrinth",
+    "kind": "region",
+    "parent": "Demon Wastes",
+    "lat": 35.8534,
+    "lng": -41.4185,
+    "zoom": 5
+  },
+  {
+    "name": "Lair of the Keeper",
+    "kind": "site",
+    "parent": "Demon Wastes",
+    "lat": 42.4397,
+    "lng": -29.707,
+    "zoom": 6,
+    "description": "Luogo leggendario nelle profondità di Khyber, raggiungibile da un baratro sulla costa orientale delle Demon Wastes.",
+    "wiki": "https://eberron.fandom.com/wiki/Lair_of_the_Keeper"
+  },
+  {
+    "name": "Lake Brey",
+    "kind": "water",
+    "lat": 18.979,
+    "lng": -24.3237,
+    "zoom": 5,
+    "wiki": "https://eberron.fandom.com/wiki/Lake_Brey"
+  },
+  {
+    "name": "Lake Cyre",
+    "kind": "water",
+    "lat": 19.3733,
+    "lng": -10.0854,
+    "zoom": 5,
+    "wiki": "https://eberron.fandom.com/wiki/Lake_Cyre"
+  },
+  {
+    "name": "Lake Dark",
+    "kind": "water",
+    "lat": 31.3724,
+    "lng": -1.4502,
+    "zoom": 5,
+    "description": "Lago e zona manifesta di Dolurrh: molti karrn credono che le sue acque permettano di parlare con i morti.",
+    "wiki": "https://eberron.fandom.com/wiki/Lake_Dark"
+  },
+  {
+    "name": "Lake Galifar",
+    "kind": "water",
+    "lat": 26.6671,
+    "lng": -34.2114,
+    "zoom": 5,
+    "wiki": "https://eberron.fandom.com/wiki/Lake_Galifar"
+  },
+  {
+    "name": "Lake Home",
+    "kind": "village",
+    "parent": "Mror Holds",
+    "lat": 34.18,
+    "lng": 2.5269,
+    "zoom": 6
+  },
+  {
+    "name": "Lake of Fire",
+    "kind": "volcano",
+    "parent": "Demon Wastes",
+    "lat": 33.3581,
+    "lng": -47.2852,
+    "zoom": 6,
+    "wiki": "https://eberron.fandom.com/wiki/Lake_of_Fire"
+  },
+  {
+    "name": "Lakeside",
+    "kind": "town",
+    "parent": "Karrnath",
+    "lat": 31.6908,
+    "lng": -2.2412,
+    "zoom": 6,
+    "description": "Piccola cittadina del Karrnath orientale tra i monti Icetop e il Lake Dark; la guarnigione sorveglia il confine conteso con i Mror Holds.",
+    "wiki": "https://eberron.fandom.com/wiki/Lakeside"
+  },
+  {
+    "name": "Lamecha Province",
+    "kind": "region",
+    "parent": "Syrkarn",
+    "lat": -25.8394,
+    "lng": 90.3955,
+    "zoom": 5
+  },
+  {
+    "name": "Lantern Tower",
+    "kind": "fort",
+    "parent": "Shadow Marches",
+    "lat": 20.221,
+    "lng": -56.0303,
+    "zoom": 6
+  },
+  {
+    "name": "Last Chance",
+    "kind": "ruin",
+    "parent": "Xen'drik",
+    "lat": -19.1452,
+    "lng": -65.6543,
+    "zoom": 5,
+    "description": "Piccolo insediamento di Xen'drik cresciuto attorno a una grande locanda con lo stesso nome.",
+    "wiki": "https://eberron.fandom.com/wiki/Last_Chance"
+  },
+  {
+    "name": "Lastpoint",
+    "kind": "island",
+    "parent": "Lhazaar Principalities",
+    "lat": 18.7503,
+    "lng": 20.8301,
+    "zoom": 6,
+    "description": "Isola del Lhazaar Sea, sede del Principato della Marea Grigia, governato da cangianti.",
+    "wiki": "https://eberron.fandom.com/wiki/Lastpoint"
   },
   {
     "name": "Lathleer",
-    "kind": "city",
+    "kind": "town",
     "parent": "Aundair",
     "lat": 28.7484,
     "lng": -25.2026,
     "zoom": 6,
-    "description": "Città dell'Aundair meridionale."
+    "description": "Grande cittadina dell'Aundair orientale, a ridosso del confine con il Thrane.",
+    "wiki": "https://eberron.fandom.com/wiki/Lathleer"
+  },
+  {
+    "name": "Lessyk",
+    "kind": "village",
+    "parent": "Thrane",
+    "lat": 22.7559,
+    "lng": -21.3135,
+    "zoom": 6,
+    "description": "Borgo del Thrane meridionale, sulla punta nord degli Harrowcrowns.",
+    "wiki": "https://eberron.fandom.com/wiki/Lessyk"
   },
   {
     "name": "Lhazaar Principalities",
@@ -271,16 +2430,216 @@
     "lat": 29.1522,
     "lng": 15.9082,
     "zoom": 5,
-    "description": "Isole e coste dei principi-pirati."
+    "description": "Isole e coste dei principi-pirati.",
+    "wiki": "https://eberron.fandom.com/wiki/Lhazaar_Principalities"
+  },
+  {
+    "name": "Lhazaar Sea",
+    "kind": "water",
+    "lat": 48.9514,
+    "lng": 19.3359,
+    "zoom": 5,
+    "description": "Mare settentrionale tra il Khorvaire e Sarlona.",
+    "wiki": "https://eberron.fandom.com/wiki/Lhazaar_Sea"
+  },
+  {
+    "name": "The Light of Siberys",
+    "kind": "region",
+    "parent": "Argonnessen",
+    "lat": -39.3003,
+    "lng": 30.498,
+    "zoom": 5,
+    "description": "Regione occidentale di Argonnessen, pattugliata dall'esercito di draghi da cui prende il nome.",
+    "wiki": "https://eberron.fandom.com/wiki/Light_of_Siberys"
+  },
+  {
+    "name": "Liugwen",
+    "kind": "village",
+    "parent": "Zilargo",
+    "lat": 6.6646,
+    "lng": -31.2012,
+    "zoom": 6,
+    "description": "Minuscolo insediamento sulla via Orien a metà strada tra Trolanport e Oskilor.",
+    "wiki": "https://eberron.fandom.com/wiki/Liugwen"
+  },
+  {
+    "name": "Loom Keep",
+    "kind": "fort",
+    "parent": "Karrnath",
+    "lat": 26.9808,
+    "lng": -13.0737,
+    "zoom": 6,
+    "description": "Fortificazione del Karrnath a ovest di Karrlakton, sul fiume Cyre al confine con il Mournland.",
+    "wiki": "https://eberron.fandom.com/wiki/Loom_Keep"
+  },
+  {
+    "name": "Loran Rath",
+    "kind": "fort",
+    "parent": "Karrnath",
+    "lat": 29.1522,
+    "lng": -16.4795,
+    "zoom": 6,
+    "description": "Piccola fortificazione del Karrnath sud-occidentale su Scions Sound, a est di Thronehold.",
+    "wiki": "https://eberron.fandom.com/wiki/Loran_Rath"
+  },
+  {
+    "name": "Lorghalan",
+    "kind": "island",
+    "parent": "Lhazaar Principalities",
+    "lat": 18.5213,
+    "lng": 15.4688,
+    "zoom": 6
+  },
+  {
+    "name": "Lost",
+    "kind": "island",
+    "parent": "Lhazaar Principalities",
+    "lat": 50.2332,
+    "lng": -2.1313,
+    "zoom": 6
+  },
+  {
+    "name": "Lurching Tower",
+    "kind": "fort",
+    "parent": "Breland",
+    "lat": 19.684,
+    "lng": -20.874,
+    "zoom": 6,
+    "wiki": "https://eberron.fandom.com/wiki/Lurching_Tower"
+  },
+  {
+    "name": "Lyrenton",
+    "kind": "ruin",
+    "parent": "Darguun",
+    "lat": 10.9412,
+    "lng": -18.2373,
+    "zoom": 6,
+    "description": "Ex cittadina del Cyre, oggi nel Darguun orientale a ridosso della nebbia grigia del Mournland.",
+    "wiki": "https://eberron.fandom.com/wiki/Lyrenton"
+  },
+  {
+    "name": "Madstone",
+    "kind": "village",
+    "parent": "Karrnath",
+    "lat": 35.2456,
+    "lng": -3.7573,
+    "zoom": 6
+  },
+  {
+    "name": "The Madwood",
+    "kind": "forest",
+    "parent": "Aerenal",
+    "lat": -13.1116,
+    "lng": -2.6807,
+    "zoom": 6
+  },
+  {
+    "name": "Madwood Gulf",
+    "kind": "water",
+    "lat": -16.088,
+    "lng": -3.7793,
+    "zoom": 5
+  },
+  {
+    "name": "Mae-Kree Province",
+    "kind": "region",
+    "parent": "Syrkarn",
+    "lat": -10.8765,
+    "lng": 82.3535,
+    "zoom": 5
+  },
+  {
+    "name": "Majarin",
+    "kind": "island",
+    "parent": "Aerenal",
+    "lat": -8.7114,
+    "lng": 5.8887,
+    "zoom": 6
   },
   {
     "name": "Making",
-    "kind": "site",
+    "kind": "ruin",
     "parent": "Mournland",
     "lat": 15.5384,
     "lng": -13.7109,
     "zoom": 6,
-    "description": "Rovine dell'antica città del Casato Cannith."
+    "description": "Una delle maggiori città del Cyre, oggi rovina nel centro esatto del Mournland, in mezzo al Glass Plateau.",
+    "wiki": "https://eberron.fandom.com/wiki/Making"
+  },
+  {
+    "name": "Malshashar",
+    "kind": "town",
+    "parent": "Adar",
+    "lat": -20.7972,
+    "lng": 104.8975,
+    "zoom": 5,
+    "description": "Uno dei monasteri-fortezza nascosti a guardia dell'Adar, gemello di Shalquar.",
+    "wiki": "https://eberron.fandom.com/wiki/Malshashar"
+  },
+  {
+    "name": "Manta Bay",
+    "kind": "water",
+    "lat": 13.7954,
+    "lng": -47.8345,
+    "zoom": 5
+  },
+  {
+    "name": "Mar'saval",
+    "kind": "ruin",
+    "parent": "Q'barra",
+    "lat": 21.9634,
+    "lng": 8.0859,
+    "zoom": 6,
+    "description": "Una delle tre grandi rovine dell'Era dei Demoni in Q'barra, sprofondata nella Basura Swamp e sacra a molti lucertoloidi.",
+    "wiki": "https://eberron.fandom.com/wiki/Mar'saval"
+  },
+  {
+    "name": "Marguul Pass",
+    "kind": "site",
+    "parent": "Darguun",
+    "lat": 12.8975,
+    "lng": -23.0493,
+    "zoom": 6,
+    "description": "Passo attraverso i Seawall Mountains, tra Darguun e Breland.",
+    "wiki": "https://eberron.fandom.com/wiki/Marguul_Pass"
+  },
+  {
+    "name": "Marketplace",
+    "kind": "village",
+    "parent": "Aundair",
+    "lat": 22.7762,
+    "lng": -26.8506,
+    "zoom": 6,
+    "description": "Villaggio dell'Aundair meridionale vicino al confine con il Thrane, su una via Orien e una linea del lightning rail.",
+    "wiki": "https://eberron.fandom.com/wiki/Marketplace"
+  },
+  {
+    "name": "Marsh of Desolation",
+    "kind": "forest",
+    "parent": "Xen'drik",
+    "lat": -22.7559,
+    "lng": -53.6572,
+    "zoom": 5,
+    "description": "Vasta palude alla base della Skyfall Peninsula.",
+    "wiki": "https://eberron.fandom.com/wiki/Marsh_of_Desolation"
+  },
+  {
+    "name": "Maruk Dar",
+    "kind": "town",
+    "parent": "Demon Wastes",
+    "lat": 34.416,
+    "lng": -43.0225,
+    "zoom": 6
+  },
+  {
+    "name": "Mel-Aqat",
+    "kind": "ruin",
+    "parent": "Xen'drik",
+    "lat": -41.8696,
+    "lng": -79.4971,
+    "zoom": 5,
+    "description": "Città in rovina dei giganti, tra le giungle al margine orientale del deserto di Menechtarun.",
+    "wiki": "https://eberron.fandom.com/wiki/Mel-Aqat"
   },
   {
     "name": "Menechtarun",
@@ -289,16 +2648,100 @@
     "lat": -44.8403,
     "lng": -99.1406,
     "zoom": 5,
-    "description": "Il grande deserto di Xen'drik."
+    "description": "Deserto che copre gran parte dell'ovest di Xen'drik.",
+    "wiki": "https://eberron.fandom.com/wiki/Menechtarun"
+  },
+  {
+    "name": "Merylsward",
+    "kind": "town",
+    "parent": "Eldeen Reaches",
+    "lat": 35.4249,
+    "lng": -30.6738,
+    "zoom": 6,
+    "description": "Piccola cittadina nel nord delle Eldeen Reaches.",
+    "wiki": "https://eberron.fandom.com/wiki/Merylsward"
   },
   {
     "name": "Metrol",
-    "kind": "site",
+    "kind": "ruin",
     "parent": "Mournland",
     "lat": 21.3712,
     "lng": -10.5688,
     "zoom": 6,
-    "description": "L'antica capitale del Cyre, oggi in rovina."
+    "description": "La Città Nascente: ex capitale del Cyre, un tempo grande metropoli e oggi città in rovina nel Mournland.",
+    "wiki": "https://eberron.fandom.com/wiki/Metrol"
+  },
+  {
+    "name": "Mirror Lake",
+    "kind": "water",
+    "lat": 35.03,
+    "lng": 2.8564,
+    "zoom": 5
+  },
+  {
+    "name": "Mistmarsh",
+    "kind": "village",
+    "parent": "Breland",
+    "lat": 13.2399,
+    "lng": -26.3892,
+    "zoom": 6,
+    "description": "Borgo del Breland sul margine meridionale della palude omonima.",
+    "wiki": "https://eberron.fandom.com/wiki/Mistmarsh"
+  },
+  {
+    "name": "Moonshadow",
+    "kind": "village",
+    "parent": "Valenar",
+    "lat": 11.6738,
+    "lng": -3.7793,
+    "zoom": 6,
+    "description": "Villaggio di mezzelfi (khoravar) nel Valenar.",
+    "wiki": "https://eberron.fandom.com/wiki/Moonshadow"
+  },
+  {
+    "name": "Moonwatch",
+    "kind": "town",
+    "parent": "Breland",
+    "lat": 9.1889,
+    "lng": -42.8906,
+    "zoom": 6,
+    "description": "Piccola cittadina del Breland occidentale sulle rive del fiume Sorrihla.",
+    "wiki": "https://eberron.fandom.com/wiki/Moonwatch"
+  },
+  {
+    "name": "Mordain's Hall",
+    "kind": "fort",
+    "parent": "Shadow Marches",
+    "lat": 24.1468,
+    "lng": -49.0869,
+    "zoom": 6,
+    "wiki": "https://eberron.fandom.com/wiki/Mordain's_Hall"
+  },
+  {
+    "name": "Morningcrest",
+    "kind": "fort",
+    "parent": "Thrane",
+    "lat": 25.6613,
+    "lng": -25.0708,
+    "zoom": 6,
+    "description": "Cittadella del Thrane e uno dei maggiori monasteri-fortezza della Chiesa della Fiamma Argentea.",
+    "wiki": "https://eberron.fandom.com/wiki/Morningcrest"
+  },
+  {
+    "name": "Mossmantle",
+    "kind": "village",
+    "parent": "Eldeen Reaches",
+    "lat": 32.064,
+    "lng": -34.1455,
+    "zoom": 6
+  },
+  {
+    "name": "The Mosswood",
+    "kind": "forest",
+    "parent": "Eldeen Reaches",
+    "lat": 32.6209,
+    "lng": -33.4424,
+    "zoom": 6
   },
   {
     "name": "Mournland",
@@ -307,7 +2750,8 @@
     "lat": 22.0653,
     "lng": -13.667,
     "zoom": 5,
-    "description": "Ciò che resta del Cyre dopo il Giorno del Lutto."
+    "description": "Ciò che resta del Cyre dopo il Giorno del Lutto.",
+    "wiki": "https://eberron.fandom.com/wiki/Mournland"
   },
   {
     "name": "Mror Holds",
@@ -316,16 +2760,51 @@
     "lat": 32.8057,
     "lng": 4.1748,
     "zoom": 5,
-    "description": "I clan dei nani, tra i monti Ironroot e Hoarfrost."
+    "description": "I clan dei nani, tra i monti Ironroot e Hoarfrost.",
+    "wiki": "https://eberron.fandom.com/wiki/Mror_Holds"
+  },
+  {
+    "name": "Mutiny Harbor",
+    "kind": "water",
+    "lat": 32.0826,
+    "lng": 11.7993,
+    "zoom": 5
+  },
+  {
+    "name": "Nathyrr",
+    "kind": "village",
+    "parent": "Thrane",
+    "lat": 21.6166,
+    "lng": -21.1157,
+    "zoom": 6,
+    "description": "Villaggio del Thrane meridionale sul margine orientale degli Harrowcrowns.",
+    "wiki": "https://eberron.fandom.com/wiki/Nathyrr"
+  },
+  {
+    "name": "Nderitese",
+    "kind": "town",
+    "parent": "Syrkarn",
+    "lat": -21.7391,
+    "lng": 92.9443,
+    "zoom": 5
+  },
+  {
+    "name": "Nestling Plateau",
+    "kind": "site",
+    "parent": "Argonnessen",
+    "lat": -28.1107,
+    "lng": 36.8701,
+    "zoom": 5
   },
   {
     "name": "New Cyre",
-    "kind": "city",
+    "kind": "town",
     "parent": "Breland",
     "lat": 15.496,
     "lng": -21.7969,
     "zoom": 6,
-    "description": "Insediamento dei profughi del Cyre."
+    "description": "La nuova casa dei profughi del Cyre: nato come campo profughi, oggi è una grande cittadina del Breland orientale.",
+    "wiki": "https://eberron.fandom.com/wiki/New_Cyre"
   },
   {
     "name": "Newthrone",
@@ -334,7 +2813,170 @@
     "lat": 16.7414,
     "lng": 3.1641,
     "zoom": 6,
-    "description": "Capitale dei coloni di Q'barra."
+    "description": "Grande città portuale sul fiume Adder e capitale di Q'barra, sede del re Sebastes ir'Kesslan.",
+    "wiki": "https://eberron.fandom.com/wiki/Newthrone"
+  },
+  {
+    "name": "Niern",
+    "kind": "village",
+    "parent": "Eldeen Reaches",
+    "lat": 27.4693,
+    "lng": -38.4082,
+    "zoom": 6
+  },
+  {
+    "name": "The Nightwood",
+    "kind": "forest",
+    "parent": "Karrnath",
+    "lat": 29.7071,
+    "lng": -13.2275,
+    "zoom": 6,
+    "description": "Vasta foresta del Karrnath occidentale legata al piano di Mabar, da cui escono mostri che terrorizzano i dintorni.",
+    "wiki": "https://eberron.fandom.com/wiki/Nightwood"
+  },
+  {
+    "name": "Ninebay Island",
+    "kind": "island",
+    "parent": "Lhazaar Principalities",
+    "lat": 34.6874,
+    "lng": 18.3252,
+    "zoom": 6
+  },
+  {
+    "name": "Noldrunthrone",
+    "kind": "ruin",
+    "parent": "Mror Holds",
+    "lat": 27.2742,
+    "lng": 4.0869,
+    "zoom": 6
+  },
+  {
+    "name": "Norinath",
+    "kind": "town",
+    "parent": "Valenar",
+    "lat": 13.646,
+    "lng": -1.7578,
+    "zoom": 6,
+    "description": "Piccola città a maggioranza umana nelle pianure desertiche orientali del Valenar.",
+    "wiki": "https://eberron.fandom.com/wiki/Norinath"
+  },
+  {
+    "name": "Nulakesh Province",
+    "kind": "region",
+    "parent": "Riedra",
+    "lat": 2.548,
+    "lng": 97.7344,
+    "zoom": 5
+  },
+  {
+    "name": "Obsidian City",
+    "kind": "ruin",
+    "parent": "Xen'drik",
+    "lat": -22.4313,
+    "lng": -63.6768,
+    "zoom": 5,
+    "description": "Leggendaria città in rovina dei giganti, nelle giungle di Xen'drik.",
+    "wiki": "https://eberron.fandom.com/wiki/Obsidian_City"
+  },
+  {
+    "name": "Ohr Kaluun Province",
+    "kind": "region",
+    "parent": "Riedra",
+    "lat": -2.8114,
+    "lng": 117.7295,
+    "zoom": 5
+  },
+  {
+    "name": "Olath",
+    "kind": "town",
+    "parent": "Thrane",
+    "lat": 26.3131,
+    "lng": -18.1494,
+    "zoom": 6,
+    "description": "Piccola cittadina del Thrane orientale, tra il Burnt Wood e la costa di Scions Sound.",
+    "wiki": "https://eberron.fandom.com/wiki/Olath"
+  },
+  {
+    "name": "Olkhaan",
+    "kind": "ruin",
+    "parent": "Darguun",
+    "lat": 12.1897,
+    "lng": -17.9956,
+    "zoom": 6
+  },
+  {
+    "name": "Orcbone",
+    "kind": "fort",
+    "parent": "Breland",
+    "lat": 20.7767,
+    "lng": -39.8584,
+    "zoom": 6,
+    "description": "Fortezza sul confine occidentale del Breland, teatro di alcuni dei più duri combattimenti dell'Ultima Guerra.",
+    "wiki": "https://eberron.fandom.com/wiki/Orcbone"
+  },
+  {
+    "name": "Orgalos",
+    "kind": "island",
+    "parent": "Lhazaar Principalities",
+    "lat": 39.6057,
+    "lng": 19.4897,
+    "zoom": 6,
+    "description": "Isola dei Lhazaar Principalities dove gli umani parlano ancora il riedrano come prima lingua.",
+    "wiki": "https://eberron.fandom.com/wiki/Orgalos"
+  },
+  {
+    "name": "Orthoss",
+    "kind": "island",
+    "parent": "Lhazaar Principalities",
+    "lat": 47.1449,
+    "lng": 6.5039,
+    "zoom": 6,
+    "description": "Isola dei Lhazaar Principalities abitata da molti mezzelfi, tra cui i Sussurratori del Vento di Blackrock.",
+    "wiki": "https://eberron.fandom.com/wiki/Orthoss"
+  },
+  {
+    "name": "Oskilor",
+    "kind": "town",
+    "parent": "Zilargo",
+    "lat": 7.4714,
+    "lng": -29.9927,
+    "zoom": 6,
+    "description": "Grande cittadina portuale dello Zilargo centrale, a nord-est di Trolanport.",
+    "wiki": "https://eberron.fandom.com/wiki/Oskilor"
+  },
+  {
+    "name": "Ostavar",
+    "kind": "island",
+    "parent": "Lhazaar Principalities",
+    "lat": 44.0876,
+    "lng": 7.3828,
+    "zoom": 6
+  },
+  {
+    "name": "Otharaunt",
+    "kind": "fort",
+    "parent": "Aundair",
+    "lat": 33.5963,
+    "lng": -27.9932,
+    "zoom": 6,
+    "description": "Fortificazione aundairiana sul confine occidentale, vicino a Eldeen Bay, tra Whisper Woods e Chanthwood.",
+    "wiki": "https://eberron.fandom.com/wiki/Otharaunt"
+  },
+  {
+    "name": "Owl's Perch",
+    "kind": "village",
+    "parent": "Aundair",
+    "lat": 32.9534,
+    "lng": -28.7622,
+    "zoom": 6
+  },
+  {
+    "name": "Paluur Draal",
+    "kind": "ruin",
+    "parent": "Darguun",
+    "lat": 5.266,
+    "lng": -24.104,
+    "zoom": 6
   },
   {
     "name": "Passage",
@@ -343,25 +2985,131 @@
     "lat": 27.2156,
     "lng": -30.0146,
     "zoom": 6,
-    "description": "Città sul Lake Galifar, sede del Casato Orien."
+    "description": "Seconda città dell'Aundair e centro di commerci, con la grande enclave del Casato Orien chiamata Journey's Home.",
+    "wiki": "https://eberron.fandom.com/wiki/Passage"
+  },
+  {
+    "name": "Patrahk'n",
+    "kind": "town",
+    "parent": "Shadow Marches",
+    "lat": 22.7762,
+    "lng": -50.7349,
+    "zoom": 6
+  },
+  {
+    "name": "Phoenix Basin",
+    "kind": "water",
+    "lat": -29.9169,
+    "lng": -75.6299,
+    "zoom": 5
+  },
+  {
+    "name": "Pirtar",
+    "kind": "village",
+    "parent": "Lhazaar Principalities",
+    "lat": 39.0618,
+    "lng": 19.5557,
+    "zoom": 6
+  },
+  {
+    "name": "The Pit of Five Sorrows",
+    "kind": "site",
+    "parent": "Argonnessen",
+    "lat": -36.1024,
+    "lng": 33.4424,
+    "zoom": 5,
+    "description": "Abisso di Argonnessen, prigione di Tiamat, la Figlia di Khyber, sorvegliato dalla Luce di Siberys.",
+    "wiki": "https://eberron.fandom.com/wiki/Pit_of_Five_Sorrows"
+  },
+  {
+    "name": "Pitchwall",
+    "kind": "village",
+    "parent": "Q'barra",
+    "lat": 14.8599,
+    "lng": 1.2305,
+    "zoom": 6
+  },
+  {
+    "name": "Port Krez",
+    "kind": "village",
+    "parent": "Lhazaar Principalities",
+    "lat": 22.614,
+    "lng": 21.1157,
+    "zoom": 6
   },
   {
     "name": "Port Verge",
-    "kind": "city",
+    "kind": "town",
     "parent": "Lhazaar Principalities",
     "lat": 40.2628,
     "lng": 12.6343,
     "zoom": 6,
-    "description": "Porto dei principati settentrionali."
+    "description": "Cittadina sulla punta sud di Questor, sede del Principato degli Squali Feroci del principe Kolberkon.",
+    "wiki": "https://eberron.fandom.com/wiki/Port_Verge"
+  },
+  {
+    "name": "Pra'xirek",
+    "kind": "ruin",
+    "parent": "Xen'drik",
+    "lat": -43.1331,
+    "lng": -56.0303,
+    "zoom": 5,
+    "description": "Città in rovina dei giganti in Xen'drik.",
+    "wiki": "https://eberron.fandom.com/wiki/Pra'xirek"
   },
   {
     "name": "Pylas Maradal",
-    "kind": "city",
+    "kind": "town",
     "parent": "Valenar",
     "lat": 7.3625,
     "lng": -7.0093,
     "zoom": 6,
-    "description": "Il principale porto del Valenar."
+    "description": "Città portuale e seconda città del Valenar, sulla riva di Kraken Bay.",
+    "wiki": "https://eberron.fandom.com/wiki/Pylas_Maradal"
+  },
+  {
+    "name": "Pylas Pyrial",
+    "kind": "town",
+    "parent": "Zilargo",
+    "lat": 5.9002,
+    "lng": -29.8608,
+    "zoom": 6
+  },
+  {
+    "name": "Pylas Talaear",
+    "kind": "town",
+    "parent": "Aerenal",
+    "lat": -17.6859,
+    "lng": -15.3369,
+    "zoom": 6,
+    "description": "Il porto usato dagli stranieri che commerciano con Aerenal: la maggior parte non vede altro del paese.",
+    "wiki": "https://eberron.fandom.com/wiki/Pylas_Talaear"
+  },
+  {
+    "name": "Pylas Zirinth",
+    "kind": "town",
+    "parent": "Aerenal",
+    "lat": -14.6048,
+    "lng": -14.0625,
+    "zoom": 6
+  },
+  {
+    "name": "Pyramid of Ebon Flame",
+    "kind": "ruin",
+    "parent": "Xen'drik",
+    "lat": -35.2097,
+    "lng": -58.7109,
+    "zoom": 5
+  },
+  {
+    "name": "Pyrine Province",
+    "kind": "region",
+    "parent": "Riedra",
+    "lat": -9.7957,
+    "lng": 103.5791,
+    "zoom": 5,
+    "description": "Provincia dell'Unità di Riedra.",
+    "wiki": "https://eberron.fandom.com/wiki/Pyrine"
   },
   {
     "name": "Q'barra",
@@ -370,7 +3118,77 @@
     "lat": 17.7278,
     "lng": 4.4385,
     "zoom": 5,
-    "description": "Giungla di frontiera, tra coloni e lucertoloidi."
+    "description": "Giungla di frontiera, tra coloni e lucertoloidi.",
+    "wiki": "https://eberron.fandom.com/wiki/Q'barra"
+  },
+  {
+    "name": "Q'barran Jungle",
+    "kind": "forest",
+    "parent": "Q'barra",
+    "lat": 15.2842,
+    "lng": 6.3721,
+    "zoom": 6
+  },
+  {
+    "name": "Qorrashi Island",
+    "kind": "island",
+    "parent": "Khorvaire",
+    "lat": 45.7522,
+    "lng": -52.3389,
+    "zoom": 6
+  },
+  {
+    "name": "Quesk",
+    "kind": "village",
+    "parent": "Zilargo",
+    "lat": 8.5158,
+    "lng": -29.6631,
+    "zoom": 6,
+    "description": "Villaggio dello Zilargo centrale, all'incrocio delle vie Orien nord-sud ed est-ovest.",
+    "wiki": "https://eberron.fandom.com/wiki/Quesk"
+  },
+  {
+    "name": "Questor",
+    "kind": "island",
+    "parent": "Lhazaar Principalities",
+    "lat": 44.1822,
+    "lng": 14.6118,
+    "zoom": 6,
+    "description": "Isola dei Lhazaar Principalities; sulla punta meridionale sorge Port Verge.",
+    "wiki": "https://eberron.fandom.com/wiki/Questor"
+  },
+  {
+    "name": "Ravar Orioth",
+    "kind": "forest",
+    "parent": "Valenar",
+    "lat": 6.4026,
+    "lng": -4.6582,
+    "zoom": 6,
+    "description": "La Giungla delle Scimitarre: foresta del Valenar e zona manifesta di Shavarath, il Campo di Battaglia.",
+    "wiki": "https://eberron.fandom.com/wiki/Ravar_Orioth"
+  },
+  {
+    "name": "Redcliff Bay",
+    "kind": "water",
+    "lat": 4.1711,
+    "lng": -36.189,
+    "zoom": 5
+  },
+  {
+    "name": "Redleaf",
+    "kind": "village",
+    "parent": "Eldeen Reaches",
+    "lat": 30.4297,
+    "lng": -29.751,
+    "zoom": 6
+  },
+  {
+    "name": "Redwatch",
+    "kind": "island",
+    "parent": "Lhazaar Principalities",
+    "lat": 33.0455,
+    "lng": 19.6655,
+    "zoom": 6
   },
   {
     "name": "Regalport",
@@ -379,7 +3197,8 @@
     "lat": 36.8093,
     "lng": 19.0723,
     "zoom": 6,
-    "description": "Il porto più importante dei principati."
+    "description": "Grande cittadina sull'isola di Greentarn, sede dei Draghi Marini e capitale del principe supremo Ryger ir'Wynarn.",
+    "wiki": "https://eberron.fandom.com/wiki/Regalport"
   },
   {
     "name": "Rekkenmark",
@@ -388,7 +3207,51 @@
     "lat": 31.3912,
     "lng": -17.6001,
     "zoom": 6,
-    "description": "Sede della celebre accademia militare."
+    "description": "Grande città del Karrnath su Scions Sound, di fronte a Thaliost.",
+    "wiki": "https://eberron.fandom.com/wiki/Rekkenmark"
+  },
+  {
+    "name": "Rellekor",
+    "kind": "village",
+    "parent": "Thrane",
+    "lat": 23.1202,
+    "lng": -25.2905,
+    "zoom": 6,
+    "description": "Villaggio del Thrane sud-occidentale, in cima al Landrise.",
+    "wiki": "https://eberron.fandom.com/wiki/Rellekor"
+  },
+  {
+    "name": "Reven",
+    "kind": "village",
+    "parent": "Zilargo",
+    "lat": 9.5141,
+    "lng": -32.937,
+    "zoom": 6,
+    "description": "Villaggio remoto nell'estremo ovest dello Zilargo.",
+    "wiki": "https://eberron.fandom.com/wiki/Reven"
+  },
+  {
+    "name": "Rheklor",
+    "kind": "town",
+    "parent": "Darguun",
+    "lat": 8.7331,
+    "lng": -17.5122,
+    "zoom": 6
+  },
+  {
+    "name": "Rhialuun",
+    "kind": "water",
+    "lat": -1.8454,
+    "lng": 84.5508,
+    "zoom": 5
+  },
+  {
+    "name": "Rhiavhaar Province",
+    "kind": "region",
+    "parent": "Riedra",
+    "lat": -4.3464,
+    "lng": 79.4971,
+    "zoom": 5
   },
   {
     "name": "Rhukaan Draal",
@@ -397,7 +3260,8 @@
     "lat": 10.5526,
     "lng": -21.3574,
     "zoom": 6,
-    "description": "Capitale del Darguun."
+    "description": "Capitale del Darguun e sede del Lhesh Haruuc: una tentacolare metropoli goblinoide.",
+    "wiki": "https://eberron.fandom.com/wiki/Rhukaan_Draal"
   },
   {
     "name": "Riedra",
@@ -406,7 +3270,64 @@
     "lat": 1.5818,
     "lng": 74.0039,
     "zoom": 4,
-    "description": "L'impero degli Ispirati, in Sarlona."
+    "description": "L'Unità di Riedra: vasto impero che copre gran parte di Sarlona, governato dagli Ispirati.",
+    "wiki": "https://eberron.fandom.com/wiki/Riedra"
+  },
+  {
+    "name": "Ring of Storms",
+    "kind": "ruin",
+    "parent": "Xen'drik",
+    "lat": -40.714,
+    "lng": -49.6143,
+    "zoom": 5,
+    "description": "Regione montuosa di Xen'drik oltre mille miglia a sud-est di Stormreach, non ancora raggiunta dagli esploratori del Khorvaire.",
+    "wiki": "https://eberron.fandom.com/wiki/Ring_of_Storms"
+  },
+  {
+    "name": "Ringbriar",
+    "kind": "village",
+    "parent": "Breland",
+    "lat": 11.0922,
+    "lng": -42.1655,
+    "zoom": 6,
+    "description": "Minuscolo insediamento del Breland occidentale, a sud della Skyraker Forest sul fiume Graymoon.",
+    "wiki": "https://eberron.fandom.com/wiki/Ringbriar"
+  },
+  {
+    "name": "Riverweep",
+    "kind": "village",
+    "parent": "Eldeen Reaches",
+    "lat": 31.4662,
+    "lng": -29.2676,
+    "zoom": 6
+  },
+  {
+    "name": "The Riverwood",
+    "kind": "forest",
+    "parent": "Eldeen Reaches",
+    "lat": 31.2222,
+    "lng": -31.2451,
+    "zoom": 6
+  },
+  {
+    "name": "Rotting Blade",
+    "kind": "village",
+    "parent": "Demon Wastes",
+    "lat": 32.4912,
+    "lng": -48.6694,
+    "zoom": 6,
+    "description": "Minuscolo insediamento di una quarantina di abitanti, costretti a servire la megera notturna Vraria.",
+    "wiki": "https://eberron.fandom.com/wiki/Rotting_Blade"
+  },
+  {
+    "name": "Ruukosi",
+    "kind": "town",
+    "parent": "Adar",
+    "lat": -26.7456,
+    "lng": 95.6689,
+    "zoom": 5,
+    "description": "Uno dei monasteri-fortezza nascosti a guardia dell'Adar.",
+    "wiki": "https://eberron.fandom.com/wiki/Ruukosi"
   },
   {
     "name": "Sarlona",
@@ -414,7 +3335,105 @@
     "lat": 4.2149,
     "lng": 78.3984,
     "zoom": 3,
-    "description": "Il continente d'origine degli umani, dominato dagli Ispirati di Riedra."
+    "description": "Il continente d'origine degli umani, dominato dagli Ispirati di Riedra.",
+    "wiki": "https://eberron.fandom.com/wiki/Sarlona"
+  },
+  {
+    "name": "The Scimitar Spires",
+    "kind": "mountains",
+    "parent": "Xen'drik",
+    "lat": -51.8358,
+    "lng": -97.8223,
+    "zoom": 5
+  },
+  {
+    "name": "Scions Sound",
+    "kind": "water",
+    "lat": 36.8269,
+    "lng": -18.1714,
+    "zoom": 5,
+    "description": "Braccio di mare che separa Aundair e Thrane, a ovest, dal Karrnath, a est.",
+    "wiki": "https://eberron.fandom.com/wiki/Scions_Sound"
+  },
+  {
+    "name": "Sea of Lost Souls",
+    "kind": "water",
+    "lat": -50.5134,
+    "lng": -121.1133,
+    "zoom": 5,
+    "description": "L'oceano tra Xen'drik, Sarlona, Everice e Argonnessen.",
+    "wiki": "https://eberron.fandom.com/wiki/Sea_of_Lost_Souls"
+  },
+  {
+    "name": "Sea of Rage",
+    "kind": "water",
+    "lat": 19.2282,
+    "lng": 57.085,
+    "zoom": 5,
+    "description": "Mare tra Sarlona, a nord e a est, e Argonnessen, a sud.",
+    "wiki": "https://eberron.fandom.com/wiki/Sea_of_Rage"
+  },
+  {
+    "name": "Seaside",
+    "kind": "ruin",
+    "parent": "Mournland",
+    "lat": 10.2717,
+    "lng": -11.9751,
+    "zoom": 6,
+    "description": "La Città delle Vele: località costiera di villeggiatura del Cyre meridionale, oggi rovina su Kraken Bay.",
+    "wiki": "https://eberron.fandom.com/wiki/Seaside"
+  },
+  {
+    "name": "Seawall Mountains",
+    "kind": "mountains",
+    "parent": "Zilargo",
+    "lat": 9.4491,
+    "lng": -23.7305,
+    "zoom": 5,
+    "wiki": "https://eberron.fandom.com/wiki/Seawall_Mountains"
+  },
+  {
+    "name": "Seren",
+    "kind": "region",
+    "parent": "Argonnessen",
+    "lat": -14.7324,
+    "lng": 28.7402,
+    "zoom": 5,
+    "wiki": "https://eberron.fandom.com/wiki/Seren"
+  },
+  {
+    "name": "The Seven Caves",
+    "kind": "site",
+    "parent": "Darguun",
+    "lat": 14.1579,
+    "lng": -21.5112,
+    "zoom": 6,
+    "description": "Rete di caverne dentro il Pargon's Peak, una delle vette più alte dei Seawall Mountains settentrionali.",
+    "wiki": "https://eberron.fandom.com/wiki/Seven_Caves"
+  },
+  {
+    "name": "Seventh",
+    "kind": "island",
+    "parent": "Lhazaar Principalities",
+    "lat": 32.4912,
+    "lng": 17.1606,
+    "zoom": 6
+  },
+  {
+    "name": "Shaarat Kol",
+    "kind": "fort",
+    "parent": "Droaam",
+    "lat": 14.1153,
+    "lng": -45.2856,
+    "zoom": 6
+  },
+  {
+    "name": "Shaazarak",
+    "kind": "ruin",
+    "parent": "Demon Wastes",
+    "lat": 41.3108,
+    "lng": -34.0137,
+    "zoom": 6
   },
   {
     "name": "Shadow Marches",
@@ -423,7 +3442,136 @@
     "lat": 26.3131,
     "lng": -54.624,
     "zoom": 5,
-    "description": "Paludi abitate da orchi e umani, ricche di frammenti del drago."
+    "description": "Paludi abitate da orchi e umani, ricche di frammenti del drago.",
+    "wiki": "https://eberron.fandom.com/wiki/Shadow_Marches"
+  },
+  {
+    "name": "The Shadowcrags",
+    "kind": "mountains",
+    "parent": "Demon Wastes",
+    "lat": 32.0267,
+    "lng": -46.626,
+    "zoom": 5
+  },
+  {
+    "name": "Shadowlock Keep",
+    "kind": "fort",
+    "parent": "Breland",
+    "lat": 12.7475,
+    "lng": -44.7363,
+    "zoom": 6,
+    "description": "Fortezza da cui i soldati del Breland sorvegliano le incursioni dal Droaam.",
+    "wiki": "https://eberron.fandom.com/wiki/Shadowlock_Keep"
+  },
+  {
+    "name": "Shadowmount Forest",
+    "kind": "forest",
+    "parent": "Karrnath",
+    "lat": 29.0946,
+    "lng": -7.0093,
+    "zoom": 6
+  },
+  {
+    "name": "Shadukar",
+    "kind": "ruin",
+    "parent": "Thrane",
+    "lat": 27.8779,
+    "lng": -18.9624,
+    "zoom": 6,
+    "description": "Un tempo splendida città del Thrane, il \"Gioiello del Sound\": fu conquistata e distrutta durante l'Ultima Guerra.",
+    "wiki": "https://eberron.fandom.com/wiki/Shadukar"
+  },
+  {
+    "name": "Shae Cairdal",
+    "kind": "capital",
+    "parent": "Aerenal",
+    "lat": -13.026,
+    "lng": -8.877,
+    "zoom": 6,
+    "description": "Capitale reale di Aerenal, da cui i Re Fratelli governano gli elfi viventi.",
+    "wiki": "https://eberron.fandom.com/wiki/Shae_Cairdal"
+  },
+  {
+    "name": "Shae Deseir",
+    "kind": "ruin",
+    "parent": "Aerenal",
+    "lat": -20.2622,
+    "lng": -8.7451,
+    "zoom": 6
+  },
+  {
+    "name": "Shae Joridal",
+    "kind": "town",
+    "parent": "Darguun",
+    "lat": 7.4496,
+    "lng": -20.127,
+    "zoom": 6,
+    "wiki": "https://eberron.fandom.com/wiki/Shan_Joridal"
+  },
+  {
+    "name": "Shae Loralyndar",
+    "kind": "town",
+    "parent": "Eldeen Reaches",
+    "lat": 30.1451,
+    "lng": -48.186,
+    "zoom": 6,
+    "wiki": "https://eberron.fandom.com/wiki/Shan_Loralyndar"
+  },
+  {
+    "name": "Shae Mordai",
+    "kind": "city",
+    "parent": "Aerenal",
+    "lat": -17.1408,
+    "lng": -9.1406,
+    "zoom": 6,
+    "description": "La Città dei Morti: sede della Corte Immortale e cuore spirituale di Aerenal.",
+    "wiki": "https://eberron.fandom.com/wiki/Shae_Mordai"
+  },
+  {
+    "name": "Shae Thoridor",
+    "kind": "city",
+    "parent": "Aerenal",
+    "lat": -8.4072,
+    "lng": -10.8984,
+    "zoom": 6
+  },
+  {
+    "name": "Shaelas Tiraleth",
+    "kind": "ruin",
+    "parent": "Valenar",
+    "lat": 11.2431,
+    "lng": -11.4258,
+    "zoom": 6
+  },
+  {
+    "name": "Shalquar",
+    "kind": "town",
+    "parent": "Adar",
+    "lat": -19.2697,
+    "lng": 102.7002,
+    "zoom": 5,
+    "description": "Monastero nascosto dell'Adar che sorveglia il confine con Riedra, gemello di Malshashar.",
+    "wiki": "https://eberron.fandom.com/wiki/Shalquar"
+  },
+  {
+    "name": "Sharavacion",
+    "kind": "town",
+    "parent": "Thrane",
+    "lat": 25.6217,
+    "lng": -21.1816,
+    "zoom": 6,
+    "description": "Piccola cittadina del Thrane orientale, poco a nord del Ponte di Maliah sul fiume Thrane.",
+    "wiki": "https://eberron.fandom.com/wiki/Sharavacion"
+  },
+  {
+    "name": "Shargon's Teeth",
+    "kind": "island",
+    "parent": "Xen'drik",
+    "lat": -11.3077,
+    "lng": -52.998,
+    "zoom": 5,
+    "description": "Isole e scogliere negli Straits of Shargon, tra Xen'drik e il Khorvaire.",
+    "wiki": "https://eberron.fandom.com/wiki/Shargon's_Teeth"
   },
   {
     "name": "Sharn",
@@ -432,7 +3580,34 @@
     "lat": 7.3407,
     "lng": -40.7593,
     "zoom": 6,
-    "description": "La Città delle Torri, la più grande del Khorvaire."
+    "description": "La Città delle Torri: la più popolosa del Khorvaire, in cima a una scogliera sopra la foce del Dagger.",
+    "wiki": "https://eberron.fandom.com/wiki/Sharn"
+  },
+  {
+    "name": "Shavalant",
+    "kind": "village",
+    "parent": "Breland",
+    "lat": 20.8793,
+    "lng": -38.584,
+    "zoom": 6,
+    "description": "Villaggio del Breland settentrionale vicino al Silver Lake, tappa degli allevatori che portano il bestiame a ovest.",
+    "wiki": "https://eberron.fandom.com/wiki/Shavalant"
+  },
+  {
+    "name": "The Shimmerwood Forest",
+    "kind": "forest",
+    "parent": "Zilargo",
+    "lat": 5.0909,
+    "lng": -31.0913,
+    "zoom": 6
+  },
+  {
+    "name": "Shivairn",
+    "kind": "village",
+    "parent": "Valenar",
+    "lat": 14.541,
+    "lng": -5.6689,
+    "zoom": 6
   },
   {
     "name": "Sigilstar",
@@ -441,7 +3616,142 @@
     "lat": 24.7269,
     "lng": -21.731,
     "zoom": 6,
-    "description": "Città del Thrane."
+    "description": "Il \"crocevia del Thrane\": piccola città che prende il nome dalla stella polare di Eberron.",
+    "wiki": "https://eberron.fandom.com/wiki/Sigilstar"
+  },
+  {
+    "name": "Silver Lake",
+    "kind": "water",
+    "lat": 22.0653,
+    "lng": -37.7271,
+    "zoom": 5,
+    "wiki": "https://eberron.fandom.com/wiki/Silver_Lake"
+  },
+  {
+    "name": "The Silver Wood",
+    "kind": "forest",
+    "parent": "Thrane",
+    "lat": 32.38,
+    "lng": -19.7095,
+    "zoom": 6
+  },
+  {
+    "name": "Silverclaw Peak",
+    "kind": "mountains",
+    "parent": "Argonnessen",
+    "lat": -45.8288,
+    "lng": 42.1436,
+    "zoom": 5
+  },
+  {
+    "name": "Silvercliff Castle",
+    "kind": "fort",
+    "parent": "Thrane",
+    "lat": 30.0501,
+    "lng": -19.4678,
+    "zoom": 6,
+    "wiki": "https://eberron.fandom.com/wiki/Silvercliff_Castle"
+  },
+  {
+    "name": "Six Kings",
+    "kind": "site",
+    "parent": "Droaam",
+    "lat": 18.7503,
+    "lng": -41.0889,
+    "zoom": 6
+  },
+  {
+    "name": "Siyar",
+    "kind": "village",
+    "parent": "Thrane",
+    "lat": 19.7047,
+    "lng": -23.2031,
+    "zoom": 6,
+    "description": "Il villaggio più meridionale del Thrane, sulla riva nord del Lake Brey al confine con il Breland.",
+    "wiki": "https://eberron.fandom.com/wiki/Siyar"
+  },
+  {
+    "name": "Skairn",
+    "kind": "town",
+    "parent": "Lhazaar Principalities",
+    "lat": 39.5549,
+    "lng": 6.8774,
+    "zoom": 6
+  },
+  {
+    "name": "Skullreave",
+    "kind": "village",
+    "parent": "Darguun",
+    "lat": 13.9021,
+    "lng": -18.6548,
+    "zoom": 6
+  },
+  {
+    "name": "Skyfall Peninsula",
+    "kind": "region",
+    "parent": "Xen'drik",
+    "lat": -16.4255,
+    "lng": -58.2715,
+    "zoom": 5,
+    "description": "Enorme penisola di Xen'drik tra il Thunder Sea e il Phoenix Basin; vi sorge Stormreach.",
+    "wiki": "https://eberron.fandom.com/wiki/Skyfall_Peninsula"
+  },
+  {
+    "name": "Skyraker Claws",
+    "kind": "mountains",
+    "parent": "Xen'drik",
+    "lat": -40.9799,
+    "lng": -101.1182,
+    "zoom": 5
+  },
+  {
+    "name": "Skyraker Forest",
+    "kind": "forest",
+    "parent": "Breland",
+    "lat": 12.7475,
+    "lng": -42.8687,
+    "zoom": 6
+  },
+  {
+    "name": "Slug Keep",
+    "kind": "fort",
+    "parent": "Shadow Marches",
+    "lat": 23.6244,
+    "lng": -56.5137,
+    "zoom": 6
+  },
+  {
+    "name": "Sorrowdusk Island",
+    "kind": "island",
+    "parent": "Xen'drik",
+    "lat": -11.9533,
+    "lng": -73.7402,
+    "zoom": 5,
+    "description": "Isola al largo della costa nord-occidentale della Skyfall Peninsula.",
+    "wiki": "https://eberron.fandom.com/wiki/Sorrowdusk_Island"
+  },
+  {
+    "name": "Speartip",
+    "kind": "island",
+    "parent": "Lhazaar Principalities",
+    "lat": 35.4786,
+    "lng": 19.6655,
+    "zoom": 6
+  },
+  {
+    "name": "Spring Harbor",
+    "kind": "water",
+    "lat": 34.7777,
+    "lng": 10.1514,
+    "zoom": 5
+  },
+  {
+    "name": "The Starhaunt",
+    "kind": "ruin",
+    "parent": "Valenar",
+    "lat": 12.2756,
+    "lng": -7.0312,
+    "zoom": 6
   },
   {
     "name": "Starilaskur",
@@ -450,16 +3760,77 @@
     "lat": 18.1876,
     "lng": -22.2144,
     "zoom": 6,
-    "description": "Città commerciale del Breland orientale."
+    "description": "Grande città del Breland settentrionale.",
+    "wiki": "https://eberron.fandom.com/wiki/Starilaskur"
+  },
+  {
+    "name": "Starkcrag Rock",
+    "kind": "island",
+    "parent": "Khorvaire",
+    "lat": 40.9965,
+    "lng": -22.5659,
+    "zoom": 6
+  },
+  {
+    "name": "Starkwood",
+    "kind": "forest",
+    "parent": "Lhazaar Principalities",
+    "lat": 41.3273,
+    "lng": 6.5918,
+    "zoom": 6
+  },
+  {
+    "name": "The Starpeaks",
+    "kind": "mountains",
+    "parent": "Aundair",
+    "lat": 33.1376,
+    "lng": -21.3135,
+    "zoom": 5,
+    "wiki": "https://eberron.fandom.com/wiki/Starpeak_Mountains"
   },
   {
     "name": "Sterngate",
-    "kind": "city",
+    "kind": "fort",
     "parent": "Breland",
     "lat": 12.8761,
     "lng": -24.7192,
     "zoom": 6,
-    "description": "Fortezza che sorveglia il passo verso il Darguun."
+    "description": "Fortezza del Breland all'imbocco occidentale del Marguul Pass, a guardia del confine con il Darguun.",
+    "wiki": "https://eberron.fandom.com/wiki/Sterngate"
+  },
+  {
+    "name": "Stone Cage Mountains",
+    "kind": "mountains",
+    "parent": "Demon Wastes",
+    "lat": 32.1012,
+    "lng": -52.5586,
+    "zoom": 5
+  },
+  {
+    "name": "Stonefeather Spire",
+    "kind": "fort",
+    "parent": "Valenar",
+    "lat": 13.3896,
+    "lng": -11.2939,
+    "zoom": 6
+  },
+  {
+    "name": "Stonejaw Keep",
+    "kind": "fort",
+    "parent": "Droaam",
+    "lat": 18.6671,
+    "lng": -44.1211,
+    "zoom": 6
+  },
+  {
+    "name": "Stonespur",
+    "kind": "island",
+    "parent": "Lhazaar Principalities",
+    "lat": 45.1356,
+    "lng": -1.3623,
+    "zoom": 6,
+    "description": "Isola nel nord-est del Khorvaire, parte dei Lhazaar Principalities.",
+    "wiki": "https://eberron.fandom.com/wiki/Stonespur"
   },
   {
     "name": "Stormhome",
@@ -468,7 +3839,18 @@
     "lat": 37.3352,
     "lng": -19.2041,
     "zoom": 6,
-    "description": "Isola enclave del Casato Lyrandar."
+    "description": "Città-isola all'imbocco di Scions Sound e sede del Casato Lyrandar, che ne mantiene il clima temperato con la magia.",
+    "wiki": "https://eberron.fandom.com/wiki/Stormhome"
+  },
+  {
+    "name": "Stormhorn Clanhold",
+    "kind": "village",
+    "parent": "Q'barra",
+    "lat": 15.8345,
+    "lng": 1.2744,
+    "zoom": 6,
+    "description": "Dimora del clan di dragonidi Stormhorn, vicino agli insediamenti umani di Pitchwall e Wyrmwatch.",
+    "wiki": "https://eberron.fandom.com/wiki/Stormhorn_Clanhold"
   },
   {
     "name": "Stormreach",
@@ -477,7 +3859,101 @@
     "lat": -14.9448,
     "lng": -65.083,
     "zoom": 6,
-    "description": "La porta d'accesso a Xen'drik."
+    "description": "Piccola città commerciale di frontiera sulla costa della Skyfall Peninsula: la porta d'accesso a Xen'drik.",
+    "wiki": "https://eberron.fandom.com/wiki/Stormreach"
+  },
+  {
+    "name": "Stormwreck Bay",
+    "kind": "water",
+    "lat": 22.8167,
+    "lng": 9.1187,
+    "zoom": 5
+  },
+  {
+    "name": "Straits of Orthoss",
+    "kind": "water",
+    "lat": 48.4,
+    "lng": 4.9658,
+    "zoom": 5
+  },
+  {
+    "name": "Straits of Port Verge",
+    "kind": "water",
+    "lat": 42.261,
+    "lng": 16.2158,
+    "zoom": 5
+  },
+  {
+    "name": "Straits of Shargon",
+    "kind": "water",
+    "lat": 1.0766,
+    "lng": -33.8379,
+    "zoom": 5,
+    "wiki": "https://eberron.fandom.com/wiki/Straits_of_Shargon"
+  },
+  {
+    "name": "Sundering Peaks",
+    "kind": "mountains",
+    "parent": "Aerenal",
+    "lat": -20.8793,
+    "lng": -12.7881,
+    "zoom": 5
+  },
+  {
+    "name": "Sunscale Clanhold",
+    "kind": "village",
+    "parent": "Q'barra",
+    "lat": 17.7068,
+    "lng": 8.3496,
+    "zoom": 6,
+    "description": "Dimora del clan di dragonidi Sunscale, la più orientale, nascosta nella giungla.",
+    "wiki": "https://eberron.fandom.com/wiki/Sunscale_Clanhold"
+  },
+  {
+    "name": "Sunyagir Province",
+    "kind": "region",
+    "parent": "Syrkarn",
+    "lat": -14.7324,
+    "lng": 92.6807,
+    "zoom": 5
+  },
+  {
+    "name": "Suthar Draal",
+    "kind": "fort",
+    "parent": "Shadow Marches",
+    "lat": 27.2742,
+    "lng": -48.0981,
+    "zoom": 6
+  },
+  {
+    "name": "Sword Keep",
+    "kind": "fort",
+    "parent": "Breland",
+    "lat": 20.715,
+    "lng": -26.2573,
+    "zoom": 6,
+    "description": "Fortificazione del Breland al confine con il Thrane, sulla linea del lightning rail.",
+    "wiki": "https://eberron.fandom.com/wiki/Sword_Keep"
+  },
+  {
+    "name": "Swoz",
+    "kind": "ruin",
+    "parent": "Mournland",
+    "lat": 26.7064,
+    "lng": -14.2603,
+    "zoom": 6,
+    "description": "Rovina nel nord del Mournland, di fronte a Loom Keep oltre il fiume Cyre.",
+    "wiki": "https://eberron.fandom.com/wiki/Swoz"
+  },
+  {
+    "name": "Sylbaran",
+    "kind": "town",
+    "parent": "Eldeen Reaches",
+    "lat": 21.8615,
+    "lng": -40.4956,
+    "zoom": 6,
+    "description": "Piccola cittadina nel sud delle Eldeen Reaches, tra il Silver Lake e i Byeshk Mountains.",
+    "wiki": "https://eberron.fandom.com/wiki/Sylbaran"
   },
   {
     "name": "Syrkarn",
@@ -486,7 +3962,58 @@
     "lat": -14.094,
     "lng": 73.125,
     "zoom": 5,
-    "description": "Regione meridionale di Sarlona."
+    "description": "Regione meridionale di Sarlona: una società agricola di ogre, eneko, mezzi-giganti e umani.",
+    "wiki": "https://eberron.fandom.com/wiki/Syrkarn"
+  },
+  {
+    "name": "Taarn Draal",
+    "kind": "fort",
+    "parent": "Shadow Marches",
+    "lat": 22.1671,
+    "lng": -53.064,
+    "zoom": 6
+  },
+  {
+    "name": "Taer Elladorn",
+    "kind": "ruin",
+    "parent": "Valenar",
+    "lat": 17.2038,
+    "lng": -6.9434,
+    "zoom": 6
+  },
+  {
+    "name": "Taer Kalindal",
+    "kind": "fort",
+    "parent": "Aerenal",
+    "lat": -17.9787,
+    "lng": -12.9639,
+    "zoom": 6
+  },
+  {
+    "name": "Taer Lian Doresh",
+    "kind": "fort",
+    "parent": "Lhazaar Principalities",
+    "lat": 30.619,
+    "lng": 10.5469,
+    "zoom": 6,
+    "description": "La Fortezza dei Sogni Svaniti: una guglia fatata da incubo, dimora di eladrin deformati dal lungo esilio in Dal Quor.",
+    "wiki": "https://eberron.fandom.com/wiki/Taer_Lian_Doresh"
+  },
+  {
+    "name": "Taer Senadal",
+    "kind": "fort",
+    "parent": "Aerenal",
+    "lat": -4.872,
+    "lng": -6.9434,
+    "zoom": 6
+  },
+  {
+    "name": "Taer Shantara",
+    "kind": "fort",
+    "parent": "Valenar",
+    "lat": 14.9023,
+    "lng": -2.439,
+    "zoom": 6
   },
   {
     "name": "Taer Valaestas",
@@ -495,7 +4022,34 @@
     "lat": 10.639,
     "lng": -4.5923,
     "zoom": 6,
-    "description": "Capitale del Valenar."
+    "description": "Capitale del Valenar, nota come la Città delle Spine.",
+    "wiki": "https://eberron.fandom.com/wiki/Taer_Valaestas"
+  },
+  {
+    "name": "Taer Valior",
+    "kind": "ruin",
+    "parent": "Valenar",
+    "lat": 14.9448,
+    "lng": -11.4038,
+    "zoom": 6
+  },
+  {
+    "name": "Taer Zanathar",
+    "kind": "ruin",
+    "parent": "Valenar",
+    "lat": 11.6738,
+    "lng": -9.8877,
+    "zoom": 6
+  },
+  {
+    "name": "Tal Esk",
+    "kind": "village",
+    "parent": "Xen'drik",
+    "lat": -54.0336,
+    "lng": -100.415,
+    "zoom": 5,
+    "description": "Villaggio nel sud-ovest di Xen'drik, lungo le distese di cristallo degli Scimitar Spires.",
+    "wiki": "https://eberron.fandom.com/wiki/Tal_Esk"
   },
   {
     "name": "Talenta Plains",
@@ -504,7 +4058,76 @@
     "lat": 23.3221,
     "lng": -2.3291,
     "zoom": 5,
-    "description": "Le pianure degli halfling nomadi e dei loro dinosauri."
+    "description": "Le pianure degli halfling nomadi e dei loro dinosauri.",
+    "wiki": "https://eberron.fandom.com/wiki/Talenta_Plains"
+  },
+  {
+    "name": "Tanar Rath",
+    "kind": "fort",
+    "parent": "Karrnath",
+    "lat": 30.4297,
+    "lng": -17.4023,
+    "zoom": 6,
+    "description": "Fortificazione del Karrnath occidentale, a sud di Rekkenmark sulla via per Korth.",
+    "wiki": "https://eberron.fandom.com/wiki/Tanar_Rath"
+  },
+  {
+    "name": "Tannishold",
+    "kind": "village",
+    "parent": "Tashana Tundra",
+    "lat": 29.3822,
+    "lng": 71.0596,
+    "zoom": 5
+  },
+  {
+    "name": "Tantamar",
+    "kind": "town",
+    "parent": "Lhazaar Principalities",
+    "lat": 33.6329,
+    "lng": 9.8218,
+    "zoom": 6,
+    "description": "Cittadina sulla costa di Spring Harbor, con un'enclave del Casato Thuranni.",
+    "wiki": "https://eberron.fandom.com/wiki/Tantamar"
+  },
+  {
+    "name": "The Tapestry",
+    "kind": "region",
+    "parent": "Argonnessen",
+    "lat": -30.4866,
+    "lng": 54.668,
+    "zoom": 5,
+    "description": "La più piccola e giovane delle regioni di Argonnessen, istituita 4.000 anni fa.",
+    "wiki": "https://eberron.fandom.com/wiki/Tapestry"
+  },
+  {
+    "name": "Tarandro",
+    "kind": "village",
+    "parent": "Zilargo",
+    "lat": 8.0375,
+    "lng": -26.3452,
+    "zoom": 6,
+    "description": "Borgo dello Zilargo orientale, all'incrocio delle vie per Zolanberg, Tariston e Thurimbar.",
+    "wiki": "https://eberron.fandom.com/wiki/Tarandro"
+  },
+  {
+    "name": "Tariston",
+    "kind": "village",
+    "parent": "Zilargo",
+    "lat": 8.2985,
+    "lng": -28.2788,
+    "zoom": 6,
+    "description": "Villaggio dello Zilargo centrale sulla via Orien tra Quesk e Tarandro.",
+    "wiki": "https://eberron.fandom.com/wiki/Tariston"
+  },
+  {
+    "name": "Tashalatora",
+    "kind": "town",
+    "parent": "Adar",
+    "lat": -23.3624,
+    "lng": 105.8643,
+    "zoom": 5,
+    "description": "Uno dei monasteri-fortezza nascosti a guardia dell'Adar.",
+    "wiki": "https://eberron.fandom.com/wiki/Tashalatora"
   },
   {
     "name": "Tashana Tundra",
@@ -513,7 +4136,101 @@
     "lat": 24.5271,
     "lng": 52.0313,
     "zoom": 5,
-    "description": "La tundra settentrionale di Sarlona."
+    "description": "Terra fredda di tundra e montagne nel nord di Sarlona, a nord-ovest di Riedra.",
+    "wiki": "https://eberron.fandom.com/wiki/Tashana_Tundra"
+  },
+  {
+    "name": "Tashyvar Islands",
+    "kind": "island",
+    "parent": "Tashana Tundra",
+    "lat": 29.6117,
+    "lng": 55.5469,
+    "zoom": 5
+  },
+  {
+    "name": "Tellyn",
+    "kind": "town",
+    "parent": "Thrane",
+    "lat": 24.5471,
+    "lng": -23.9282,
+    "zoom": 6,
+    "description": "Villaggio del Thrane centrale all'incrocio di due vie Orien.",
+    "wiki": "https://eberron.fandom.com/wiki/Tellyn"
+  },
+  {
+    "name": "Tempest Isle",
+    "kind": "island",
+    "parent": "Lhazaar Principalities",
+    "lat": 23.564,
+    "lng": 12.3706,
+    "zoom": 6,
+    "description": "Isola dei Lhazaar Principalities, battuta da tempeste incessanti sulle vette centrali.",
+    "wiki": "https://eberron.fandom.com/wiki/Tempest_Isle"
+  },
+  {
+    "name": "Tempest Strait",
+    "kind": "water",
+    "lat": 20.7356,
+    "lng": 12.3706,
+    "zoom": 5
+  },
+  {
+    "name": "Tempest's Spine",
+    "kind": "mountains",
+    "parent": "Xen'drik",
+    "lat": -42.6178,
+    "lng": -41.5723,
+    "zoom": 5
+  },
+  {
+    "name": "Teryk",
+    "kind": "town",
+    "parent": "Karrnath",
+    "lat": 30.278,
+    "lng": -7.1191,
+    "zoom": 6,
+    "description": "Piccola cittadina del Karrnath centrale, a nord della Shadowmount Forest.",
+    "wiki": "https://eberron.fandom.com/wiki/Teryk"
+  },
+  {
+    "name": "Thal Eledar",
+    "kind": "island",
+    "parent": "Valenar",
+    "lat": 1.6916,
+    "lng": 5.0098,
+    "zoom": 6
+  },
+  {
+    "name": "Thal Othoril",
+    "kind": "island",
+    "parent": "Aerenal",
+    "lat": -2.6797,
+    "lng": 5.6689,
+    "zoom": 6
+  },
+  {
+    "name": "Thal Taluna",
+    "kind": "island",
+    "parent": "Aerenal",
+    "lat": -26.5099,
+    "lng": -4.8779,
+    "zoom": 6
+  },
+  {
+    "name": "Thalann Gol",
+    "kind": "island",
+    "parent": "Aerenal",
+    "lat": -3.6889,
+    "lng": 8.5254,
+    "zoom": 6
+  },
+  {
+    "name": "Thalann Zar",
+    "kind": "island",
+    "parent": "Aerenal",
+    "lat": -10.7901,
+    "lng": 1.4062,
+    "zoom": 6
   },
   {
     "name": "Thaliost",
@@ -522,7 +4239,44 @@
     "lat": 31.3912,
     "lng": -18.5669,
     "zoom": 6,
-    "description": "Città aundairiana occupata dal Thrane."
+    "description": "Grande città oggi nel Thrane settentrionale, contesa con l'Aundair.",
+    "wiki": "https://eberron.fandom.com/wiki/Thaliost"
+  },
+  {
+    "name": "Tharkgun Dhak",
+    "kind": "ruin",
+    "parent": "Xen'drik",
+    "lat": -40.246,
+    "lng": -69.6973,
+    "zoom": 5,
+    "description": "Rovine di una possente fortezza dei giganti nelle giungle centrali, oggi abitate da ogre.",
+    "wiki": "https://eberron.fandom.com/wiki/Tharkgun_Dhak"
+  },
+  {
+    "name": "The Thornwood",
+    "kind": "forest",
+    "parent": "Thrane",
+    "lat": 22.5126,
+    "lng": -18.0615,
+    "zoom": 6
+  },
+  {
+    "name": "The Thousand",
+    "kind": "region",
+    "parent": "Argonnessen",
+    "lat": -42.7793,
+    "lng": 54.2285,
+    "zoom": 5,
+    "description": "I Mille Stormi: regione sud-orientale di Argonnessen, cuore delle terre dei draghi.",
+    "wiki": "https://eberron.fandom.com/wiki/Thousand"
+  },
+  {
+    "name": "Thrakelorn",
+    "kind": "village",
+    "parent": "Droaam",
+    "lat": 22.9382,
+    "lng": -47.7246,
+    "zoom": 6
   },
   {
     "name": "Thrane",
@@ -531,7 +4285,34 @@
     "lat": 23.2413,
     "lng": -22.1484,
     "zoom": 5,
-    "description": "Una delle Cinque Nazioni, teocrazia della Fiamma Argentea."
+    "description": "Una delle Cinque Nazioni, teocrazia della Fiamma Argentea.",
+    "wiki": "https://eberron.fandom.com/wiki/Thrane"
+  },
+  {
+    "name": "Three Barrel Cove",
+    "kind": "village",
+    "parent": "Xen'drik",
+    "lat": -10.1419,
+    "lng": -62.5781,
+    "zoom": 5,
+    "description": "Baia su una delle maggiori isole di Shargon's Teeth, famigerato ritrovo di pirati e avventurieri.",
+    "wiki": "https://eberron.fandom.com/wiki/Three-Barrel_Cove"
+  },
+  {
+    "name": "Three Sisters",
+    "kind": "island",
+    "parent": "Lhazaar Principalities",
+    "lat": 44.2767,
+    "lng": 2.2632,
+    "zoom": 6
+  },
+  {
+    "name": "Throne Gate Ruins",
+    "kind": "ruin",
+    "parent": "Xen'drik",
+    "lat": -17.1828,
+    "lng": -68.9941,
+    "zoom": 5
   },
   {
     "name": "Thronehold",
@@ -540,7 +4321,150 @@
     "lat": 29.4587,
     "lng": -18.2813,
     "zoom": 6,
-    "description": "L'isola dell'antica capitale di Galifar, dove fu firmato il trattato che chiuse l'Ultima Guerra."
+    "description": "L'isola, il castello e la città portuale di Throneport: antica sede dei re di Galifar, dove fu firmato il trattato che chiuse l'Ultima Guerra.",
+    "wiki": "https://eberron.fandom.com/wiki/Thronehold"
+  },
+  {
+    "name": "Thrug",
+    "kind": "island",
+    "parent": "Lhazaar Principalities",
+    "lat": 31.4662,
+    "lng": 18.1494,
+    "zoom": 6
+  },
+  {
+    "name": "Thunder Sea",
+    "kind": "water",
+    "lat": 3.9958,
+    "lng": -54.9756,
+    "zoom": 5,
+    "description": "Mare abitato soprattutto dai sahuagin: molte tribù depredano le navi di passaggio.",
+    "wiki": "https://eberron.fandom.com/wiki/Thunder_Sea"
+  },
+  {
+    "name": "Thurim Bay",
+    "kind": "water",
+    "lat": 2.548,
+    "lng": -27.7295,
+    "zoom": 5
+  },
+  {
+    "name": "Thurimbar",
+    "kind": "town",
+    "parent": "Zilargo",
+    "lat": 5.6379,
+    "lng": -26.7847,
+    "zoom": 6,
+    "description": "Grande cittadina dello Zilargo sud-orientale, sulla via Orien tra Tarandro e Korranberg.",
+    "wiki": "https://eberron.fandom.com/wiki/Thurimbar"
+  },
+  {
+    "name": "Titan's Teeth",
+    "kind": "mountains",
+    "parent": "Xen'drik",
+    "lat": -29.7262,
+    "lng": -63.5449,
+    "zoom": 5,
+    "wiki": "https://eberron.fandom.com/wiki/Titan's_Teeth"
+  },
+  {
+    "name": "Tlalusk Island",
+    "kind": "island",
+    "parent": "Khorvaire",
+    "lat": 41.4592,
+    "lng": -53.7671,
+    "zoom": 6
+  },
+  {
+    "name": "Torch Keep",
+    "kind": "fort",
+    "parent": "Breland",
+    "lat": 6.4463,
+    "lng": -42.2314,
+    "zoom": 6,
+    "description": "Piccolo forte del Breland vicino al Dagger Wood, che fa da faro alle navi che entrano nell'Hilt.",
+    "wiki": "https://eberron.fandom.com/wiki/Torch_Keep"
+  },
+  {
+    "name": "Torlaac Bay",
+    "kind": "water",
+    "lat": 2.1967,
+    "lng": -21.2256,
+    "zoom": 5
+  },
+  {
+    "name": "Torlaac Moor",
+    "kind": "forest",
+    "parent": "Darguun",
+    "lat": 4.6969,
+    "lng": -22.3022,
+    "zoom": 6
+  },
+  {
+    "name": "Totem Beach",
+    "kind": "site",
+    "parent": "Argonnessen",
+    "lat": -18.6046,
+    "lng": 38.1885,
+    "zoom": 5
+  },
+  {
+    "name": "Tower Valiant",
+    "kind": "fort",
+    "parent": "Aundair",
+    "lat": 26.9417,
+    "lng": -25.1807,
+    "zoom": 6,
+    "description": "Uno dei tre castelli che l'Aundair mantiene sul confine orientale con il Thrane.",
+    "wiki": "https://eberron.fandom.com/wiki/Tower_Valiant"
+  },
+  {
+    "name": "Tower Vigilant",
+    "kind": "fort",
+    "parent": "Aundair",
+    "lat": 24.1868,
+    "lng": -26.0815,
+    "zoom": 6,
+    "description": "Uno dei tre castelli che l'Aundair mantiene sul confine orientale con il Thrane.",
+    "wiki": "https://eberron.fandom.com/wiki/Tower_Vigilant"
+  },
+  {
+    "name": "The Towering Wood",
+    "kind": "forest",
+    "parent": "Droaam",
+    "lat": 29.037,
+    "lng": -43.8354,
+    "zoom": 6
+  },
+  {
+    "name": "Traelyn",
+    "kind": "town",
+    "parent": "Thrane",
+    "lat": 27.1374,
+    "lng": -20.5444,
+    "zoom": 6,
+    "description": "Piccola cittadina del Thrane orientale, sulla foce del fiume Thrane in Scions Sound.",
+    "wiki": "https://eberron.fandom.com/wiki/Traelyn"
+  },
+  {
+    "name": "Traglorn Isle",
+    "kind": "island",
+    "parent": "Lhazaar Principalities",
+    "lat": 25.9185,
+    "lng": 14.6338,
+    "zoom": 6,
+    "description": "Isola dei Lhazaar Principalities, dimora della tribù di morfici dei Figli del Sole.",
+    "wiki": "https://eberron.fandom.com/wiki/Traglorn_Isle"
+  },
+  {
+    "name": "Trebaz Sinara",
+    "kind": "island",
+    "parent": "Lhazaar Principalities",
+    "lat": 40.6306,
+    "lng": 15.7544,
+    "zoom": 6,
+    "description": "Isola infestata da mostri e cinta da scogliere pericolose: il posto prediletto per nascondere tesori.",
+    "wiki": "https://eberron.fandom.com/wiki/Trebaz_Sinara"
   },
   {
     "name": "Trolanport",
@@ -549,7 +4473,103 @@
     "lat": 5.8783,
     "lng": -31.9043,
     "zoom": 6,
-    "description": "Capitale dello Zilargo."
+    "description": "Capitale dello Zilargo, costruita accanto al fiume Trolan.",
+    "wiki": "https://eberron.fandom.com/wiki/Trolanport"
+  },
+  {
+    "name": "Tronish",
+    "kind": "ruin",
+    "parent": "Mournland",
+    "lat": 17.1408,
+    "lng": -11.4258,
+    "zoom": 6,
+    "description": "Una delle maggiori città del Cyre, oggi rovina sul margine orientale del Mournland.",
+    "wiki": "https://eberron.fandom.com/wiki/Tronish"
+  },
+  {
+    "name": "Trumpet Mountains",
+    "kind": "mountains",
+    "parent": "Aundair",
+    "lat": 31.9335,
+    "lng": -22.2803,
+    "zoom": 5
+  },
+  {
+    "name": "Turakbar's Fist",
+    "kind": "fort",
+    "parent": "Droaam",
+    "lat": 20.2622,
+    "lng": -42.0557,
+    "zoom": 6,
+    "description": "Fortezza al confine tra Droaam e Breland, del signore della guerra minotauro Rhesh Turakbar.",
+    "wiki": "https://eberron.fandom.com/wiki/Turakbar's_Fist"
+  },
+  {
+    "name": "Turnaway",
+    "kind": "island",
+    "parent": "Lhazaar Principalities",
+    "lat": 44.9803,
+    "lng": 10.0635,
+    "zoom": 6
+  },
+  {
+    "name": "Turnaway Sound",
+    "kind": "water",
+    "lat": 45.1201,
+    "lng": 11.8872,
+    "zoom": 5
+  },
+  {
+    "name": "The Twilight Demesne",
+    "kind": "village",
+    "parent": "Eldeen Reaches",
+    "lat": 29.8406,
+    "lng": -47.6367,
+    "zoom": 6,
+    "description": "Zona della Towering Wood occidentale dove il piano di Thelanis tocca il mondo: un reame dei folletti.",
+    "wiki": "https://eberron.fandom.com/wiki/Twilight_Demesne"
+  },
+  {
+    "name": "Tzanthus",
+    "kind": "town",
+    "parent": "Zilargo",
+    "lat": 7.3625,
+    "lng": -31.8604,
+    "zoom": 6,
+    "description": "Piccola cittadina dello Zilargo occidentale, sulla via Orien tra Trolanport e Quesk.",
+    "wiki": "https://eberron.fandom.com/wiki/Tzanthus"
+  },
+  {
+    "name": "Tzaryan Keep",
+    "kind": "fort",
+    "parent": "Droaam",
+    "lat": 17.7068,
+    "lng": -50.2954,
+    "zoom": 6
+  },
+  {
+    "name": "Urthhold",
+    "kind": "town",
+    "parent": "Shadow Marches",
+    "lat": 19.7667,
+    "lng": -54.3604,
+    "zoom": 6
+  },
+  {
+    "name": "Vale of the Fallen Rajah",
+    "kind": "ruin",
+    "parent": "Argonnessen",
+    "lat": -42.6824,
+    "lng": 18.2373,
+    "zoom": 5
+  },
+  {
+    "name": "Valen's Isle",
+    "kind": "island",
+    "parent": "Aerenal",
+    "lat": -1.9332,
+    "lng": 0.3955,
+    "zoom": 6
   },
   {
     "name": "Valenar",
@@ -558,16 +4578,83 @@
     "lat": 12.8546,
     "lng": -5.5371,
     "zoom": 5,
-    "description": "Il regno degli elfi guerrieri."
+    "description": "Il regno degli elfi guerrieri.",
+    "wiki": "https://eberron.fandom.com/wiki/Valenar"
+  },
+  {
+    "name": "Valiron",
+    "kind": "village",
+    "parent": "Thrane",
+    "lat": 20.3652,
+    "lng": -24.8071,
+    "zoom": 6,
+    "description": "Villaggio del Thrane meridionale sulla riva nord del Lake Brey.",
+    "wiki": "https://eberron.fandom.com/wiki/Valiron"
+  },
+  {
+    "name": "Valley of Shadows",
+    "kind": "region",
+    "parent": "Xen'drik",
+    "lat": -48.9802,
+    "lng": -68.7305,
+    "zoom": 5
+  },
+  {
+    "name": "Valshar'ak",
+    "kind": "town",
+    "parent": "Shadow Marches",
+    "lat": 22.2688,
+    "lng": -55.5688,
+    "zoom": 6,
+    "description": "Piccola cittadina delle Shadow Marches.",
+    "wiki": "https://eberron.fandom.com/wiki/Valshar'ak"
+  },
+  {
+    "name": "Vanguard Keep",
+    "kind": "fort",
+    "parent": "Aundair",
+    "lat": 23.201,
+    "lng": -30.3442,
+    "zoom": 6,
+    "wiki": "https://eberron.fandom.com/wiki/Vanguard_Keep"
+  },
+  {
+    "name": "Var-Shalas",
+    "kind": "town",
+    "parent": "Aerenal",
+    "lat": -6.4463,
+    "lng": -9.2285,
+    "zoom": 6
   },
   {
     "name": "Varna",
-    "kind": "city",
+    "kind": "town",
     "parent": "Eldeen Reaches",
     "lat": 29.133,
     "lng": -31.355,
     "zoom": 6,
-    "description": "La città più grande delle Eldeen Reaches."
+    "description": "Il maggiore insediamento delle Eldeen Reaches e centro del Casato Vadalis: snodo dei commerci con l'Aundair.",
+    "wiki": "https://eberron.fandom.com/wiki/Varna"
+  },
+  {
+    "name": "The Vast",
+    "kind": "region",
+    "parent": "Argonnessen",
+    "lat": -28.1882,
+    "lng": 45.4395,
+    "zoom": 5,
+    "description": "Regione senza regole di Argonnessen, dove i giovani draghi vanno a mettersi alla prova.",
+    "wiki": "https://eberron.fandom.com/wiki/Vast"
+  },
+  {
+    "name": "Vathirond",
+    "kind": "town",
+    "parent": "Breland",
+    "lat": 20.4682,
+    "lng": -17.7319,
+    "zoom": 6,
+    "description": "Grande cittadina del Breland sulla riva sud del fiume Brey: uno dei luoghi più contesi dell'Ultima Guerra.",
+    "wiki": "https://eberron.fandom.com/wiki/Vathirond"
   },
   {
     "name": "Vedykar",
@@ -576,16 +4663,227 @@
     "lat": 28.5749,
     "lng": -9.7119,
     "zoom": 6,
-    "description": "Città del Karrnath centrale."
+    "description": "Grande città del Karrnath centro-meridionale, snodo di vie Orien e sede del Casato Jorasco.",
+    "wiki": "https://eberron.fandom.com/wiki/Vedykar"
+  },
+  {
+    "name": "Verthicha'vivex",
+    "kind": "city",
+    "parent": "Argonnessen",
+    "lat": -43.7394,
+    "lng": 27.9492,
+    "zoom": 5
+  },
+  {
+    "name": "The Vile Marsh",
+    "kind": "forest",
+    "parent": "Shadow Marches",
+    "lat": 20.6739,
+    "lng": -53.2617,
+    "zoom": 6
+  },
+  {
+    "name": "Volaar Draal",
+    "kind": "town",
+    "parent": "Darguun",
+    "lat": 10.0121,
+    "lng": -23.1812,
+    "zoom": 6
+  },
+  {
+    "name": "Vorel'Arux",
+    "kind": "site",
+    "parent": "Argonnessen",
+    "lat": -34.0162,
+    "lng": 59.2822,
+    "zoom": 5
+  },
+  {
+    "name": "Vostethatra",
+    "kind": "ruin",
+    "parent": "Demon Wastes",
+    "lat": 41.129,
+    "lng": -29.2236,
+    "zoom": 6
+  },
+  {
+    "name": "Vralkek",
+    "kind": "town",
+    "parent": "Droaam",
+    "lat": 16.3834,
+    "lng": -48.1201,
+    "zoom": 6,
+    "description": "Grande cittadina alla foce dello Scar River su Manta Bay: l'unico porto del Droaam, feudo del gigante del fuoco Gorodan Ashlord.",
+    "wiki": "https://eberron.fandom.com/wiki/Vralkek"
   },
   {
     "name": "Vulyar",
-    "kind": "city",
+    "kind": "town",
     "parent": "Karrnath",
     "lat": 26.3131,
     "lng": -6.9214,
     "zoom": 6,
-    "description": "Città di confine verso le Talenta Plains."
+    "description": "Grande cittadina del Karrnath meridionale sulla linea del lightning rail tra Vedykar e Irontown.",
+    "wiki": "https://eberron.fandom.com/wiki/Vulyar"
+  },
+  {
+    "name": "Vurgenslye",
+    "kind": "village",
+    "parent": "Karrnath",
+    "lat": 28.227,
+    "lng": -15.0513,
+    "zoom": 6,
+    "description": "Borgo del Karrnath meridionale sulla riva di Scions Sound, a metà strada tra Korth e Karrlakton.",
+    "wiki": "https://eberron.fandom.com/wiki/Vurgenslye"
+  },
+  {
+    "name": "Warden Keep",
+    "kind": "fort",
+    "parent": "Darguun",
+    "lat": 8.5158,
+    "lng": -19.6216,
+    "zoom": 6,
+    "description": "Rovina di un'ex fortezza e prigione nel Darguun, vicino alla foce del fiume Ghaal.",
+    "wiki": "https://eberron.fandom.com/wiki/Warden_Keep"
+  },
+  {
+    "name": "The Wasting Plain",
+    "kind": "region",
+    "parent": "Xen'drik",
+    "lat": -35.4607,
+    "lng": -77.6074,
+    "zoom": 5
+  },
+  {
+    "name": "The Watching Wood",
+    "kind": "forest",
+    "parent": "Droaam",
+    "lat": 19.8081,
+    "lng": -49.4165,
+    "zoom": 6
+  },
+  {
+    "name": "Whisper Rock",
+    "kind": "fort",
+    "parent": "Aundair",
+    "lat": 35.1738,
+    "lng": -23.7305,
+    "zoom": 6,
+    "description": "Misteriosa rovina di pietra nera nel cuore dei Whisper Woods, in piedi fin dai primi giorni di Galifar.",
+    "wiki": "https://eberron.fandom.com/wiki/Whisper_Rock"
+  },
+  {
+    "name": "Whisper Woods",
+    "kind": "forest",
+    "parent": "Aundair",
+    "lat": 34.416,
+    "lng": -24.4116,
+    "zoom": 6
+  },
+  {
+    "name": "White Sea",
+    "kind": "water",
+    "lat": 17.3506,
+    "lng": 101.9092,
+    "zoom": 5,
+    "wiki": "https://eberron.fandom.com/wiki/White_Sea"
+  },
+  {
+    "name": "Whitecliff",
+    "kind": "town",
+    "parent": "Q'barra",
+    "lat": 19.1867,
+    "lng": 2.6147,
+    "zoom": 6
+  },
+  {
+    "name": "Whitehearth",
+    "kind": "ruin",
+    "parent": "Mournland",
+    "lat": 11.1784,
+    "lng": -17.688,
+    "zoom": 6,
+    "wiki": "https://eberron.fandom.com/wiki/Whitehearth"
+  },
+  {
+    "name": "Whitehorn Wood",
+    "kind": "forest",
+    "parent": "Breland",
+    "lat": 19.8494,
+    "lng": -37.6611,
+    "zoom": 6
+  },
+  {
+    "name": "Whitepine Forest",
+    "kind": "forest",
+    "parent": "Lhazaar Principalities",
+    "lat": 31.5224,
+    "lng": 9.6899,
+    "zoom": 6,
+    "description": "Foresta nella parte continentale dei Lhazaar Principalities.",
+    "wiki": "https://eberron.fandom.com/wiki/Whitepine_Forest"
+  },
+  {
+    "name": "Whitetooth",
+    "kind": "village",
+    "parent": "Tashana Tundra",
+    "lat": 18.3128,
+    "lng": 68.8623,
+    "zoom": 5
+  },
+  {
+    "name": "Windlost",
+    "kind": "island",
+    "parent": "Lhazaar Principalities",
+    "lat": 22.2281,
+    "lng": 17.8418,
+    "zoom": 6
+  },
+  {
+    "name": "Windshire",
+    "kind": "village",
+    "parent": "Aundair",
+    "lat": 29.8406,
+    "lng": -29.5093,
+    "zoom": 6,
+    "description": "Minuscolo insediamento dell'Aundair occidentale sul fiume Wynarn, a nord del Duskwood.",
+    "wiki": "https://eberron.fandom.com/wiki/Windshire"
+  },
+  {
+    "name": "Winterstead",
+    "kind": "village",
+    "parent": "Tashana Tundra",
+    "lat": 20.7561,
+    "lng": 65.6982,
+    "zoom": 5
+  },
+  {
+    "name": "Wolf's Paw",
+    "kind": "village",
+    "parent": "Eldeen Reaches",
+    "lat": 31.0153,
+    "lng": -34.3652,
+    "zoom": 6,
+    "description": "Piccolo villaggio agricolo di morfici nel nord-est delle Eldeen Reaches, una delle loro poche comunità stanziali.",
+    "wiki": "https://eberron.fandom.com/wiki/Wolf's_Paw"
+  },
+  {
+    "name": "The Wolfwood",
+    "kind": "forest",
+    "parent": "Eldeen Reaches",
+    "lat": 30.4108,
+    "lng": -33.5522,
+    "zoom": 6
+  },
+  {
+    "name": "Woodhelm",
+    "kind": "village",
+    "parent": "Breland",
+    "lat": 16.5098,
+    "lng": -33.4424,
+    "zoom": 6,
+    "description": "Villaggio di taglialegna nel mezzo del Dragonwood, sulle rive del Dagger.",
+    "wiki": "https://eberron.fandom.com/wiki/Woodhelm"
   },
   {
     "name": "Wroat",
@@ -594,7 +4892,64 @@
     "lat": 12.6618,
     "lng": -36.189,
     "zoom": 6,
-    "description": "Capitale del Breland."
+    "description": "Capitale del Breland, sede della famiglia reale e del parlamento: una grande città murata sulle due rive dello Howling River.",
+    "wiki": "https://eberron.fandom.com/wiki/Wroat"
+  },
+  {
+    "name": "Wrogar Keep",
+    "kind": "fort",
+    "parent": "Aundair",
+    "lat": 30.9022,
+    "lng": -24.4995,
+    "zoom": 6,
+    "description": "Fortificazione dell'Aundair a sud del fiume Aundair, sul confine con il Thrane.",
+    "wiki": "https://eberron.fandom.com/wiki/Wrogar_Keep"
+  },
+  {
+    "name": "Wyr",
+    "kind": "village",
+    "parent": "Aundair",
+    "lat": 31.5036,
+    "lng": -28.8721,
+    "zoom": 6,
+    "description": "Villaggio dell'Aundair occidentale al margine del Chanthwood; vi sorge il monastero dei monaci guerrieri di Orla-un.",
+    "wiki": "https://eberron.fandom.com/wiki/Wyr"
+  },
+  {
+    "name": "Wyrmsfang Jungle",
+    "kind": "forest",
+    "parent": "Argonnessen",
+    "lat": -16.9307,
+    "lng": 53.3496,
+    "zoom": 5
+  },
+  {
+    "name": "Wyrmsperch Mountains",
+    "kind": "mountains",
+    "parent": "Argonnessen",
+    "lat": -27.8002,
+    "lng": 27.6416,
+    "zoom": 5
+  },
+  {
+    "name": "Wyrmwatch",
+    "kind": "village",
+    "parent": "Q'barra",
+    "lat": 15.3689,
+    "lng": 0.022,
+    "zoom": 6,
+    "description": "Piccolo villaggio di frontiera di Q'barra, in crescita da pochi anni.",
+    "wiki": "https://eberron.fandom.com/wiki/Wyrmwatch"
+  },
+  {
+    "name": "Wyvernskull",
+    "kind": "town",
+    "parent": "Darguun",
+    "lat": 4.9815,
+    "lng": -20.3247,
+    "zoom": 6,
+    "description": "Principale porto di mare del Darguun.",
+    "wiki": "https://eberron.fandom.com/wiki/Wyvernskull"
   },
   {
     "name": "Xandrar",
@@ -603,7 +4958,8 @@
     "lat": 23.7451,
     "lng": -36.145,
     "zoom": 6,
-    "description": "Città del Breland settentrionale, sul Silver Lake."
+    "description": "Piccola città sulla costa meridionale del Lake Galifar, al confine con l'Aundair: una delle maggiori del Breland.",
+    "wiki": "https://eberron.fandom.com/wiki/Xandrar"
   },
   {
     "name": "Xen'drik",
@@ -611,7 +4967,51 @@
     "lat": -40.9799,
     "lng": -71.0156,
     "zoom": 3,
-    "description": "Il continente perduto dei giganti, terra di rovine e spedizioni."
+    "description": "Il continente perduto dei giganti, terra di rovine e spedizioni.",
+    "wiki": "https://eberron.fandom.com/wiki/Xen'drik"
+  },
+  {
+    "name": "Yarkuun Draal",
+    "kind": "ruin",
+    "parent": "Breland",
+    "lat": 5.0691,
+    "lng": -38.4302,
+    "zoom": 6
+  },
+  {
+    "name": "Yrlag",
+    "kind": "town",
+    "parent": "Shadow Marches",
+    "lat": 28.8447,
+    "lng": -50.8447,
+    "zoom": 6,
+    "description": "Grande cittadina nel nord delle Shadow Marches, affacciata su Crescent Bay.",
+    "wiki": "https://eberron.fandom.com/wiki/Yrlag"
+  },
+  {
+    "name": "Zaenya's Well",
+    "kind": "village",
+    "parent": "Aerenal",
+    "lat": -15.1146,
+    "lng": -10.7666,
+    "zoom": 6
+  },
+  {
+    "name": "Zantashk",
+    "kind": "village",
+    "parent": "Xen'drik",
+    "lat": -37.0902,
+    "lng": -43.2422,
+    "zoom": 5,
+    "description": "Piccolo villaggio di Xen'drik su una baia del Thunder Sea, centinaia di miglia a sud di Stormreach.",
+    "wiki": "https://eberron.fandom.com/wiki/Zantashk"
+  },
+  {
+    "name": "Zarash Bay",
+    "kind": "water",
+    "lat": 16.8256,
+    "lng": -56.6895,
+    "zoom": 5
   },
   {
     "name": "Zarash'ak",
@@ -620,7 +5020,32 @@
     "lat": 22.0245,
     "lng": -54.4043,
     "zoom": 6,
-    "description": "La Città delle Palafitte, sede del Casato Tharashk."
+    "description": "La Città delle Palafitte: capitale di fatto e maggiore insediamento delle Shadow Marches, amministrata dal Casato Tharashk.",
+    "wiki": "https://eberron.fandom.com/wiki/Zarash'ak"
+  },
+  {
+    "name": "Zarrthec",
+    "kind": "village",
+    "parent": "Darguun",
+    "lat": 10.077,
+    "lng": -20.127,
+    "zoom": 6
+  },
+  {
+    "name": "Zephyr Keep",
+    "kind": "fort",
+    "parent": "Valenar",
+    "lat": 17.2877,
+    "lng": -4.043,
+    "zoom": 6
+  },
+  {
+    "name": "Zilan's Breath",
+    "kind": "island",
+    "parent": "Argonnessen",
+    "lat": -54.5466,
+    "lng": 59.0625,
+    "zoom": 5
   },
   {
     "name": "Zilargo",
@@ -629,7 +5054,28 @@
     "lat": 9.6657,
     "lng": -28.6963,
     "zoom": 5,
-    "description": "La patria degli gnomi."
+    "description": "La patria degli gnomi.",
+    "wiki": "https://eberron.fandom.com/wiki/Zilargo"
+  },
+  {
+    "name": "Zilspar",
+    "kind": "village",
+    "parent": "Breland",
+    "lat": 6.4682,
+    "lng": -36.5845,
+    "zoom": 6,
+    "description": "Villaggio del Breland meridionale a est di Sharn, sulla via Orien per Trolanport.",
+    "wiki": "https://eberron.fandom.com/wiki/Zilspar"
+  },
+  {
+    "name": "Znir",
+    "kind": "village",
+    "parent": "Droaam",
+    "lat": 18.8751,
+    "lng": -45.835,
+    "zoom": 6,
+    "description": "Piccolo villaggio di gnoll, sede del raduno annuale che rinnova il Patto di Znir.",
+    "wiki": "https://eberron.fandom.com/wiki/Znir"
   },
   {
     "name": "Zolanberg",
@@ -638,6 +5084,7 @@
     "lat": 8.4724,
     "lng": -24.7192,
     "zoom": 6,
-    "description": "Città mineraria dello Zilargo."
+    "description": "Piccola città mineraria nei Seawall Mountains: una delle tre grandi città dello Zilargo.",
+    "wiki": "https://eberron.fandom.com/wiki/Zolanberg"
   }
 ]
