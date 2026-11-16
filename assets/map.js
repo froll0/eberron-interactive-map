@@ -8,12 +8,11 @@ const HOME_VIEW = { center: [20.009428770699756, 0.07578125], zoom: 4 };
 const STORAGE_KEY = 'eberronMarkers';
 const LAYERS_STORAGE_KEY = 'eberronLayers';
 const PLACES_URL = 'data/places.json';
-const PLACES_MIN_ZOOM = 5; // sotto questo zoom i punti dei luoghi sono nascosti
 const MAX_NAME_LENGTH = 80;
 const MAX_DESCRIPTION_LENGTH = 500;
 const MAX_IMPORT_BYTES = 2 * 1024 * 1024;
 const MAX_MARKERS = 5000;
-const MAX_SEARCH_RESULTS = 8;
+const MAX_SEARCH_RESULTS = 10;
 
 // L'immagine della mappa occupa solo una parte del "mondo" delle tile:
 // questi sono i suoi bordi in pixel allo zoom 3, con un po' di margine.
@@ -47,14 +46,27 @@ const MARKER_TYPES = {
 };
 const DEFAULT_MARKER_TYPE = 'other';
 
+// Tipi di luogo. "dotZoom" è lo zoom da cui il luogo ha un punto cliccabile
+// sulla mappa (assente = solo nella ricerca e nell'atlante); "browse" mette il
+// tipo nell'elenco che compare aprendo la ricerca vuota.
 const PLACE_KINDS = {
-  continent: { label: 'Continente', dot: false, browse: 0 },
-  nation: { label: 'Nazione', dot: false, browse: 1 },
-  region: { label: 'Regione', dot: false },
-  capital: { label: 'Capitale', dot: true },
-  city: { label: 'Città', dot: true },
-  site: { label: 'Luogo', dot: true }
+  continent: { label: 'Continente', plural: 'Continenti', browse: 0 },
+  nation: { label: 'Nazione', plural: 'Nazioni', browse: 1 },
+  region: { label: 'Regione', plural: 'Regioni' },
+  capital: { label: 'Capitale', plural: 'Capitali', dotZoom: 5 },
+  city: { label: 'Città', plural: 'Città', dotZoom: 5 },
+  town: { label: 'Cittadina', plural: 'Cittadine', dotZoom: 6 },
+  village: { label: 'Villaggio', plural: 'Villaggi', dotZoom: 6 },
+  fort: { label: 'Fortezza', plural: 'Fortezze', dotZoom: 6 },
+  ruin: { label: 'Rovina', plural: 'Rovine', dotZoom: 6 },
+  site: { label: 'Luogo notevole', plural: 'Luoghi notevoli', dotZoom: 6 },
+  volcano: { label: 'Vulcano', plural: 'Vulcani', dotZoom: 6 },
+  island: { label: 'Isola', plural: 'Isole' },
+  forest: { label: 'Foresta o palude', plural: 'Foreste e paludi' },
+  mountains: { label: 'Monti', plural: 'Monti' },
+  water: { label: 'Mare o lago', plural: 'Mari e laghi' }
 };
+const PLACES_MIN_ZOOM = Math.min(...Object.values(PLACE_KINDS).map((kind) => kind.dotZoom || Infinity));
 
 const narrowScreen = window.matchMedia('(max-width: 719px)');
 
@@ -500,7 +512,8 @@ try {
   console.error('Preferenze dei livelli non leggibili:', e);
 }
 
-const placesLayer = L.layerGroup();
+// Un gruppo di punti per ogni soglia di zoom (città prima, centri minori poi).
+const placeLayers = new Map();
 
 function isLayerVisible(key) {
   return layerState[key] !== false;
@@ -524,9 +537,11 @@ function applyLayers() {
     if (visible && !eberronmap.hasLayer(entry.layer)) entry.layer.addTo(eberronmap);
     if (!visible && eberronmap.hasLayer(entry.layer)) eberronmap.removeLayer(entry.layer);
   });
-  const showPlaces = isLayerVisible('places') && eberronmap.getZoom() >= PLACES_MIN_ZOOM;
-  if (showPlaces && !eberronmap.hasLayer(placesLayer)) placesLayer.addTo(eberronmap);
-  if (!showPlaces && eberronmap.hasLayer(placesLayer)) eberronmap.removeLayer(placesLayer);
+  placeLayers.forEach((layer, dotZoom) => {
+    const show = isLayerVisible('places') && eberronmap.getZoom() >= dotZoom;
+    if (show && !eberronmap.hasLayer(layer)) layer.addTo(eberronmap);
+    if (!show && eberronmap.hasLayer(layer)) eberronmap.removeLayer(layer);
+  });
 }
 
 eberronmap.on('zoomend', applyLayers);
@@ -561,7 +576,9 @@ function setGridVisible(visible) {
 // ---------------------------------------------------------------------------
 // Luoghi di Eberron (data/places.json)
 // ---------------------------------------------------------------------------
+const WATERS_GROUP = 'Mari, baie e laghi';
 let places = [];
+const placesByParent = new Map();
 
 function normalizePlace(raw) {
   if (!raw || typeof raw !== 'object' || typeof raw.name !== 'string' || !raw.name.trim()) return null;
@@ -574,6 +591,8 @@ function normalizePlace(raw) {
     kind: Object.prototype.hasOwnProperty.call(PLACE_KINDS, raw.kind) ? raw.kind : 'site',
     parent: typeof raw.parent === 'string' ? raw.parent : '',
     description: typeof raw.description === 'string' ? raw.description : '',
+    // Solo link alla wiki di Eberron: il file dei luoghi non deve poter puntare altrove.
+    wiki: typeof raw.wiki === 'string' && raw.wiki.startsWith('https://eberron.fandom.com/wiki/') ? raw.wiki : '',
     lat,
     lng,
     zoom: Number.isFinite(zoom) ? Math.min(maxZoom, Math.max(minZoom, Math.round(zoom))) : 5
@@ -590,8 +609,21 @@ function buildPlacePopup(place) {
   root.append(el('p', 'note__kind', placeSubtitle(place)));
   root.append(el('h3', 'note__title', place.name));
   if (place.description) root.append(el('p', 'note__text', place.description));
+  if (place.wiki) {
+    const link = el('a', 'note__link', 'Leggi sulla Eberron Wiki');
+    link.href = place.wiki;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    root.append(link);
+  }
   const actions = el('div', 'note__actions');
   actions.append(button('btn btn--ink', 'Misura da qui', () => measureFrom(L.latLng(place.lat, place.lng))));
+  if (placesByParent.has(place.name)) {
+    actions.append(button('btn btn--ink', 'Luoghi qui', () => {
+      eberronmap.closePopup();
+      openAtlas(place.name);
+    }));
+  }
   root.append(actions);
   return root;
 }
@@ -612,12 +644,21 @@ function loadPlaces() {
     })
     .then((raw) => {
       places = (Array.isArray(raw) ? raw : []).map(normalizePlace).filter(Boolean);
-      places.filter((place) => PLACE_KINDS[place.kind].dot).forEach((place) => {
+      places.forEach((place) => {
+        // Mari e laghi non appartengono a una nazione: nell'atlante stanno insieme.
+        const group = place.parent || (place.kind === 'water' ? WATERS_GROUP : '');
+        if (!group) return;
+        if (!placesByParent.has(group)) placesByParent.set(group, []);
+        placesByParent.get(group).push(place);
+      });
+      places.filter((place) => PLACE_KINDS[place.kind].dotZoom).forEach((place) => {
+        const dotZoom = PLACE_KINDS[place.kind].dotZoom;
+        if (!placeLayers.has(dotZoom)) placeLayers.set(dotZoom, L.layerGroup());
         L.marker([place.lat, place.lng], {
           icon: L.divIcon({
             className: `place-dot place-dot--${place.kind}`,
-            iconSize: [16, 16],
-            iconAnchor: [8, 8],
+            iconSize: [18, 18],
+            iconAnchor: [9, 9],
             popupAnchor: [0, -6],
             tooltipAnchor: [0, -8]
           }),
@@ -626,9 +667,10 @@ function loadPlaces() {
         })
           .bindTooltip(tooltipContent(place.name), { direction: 'top' })
           .bindPopup(() => buildPlacePopup(place), { ...POPUP_OPTIONS, minWidth: 220, maxWidth: 280 })
-          .addTo(placesLayer);
+          .addTo(placeLayers.get(dotZoom));
       });
       applyLayers();
+      refreshSheet();
     })
     .catch((e) => {
       console.error('Impossibile caricare i luoghi:', e);
@@ -1028,6 +1070,91 @@ function renderMarkersSheet(body) {
     'I marker restano in questo browser. Esportali per salvarli o passarli ai tuoi giocatori.'));
 }
 
+// Atlante: le nazioni e le regioni, e dentro ognuna i suoi luoghi per tipo.
+let atlasParent = null;
+
+function openAtlas(parent) {
+  atlasParent = parent || null;
+  if (openTool === 'atlas') {
+    sheetBody.scrollTop = 0;
+    refreshSheet();
+  } else {
+    openSheet('atlas');
+  }
+}
+
+function listRow(name, hint, onClick) {
+  const item = el('li');
+  const row = button('marker-list__btn', undefined, onClick);
+  const text = el('span', 'marker-list__text');
+  text.append(el('span', 'marker-list__name', name));
+  if (hint) text.append(el('span', 'marker-list__kind', hint));
+  row.append(text);
+  item.append(row);
+  return item;
+}
+
+function goToPlace(place) {
+  if (narrowScreen.matches) closeSheet();
+  showPlace(place);
+}
+
+function renderAtlasSheet(body) {
+  if (!places.length) {
+    body.append(el('p', 'sheet__lead', 'L\'elenco dei luoghi non è disponibile.'));
+    return;
+  }
+  const byName = new Map(places.map((place) => [place.name, place]));
+
+  if (!atlasParent || !placesByParent.has(atlasParent)) {
+    // Primo livello: prima le nazioni, poi continenti e altre regioni.
+    const rank = (name) => {
+      const kind = byName.get(name) ? byName.get(name).kind : 'region';
+      return kind === 'nation' ? 0 : kind === 'continent' ? 1 : 2;
+    };
+    const groups = [
+      ['Nazioni del Khorvaire', 0],
+      ['Continenti', 1],
+      ['Altre regioni', 2]
+    ];
+    groups.forEach(([heading, wanted]) => {
+      const names = [...placesByParent.keys()].filter((name) => rank(name) === wanted).sort((a, b) => a.localeCompare(b));
+      if (!names.length) return;
+      body.append(el('h3', 'sheet__heading', heading));
+      const list = el('ul', 'marker-list');
+      names.forEach((name) => {
+        const count = placesByParent.get(name).length;
+        list.append(listRow(name, count === 1 ? '1 luogo' : `${count} luoghi`, () => openAtlas(name)));
+      });
+      body.append(list);
+    });
+    body.append(el('p', 'sheet__hint',
+      `${places.length} luoghi. Le descrizioni riassumono la Eberron Wiki, a cui rimanda ogni scheda.`));
+    return;
+  }
+
+  const parent = byName.get(atlasParent);
+  const nav = el('div', 'sheet__actions sheet__actions--top');
+  nav.append(button('btn', 'Tutte le regioni', () => openAtlas(null)));
+  if (parent) nav.append(button('btn', 'Mostra sulla mappa', () => goToPlace(parent)));
+  body.append(nav);
+  body.append(el('h3', 'sheet__title sheet__title--inline', atlasParent));
+  if (parent && parent.description) body.append(el('p', 'sheet__lead', parent.description));
+
+  const children = placesByParent.get(atlasParent);
+  Object.keys(PLACE_KINDS).forEach((kind) => {
+    const group = children.filter((place) => place.kind === kind).sort((a, b) => a.name.localeCompare(b.name));
+    if (!group.length) return;
+    body.append(el('h3', 'sheet__heading', PLACE_KINDS[kind].plural));
+    const list = el('ul', 'marker-list');
+    group.forEach((place) => {
+      const more = placesByParent.has(place.name) ? () => openAtlas(place.name) : () => goToPlace(place);
+      list.append(listRow(place.name, place.description, more));
+    });
+    body.append(list);
+  });
+}
+
 function toggleRow(labelText, hint, checked, onChange, lead) {
   const row = el('label', 'toggle');
   const input = el('input', 'toggle__input');
@@ -1044,7 +1171,7 @@ function toggleRow(labelText, hint, checked, onChange, lead) {
 function renderLayersSheet(body) {
   const dot = el('span', 'toggle__lead');
   dot.append(el('span', 'search__dot'));
-  body.append(toggleRow('Città e luoghi di Eberron', 'Compaiono ingrandendo la mappa',
+  body.append(toggleRow('Città e luoghi di Eberron', 'Le città da zoom medio, i centri minori ingrandendo ancora',
     isLayerVisible('places'), (on) => setLayerVisible('places', on), dot));
 
   body.append(el('h3', 'sheet__heading', 'I tuoi marker'));
@@ -1062,6 +1189,7 @@ function renderLayersSheet(body) {
 }
 
 const SHEETS = {
+  atlas: { title: 'Atlante', render: renderAtlasSheet },
   markers: { title: 'Marker', render: renderMarkersSheet },
   layers: { title: 'Livelli', render: renderLayersSheet },
   measure: { title: 'Misura un percorso', render: renderMeasureSheet }

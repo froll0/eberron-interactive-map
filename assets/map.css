@@ -408,29 +408,33 @@ svg {
 /* ---------------------------------------------------------------------------
    Punti dei luoghi di Eberron
    --------------------------------------------------------------------------- */
+/* Area cliccabile sopra il simbolo già disegnato sulla mappa: un anello
+   discreto, che si accende al passaggio. */
 .place-dot {
-    border: 2px solid var(--gold);
+    border: 2px solid rgba(217, 164, 65, .75);
     border-radius: 50%;
-    background: rgba(217, 164, 65, .18);
-    box-shadow: 0 0 0 1px rgba(12, 34, 51, .8);
     box-sizing: border-box;
-    cursor: pointer
+    cursor: pointer;
+    transition: background-color .12s, border-color .12s
 }
 
 .place-dot:hover,
 .place-dot:focus-visible {
-    background: rgba(217, 164, 65, .65);
+    border-color: var(--vellum);
+    background: rgba(217, 164, 65, .6);
     outline: none
 }
 
-.place-dot--capital {
-    border-color: var(--vellum);
-    background: rgba(217, 164, 65, .7)
+.place-dot--capital,
+.place-dot--city {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 1px rgba(12, 34, 51, .7)
 }
 
-.place-dot--site {
-    border-color: var(--crimson);
-    background: rgba(179, 38, 43, .2)
+.place-dot--ruin,
+.place-dot--site,
+.place-dot--volcano {
+    border-color: rgba(179, 38, 43, .8)
 }
 
 /* ---------------------------------------------------------------------------
@@ -503,6 +507,21 @@ svg {
     overflow-wrap: anywhere;
     max-height: 9rem;
     overflow-y: auto
+}
+
+.leaflet-container a.note__link,
+.note__link {
+    align-self: flex-start;
+    margin-top: 2px;
+    color: #1f4d6e;
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 2px
+}
+
+.leaflet-container a.note__link:hover,
+.note__link:hover {
+    color: var(--ink)
 }
 
 .note__actions {
@@ -744,6 +763,16 @@ svg {
 
 .sheet__actions .btn {
     flex: 1
+}
+
+.sheet__actions--top {
+    margin: 0 0 14px
+}
+
+.sheet__title--inline {
+    margin-bottom: 6px;
+    font-size: 1.5rem;
+    color: var(--gold)
 }
 
 /* Scelta del tipo di marker */
@@ -1020,11 +1049,12 @@ svg {
 
     .dock__btn {
         flex: 1;
+        min-width: 0;
         flex-direction: column;
         gap: 2px;
         height: 50px;
-        padding: 0 2px;
-        font-size: .8125rem
+        padding: 0 1px;
+        font-size: .75rem
     }
 
     .sheet {
