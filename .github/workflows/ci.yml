@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # The map tiles are not needed to run the tests.
+          sparse-checkout: |
+            assets
+            data
+            tests
+            package.json
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check JavaScript syntax
+        run: for f in assets/js/*.js; do node --check "$f"; done
+      - name: Run tests
+        run: npm test
