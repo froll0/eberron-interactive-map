@@ -80,28 +80,45 @@ body {
     -webkit-text-size-adjust: 100%
 }
 
+/* La mappa riempie il suo contenitore: incorporata in un'altra pagina basta
+   dare dimensioni all'elemento passato a initMap. */
 .app {
-    position: fixed;
-    inset: 0;
-    overflow: hidden
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    /* Colori e caratteri propri: la pagina ospite non deve cambiarli. */
+    color: var(--vellum);
+    font-family: var(--font-ui);
+    font-size: 16px;
+    line-height: 1.4;
+    text-align: left
 }
 
-#map {
+/* Pagina autonoma (index.html): a tutto schermo. */
+.app--fullscreen {
+    position: fixed;
+    inset: 0;
+    height: auto
+}
+
+.map {
     position: absolute;
     inset: 0;
     background: #0a1c2a;
     font-family: var(--font-ui)
 }
 
-#map.is-placing,
-#map.is-measuring,
-#map.is-measuring .leaflet-interactive {
+.map.is-placing,
+.map.is-measuring,
+.map.is-measuring .leaflet-interactive {
     cursor: crosshair
 }
 
-/* Mentre si misura, i tocchi su marker e luoghi devono arrivare alla mappa:
-   così si può misurare da una città all'altra toccandole. */
-#map.is-measuring .leaflet-marker-icon {
+/* Mentre si misura o si posiziona un marker, i tocchi su marker e luoghi
+   devono arrivare alla mappa: si può misurare da una città all'altra, o
+   mettere un marker proprio sopra una città. */
+.map.is-measuring .leaflet-marker-icon,
+.map.is-placing .leaflet-marker-icon {
     pointer-events: none
 }
 
@@ -160,6 +177,30 @@ svg {
 
 .btn:hover:not(:disabled) {
     background: rgba(241, 230, 200, .1)
+}
+
+.btn--small {
+    min-height: 34px;
+    padding: 0 10px;
+    font-size: .9375rem
+}
+
+.btn--accent {
+    border-color: var(--gold);
+    color: var(--gold)
+}
+
+.btn--accent:hover:not(:disabled) {
+    background: rgba(217, 164, 65, .14)
+}
+
+.btn--danger-dark {
+    border-color: rgba(230, 120, 112, .55);
+    color: #f0a39b
+}
+
+.btn--danger-dark:hover:not(:disabled) {
+    background: rgba(179, 38, 43, .25)
 }
 
 .btn--quiet {
@@ -381,6 +422,21 @@ svg {
 .pin--dungeon { --pin: #5b3a8c }
 .pin--monster { --pin: #b3262b }
 .pin--other { --pin: #46525c }
+
+/* Marker nascosti ai giocatori: contorno tratteggiato e corpo più tenue. */
+.pin--hidden .pin__body {
+    stroke-dasharray: 3 2.5;
+    fill-opacity: .55
+}
+
+.map-pin--moving {
+    cursor: grab;
+    animation: pin-lift .9s ease-in-out infinite alternate
+}
+
+@keyframes pin-lift {
+    to { translate: 0 -5px }
+}
 
 .map-pin {
     background: none;
@@ -684,7 +740,7 @@ svg {
     background: var(--abyss-raised)
 }
 
-.dock__btn[aria-pressed="true"] {
+.dock__btn[aria-expanded="true"] {
     background: var(--gold);
     color: var(--ink)
 }
@@ -997,6 +1053,31 @@ svg {
     pointer-events: none
 }
 
+/* Con un'azione ("Annulla") la notifica diventa cliccabile. */
+.toast--action {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 4px 4px 16px;
+    text-align: left;
+    pointer-events: auto
+}
+
+.toast__action {
+    min-height: 36px;
+    padding: 0 12px;
+    border: 0;
+    border-radius: 9px;
+    background: transparent;
+    color: var(--gold);
+    font-weight: 700;
+    white-space: nowrap
+}
+
+.toast__action:hover {
+    background: rgba(217, 164, 65, .14)
+}
+
 /* ---------------------------------------------------------------------------
    Scala
    --------------------------------------------------------------------------- */
@@ -1036,8 +1117,16 @@ svg {
         --dock-height: 62px
     }
 
+    /* Il titolo resta per i lettori di schermo, ma non occupa spazio. */
     .search__brand {
-        display: none
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        border: 0;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap
     }
 
     .dock {
@@ -1095,5 +1184,189 @@ svg {
     .toggle__switch,
     .toggle__switch::after {
         transition: none
+    }
+}
+
+/* ---------------------------------------------------------------------------
+   Campagne, moduli in linea, conferme
+   --------------------------------------------------------------------------- */
+.campaign {
+    display: flex;
+    flex-direction: column;
+    gap: 8px
+}
+
+.campaign__actions,
+.sheet__actions--wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px
+}
+
+.sheet__actions--wrap .btn {
+    flex: 1 1 auto
+}
+
+.field__input--dark {
+    border-color: rgba(241, 230, 200, .25);
+    background: var(--abyss-raised);
+    color: var(--vellum)
+}
+
+.field__input--dark::placeholder {
+    color: var(--mist)
+}
+
+.field__input--dark:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 0
+}
+
+.inline-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px
+}
+
+.inline-form .field__input {
+    flex: 1 1 100%
+}
+
+.inline-form--stack {
+    flex-direction: column;
+    margin-top: 14px
+}
+
+.inline-form--stack .sheet__actions {
+    margin-top: 2px
+}
+
+.check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 32px;
+    color: var(--ink);
+    cursor: pointer
+}
+
+.check input {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    accent-color: var(--abyss)
+}
+
+.check--dark {
+    color: var(--vellum)
+}
+
+.check--dark input {
+    accent-color: var(--gold)
+}
+
+.confirm {
+    padding: 12px;
+    border: 1px solid rgba(230, 120, 112, .45);
+    border-radius: 10px;
+    background: rgba(179, 38, 43, .12)
+}
+
+.confirm p {
+    margin: 0
+}
+
+/* Percorsi salvati */
+.route {
+    display: flex;
+    align-items: center;
+    gap: 4px
+}
+
+.route .marker-list__btn {
+    flex: 1;
+    min-width: 0
+}
+
+.route__delete {
+    flex: none
+}
+
+/* ---------------------------------------------------------------------------
+   Legenda dei simboli della mappa
+   --------------------------------------------------------------------------- */
+.legend {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 12px
+}
+
+.legend__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 32px;
+    font-size: .9375rem
+}
+
+.legend__symbol {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 7px;
+    background: #d9c79a
+}
+
+.legend__symbol svg {
+    width: 24px;
+    height: 24px
+}
+
+.lg-fill-light {
+    fill: #f6efdc;
+    stroke: #2a2118;
+    stroke-width: 1.4
+}
+
+.lg-fill-dark {
+    fill: #2a2118
+}
+
+.lg-line {
+    stroke: #2a2118;
+    stroke-width: 1.4
+}
+
+.lg-rail,
+.lg-road,
+.lg-border {
+    fill: none;
+    stroke-linecap: round
+}
+
+.lg-rail {
+    stroke: #e8892c;
+    stroke-width: 2.4
+}
+
+.lg-road {
+    stroke: #6b3a1f;
+    stroke-width: 2.4
+}
+
+.lg-border {
+    stroke: #2a2118;
+    stroke-width: 1.6;
+    stroke-dasharray: 3 2.5
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .map-pin--moving {
+        animation: none
     }
 }

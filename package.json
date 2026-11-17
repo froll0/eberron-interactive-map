@@ -1,0 +1,11 @@
+{
+  "name": "eberron-interactive-map",
+  "private": true,
+  "type": "module",
+  "description": "Community-driven interactive map for the Eberron campaign setting",
+  "license": "MIT",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "test": "node --test tests/*.test.js"
+  }
+}
